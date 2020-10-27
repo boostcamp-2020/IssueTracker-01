@@ -1,27 +1,25 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
+import Config from '.';
 
 export default {
   development: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
+    username: Config.DB_USER,
+    password: Config.DB_PASSWORD,
+    database: Config.DB_NAME,
+    host: Config.DB_HOST,
     dialect: 'mysql',
   },
   test: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
+    username: Config.DB_USER,
+    password: Config.DB_PASSWORD,
+    database: Config.DB_NAME,
+    host: Config.DB_HOST,
     dialect: 'mysql',
   },
   production: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
+    username: Config.DB_USER,
+    password: Config.DB_PASSWORD,
+    database: Config.DB_NAME,
+    host: Config.DB_HOST,
     dialect: 'mysql',
   },
 };
