@@ -7,16 +7,15 @@
 
 import UIKit
 
-protocol LoginViewControllerDelegate {
+protocol LoginViewControllerDelegate: class {
     func addUserData()
 }
 
 class LoginViewController: UIViewController {
-    var delegate: LoginViewControllerDelegate?
+    weak var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     private func configureMainTabBarController() -> UIViewController {

@@ -20,7 +20,8 @@ class MainViewController: UITabBarController {
     }
     
     private func configureLoginViewController() -> LoginViewController {
-        return storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController ?? LoginViewController()
+        let login = storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
+        return login as? LoginViewController ?? LoginViewController()
     }
     
     private func checkUserData() {
