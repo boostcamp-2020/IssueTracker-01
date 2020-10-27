@@ -1,24 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈 트래커" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eta-UM-nah">
+                                <rect key="frame" x="115" y="55" width="145.5" height="39"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFw-pN-hgp">
+                                <rect key="frame" x="98" y="253" width="39" height="30"/>
+                                <state key="normal" title="로그인"/>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6QL-Pe-kZC">
+                                <rect key="frame" x="221" y="253" width="56" height="30"/>
+                                <state key="normal" title="회원 가입"/>
+                            </button>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DAn-sp-haY">
+                                <rect key="frame" x="58" y="146" width="259" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVl-ld-du6">
+                                <rect key="frame" x="58" y="194" width="259" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCD-H5-RkO">
+                                <rect key="frame" x="58" y="318" width="259" height="34"/>
+                                <color key="backgroundColor" name="GitHubSigninBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Sign in with GitHub">
+                                    <color key="titleColor" name="GitHubSigninTextColor"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiC-DP-sJT">
+                                <rect key="frame" x="58" y="368" width="259" height="34"/>
+                                <color key="backgroundColor" name="AppleSigninBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="tintColor" name="AppleSigninTextColor"/>
+                                <state key="normal" title="Sign in with Apple" image="applelogo" catalog="system">
+                                    <color key="titleColor" name="AppleSigninTextColor"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JVl-ld-du6" firstAttribute="top" secondItem="DAn-sp-haY" secondAttribute="bottom" constant="14" id="0DQ-Zg-5Yq"/>
+                            <constraint firstItem="6QL-Pe-kZC" firstAttribute="top" secondItem="JVl-ld-du6" secondAttribute="bottom" constant="25" id="5zy-vg-9Fv"/>
+                            <constraint firstItem="6QL-Pe-kZC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SFw-pN-hgp" secondAttribute="trailing" constant="84" id="FIL-MT-GuS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JVl-ld-du6" secondAttribute="trailing" constant="58" id="KH4-nG-Fxe"/>
+                            <constraint firstItem="eta-UM-nah" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NMZ-fO-s8V"/>
+                            <constraint firstItem="qCD-H5-RkO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="NS4-eO-9LL"/>
+                            <constraint firstItem="JVl-ld-du6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="OyW-jD-nWO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PiC-DP-sJT" secondAttribute="trailing" constant="58" id="Qoi-Z5-Qtn"/>
+                            <constraint firstItem="eta-UM-nah" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="55" id="R95-OB-0lQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qCD-H5-RkO" secondAttribute="trailing" constant="58" id="RZg-fx-Oa2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DAn-sp-haY" secondAttribute="trailing" constant="58" id="SdP-Zb-XoG"/>
+                            <constraint firstItem="DAn-sp-haY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="Tu7-A0-BjB"/>
+                            <constraint firstItem="qCD-H5-RkO" firstAttribute="top" secondItem="6QL-Pe-kZC" secondAttribute="bottom" constant="35" id="WRZ-YY-gzP"/>
+                            <constraint firstItem="PiC-DP-sJT" firstAttribute="height" secondItem="qCD-H5-RkO" secondAttribute="height" id="Yji-bH-D5M"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6QL-Pe-kZC" secondAttribute="trailing" constant="98" id="bbe-O8-DVA"/>
+                            <constraint firstItem="SFw-pN-hgp" firstAttribute="top" secondItem="JVl-ld-du6" secondAttribute="bottom" constant="25" id="eIB-Vs-FBd"/>
+                            <constraint firstItem="DAn-sp-haY" firstAttribute="top" secondItem="eta-UM-nah" secondAttribute="bottom" constant="52" id="efa-Yn-rg6"/>
+                            <constraint firstItem="PiC-DP-sJT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="ew0-Tf-k7q"/>
+                            <constraint firstItem="qCD-H5-RkO" firstAttribute="top" secondItem="SFw-pN-hgp" secondAttribute="bottom" constant="35" id="j97-qA-It5"/>
+                            <constraint firstItem="SFw-pN-hgp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="98" id="lrV-LX-iKW"/>
+                            <constraint firstItem="PiC-DP-sJT" firstAttribute="top" secondItem="qCD-H5-RkO" secondAttribute="bottom" constant="16" id="zbJ-qs-etG"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="84" y="125.4872563718141"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="applelogo" catalog="system" width="128" height="121"/>
+        <namedColor name="AppleSigninBackgroundColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppleSigninTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GitHubSigninBackgroundColor">
+            <color red="0.47600001096725464" green="0.47600001096725464" blue="0.47600001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GitHubSigninTextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
