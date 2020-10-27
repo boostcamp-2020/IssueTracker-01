@@ -6,10 +6,20 @@ import logger from 'morgan';
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 import dotenv from 'dotenv';
+import { sequelize } from './models';
 
 dotenv.config();
 
 const app = express();
+
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log('데이터베이스 연결 성공');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // view engine setup
 app.use(logger('dev'));
