@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-class MileStone extends Sequelize.Model {
+module.exports = class MileStone extends Sequelize.Model {
     static init(sequelize) {
         return super.init(
             {
@@ -30,4 +30,5 @@ class MileStone extends Sequelize.Model {
               },
         )
     }
+
 }
