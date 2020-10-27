@@ -5,5 +5,5 @@
   "trailingComma": "all",
   "bracketSpacing": true,
   "semi": true,
-  "endOfLine": "lf"
+  "endOfLine": "crlf"
 }
