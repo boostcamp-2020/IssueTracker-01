@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
-module.exports = class Issue extends Sequelize.Model {
+export default class Issue extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
@@ -38,9 +38,8 @@ module.exports = class Issue extends Sequelize.Model {
     db.Issue.belongsTo(db.User, {
       foreignKey: 'userId',
     });
-
-    db.Issue.belongsTo(db.MileStone, {
+    db.Issue.belongsTo(db.Milestone, {
       foreignKey: 'milestoneId',
     });
   }
-};
+}

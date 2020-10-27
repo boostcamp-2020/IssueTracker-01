@@ -3,12 +3,11 @@ import express from 'express';
 // import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import dotenv from 'dotenv';
+
 import { sequelize } from './models';
 import 'module-alias/register';
 import indexRouter from './routes/index';
 
-dotenv.config();
 const app = express();
 
 sequelize

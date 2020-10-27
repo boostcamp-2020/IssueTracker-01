@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
-module.exports = class IssueLabel extends Sequelize.Model {
+export default class IssueLabel extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
@@ -31,4 +31,4 @@ module.exports = class IssueLabel extends Sequelize.Model {
       foreignKey: 'name',
     });
   }
-};
+}

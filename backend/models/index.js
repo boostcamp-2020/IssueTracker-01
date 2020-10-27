@@ -1,13 +1,16 @@
-const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config/db.config')[env];
+import Sequelize from 'sequelize';
 
-const User = require('./userModel');
-const Milestone = require('./milestoneModel');
-const Label = require('./labelModel');
-const Issue = require('./issueModel');
-const IssueLabel = require('./issueLabelModel');
-const Comment = require('./commentModel');
+import Comment from './commentModel';
+import User from './userModel';
+import Milestone from './milestoneModel';
+import Label from './labelModel';
+import Issue from './issueModel';
+import IssueLabel from './issueLabelModel';
+
+import dbconfig from '../config/db.config';
+
+const env = process.env.NODE_ENV || 'development';
+const config = dbconfig[env];
 
 const db = {};
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
