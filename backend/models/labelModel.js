@@ -4,7 +4,7 @@ module.exports = class Label extends Sequelize.Model {
     static init(sequelize) {
         return super.init(
             {
-                name: {
+                labelName: {
                     type: Sequelize.STRING(100),
                     allowNull: false,
                     primaryKey: true,
@@ -20,7 +20,7 @@ module.exports = class Label extends Sequelize.Model {
             },
             {
                 sequelize,
-                timestamps: true,
+                timestamps: false,
                 underscored: false,
                 paranoid: false,
                 modelName: 'Label',
