@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 protocol GithubLogin {
     func requestCode()
@@ -19,6 +20,7 @@ protocol GithubLoginManagerDelegate: class {
 
 final class GithubLoginManager: GithubLogin {
     private let clientId = "e9eac94fb40d8f0685f0"
+    private let clientSecret = "****"
     
     static let shared = GithubLoginManager()
     
@@ -33,5 +35,27 @@ final class GithubLoginManager: GithubLogin {
         guard let canOpenURL = delegate?.canOpenURL(url) else { return }
         guard canOpenURL else { return }
         delegate?.open(url)
+    }
+    
+    func requestAccessToken(with code: String) {
+        let url = "https://github.com/login/oauth/access_token"
+        let parameters = ["client_id": clientId,
+                          "client_secret": clientSecret,
+                          "code": code]
+        
+        let headers: HTTPHeaders = ["Accept": "application/json"]
+        
+        AF.request(url, method: .post, parameters: parameters, headers: headers).responseJSON { (response) in
+            switch response.result {
+            case let .success(json):
+                if let dic = json as? [String: String] {
+                    print(dic["access_token"])
+                    print(dic["scope"])
+                    print(dic["token_type"])
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
     }
 }

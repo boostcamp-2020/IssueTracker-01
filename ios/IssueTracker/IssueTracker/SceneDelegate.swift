@@ -19,6 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         configureLoginManager()
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            if url.absoluteString.starts(with: "issuetracker://") {
+                if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
+                    GithubLoginManager.shared.requestAccessToken(with: code)
+                }
+            }
+        }
+    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
