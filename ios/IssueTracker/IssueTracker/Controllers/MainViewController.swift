@@ -9,6 +9,7 @@ import UIKit
 
 class MainViewController: UITabBarController {
     var userData: Any?
+    var githubLogin: GithubLogin?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +21,9 @@ class MainViewController: UITabBarController {
     }
     
     private func configureLoginViewController() -> LoginViewController {
-        let login = storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
-        return login as? LoginViewController ?? LoginViewController()
+        let login = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController ?? LoginViewController()
+        login.delegate = self
+        return login
     }
     
     private func checkUserData() {
@@ -34,6 +36,10 @@ class MainViewController: UITabBarController {
 }
 
 extension MainViewController: LoginViewControllerDelegate {
+    func requestCode() {
+        githubLogin?.requestCode()
+    }
+    
     func addUserData() {
         userData = "user"
     }

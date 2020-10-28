@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard scene as? UIWindowScene != nil else { return }
+        
+        configureLoginManager()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -46,4 +48,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+}
+
+extension SceneDelegate {
+    func configureLoginManager() {
+        guard let rootView = window?.rootViewController as? MainViewController else { return }
+        GithubLoginManager.shared.delegate = self
+        rootView.githubLogin = GithubLoginManager.shared
+    }
+}
+
+extension SceneDelegate: GithubLoginManagerDelegate {
+    func canOpenURL(_ url: URL) -> Bool {
+        UIApplication.shared.canOpenURL(url)
+    }
+    
+    func open(_ url: URL) {
+        UIApplication.shared.open(url)
+    }
 }
