@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 /* eslint-disable */
-
 /**
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app').default;
 var debug = require('debug')('e:server');
 var http = require('http');
 

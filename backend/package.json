@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "babel-node ./bin/www",
+    "dev": "nodemon --exec babel-node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -12,14 +13,21 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "module-alias": "^2.2.2",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
     "eslint": "^7.12.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "nodemon": "^2.0.6",
     "prettier": "^2.1.2"
   },
   "_moduleAliases": {
@@ -27,5 +35,8 @@
     "@services": "services",
     "@routes": "routes",
     "@utils": "utils"
+  },
+  "babel": {
+    "presets": ["@babel/env"]
   }
 }
