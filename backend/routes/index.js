@@ -14,6 +14,9 @@ router.get('/github/callback', (req, res) => {
   passport.authenticate('github', { failureRedirect: '/' }, (err, user) => {
     const [User] = user;
     const token = jwt.sign({ userId: User.dataValues.userId }, process.env.JWT_SECERT);
+    if (req.headers['user-agent'].includes('iPhone')) {
+      return res.redirect(`issuetracker://${token}`);
+    }
     res.cookie('jwt', token);
     return res.redirect('/');
   })(req, res);
