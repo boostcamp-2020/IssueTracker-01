@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import Alamofire
 
 protocol GithubLogin {
     var token: String? { get }
