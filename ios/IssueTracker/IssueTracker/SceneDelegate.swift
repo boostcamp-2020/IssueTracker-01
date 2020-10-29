@@ -75,8 +75,9 @@ extension SceneDelegate: GithubLoginManagerDelegate {
 extension SceneDelegate {
     func checkGithubResponse(openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let url = URLContexts.first?.url else { return }
-        guard url.absoluteString.starts(with: "issuetracker://") else { return }
-        guard let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) else { return }
-        GithubLoginManager.shared.requestAccessToken(with: code)
+        guard url.absoluteString.starts(with: "issuetracker://=") else { return }
+        guard let token = url.absoluteString.split(separator: "=").last.map({ String($0) }) else { return }
+        GithubLoginManager.shared.token = token
+        GithubLoginManager.shared.completionHandler?()
     }
 }
