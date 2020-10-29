@@ -25,8 +25,6 @@ final class GithubLoginManager: GithubLogin {
         case haveNoAccessToken
     }
     
-    private let clientId = "e9eac94fb40d8f0685f0"
-    private let clientSecret = "ea55ceea6bf5da622dff960705be5e11fd8b88c2"
     var completionHandler: (() -> Void)?
     
     static let shared = GithubLoginManager()
