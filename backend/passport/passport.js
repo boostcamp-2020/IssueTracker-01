@@ -1,7 +1,11 @@
 import passport from 'passport';
-const GitHubStrategy = require('passport-github').Strategy;
-const { Strategy: JwtStrategy } = require('passport-jwt');
-import User from '../models/userModel';
+
+import User from '@models/userModel';
+
+import { Strategy as GitHubStrategy } from 'passport-github';
+
+import { Strategy as JwtStrategy } from 'passport-jwt';
+
 require('dotenv').config();
 
 module.exports = () => {
@@ -25,11 +29,7 @@ module.exports = () => {
   );
 
   const cookieExtractor = (req) => {
-    let token = undefined;
-    if (req && req.cookies) {
-      token = req.cookies.jwt;
-    }
-    return token;
+    return req.cookies ? req.cookies.jwt : undefined;
   };
   passport.use(
     new JwtStrategy(
