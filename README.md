@@ -61,7 +61,7 @@
 
 ## :apple:iOS
 - [x] Login
-    - Github OAuth를 이용한 로그인
+    - Github OAuth를 이용한 로그인  
     <img width="50%" src="https://user-images.githubusercontent.com/45285737/97650166-754af880-1a9c-11eb-87e0-2b548163696f.gif"></img>  
 - [ ] Issue Tab
 - [ ] Label Tab
