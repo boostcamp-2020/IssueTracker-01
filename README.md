@@ -12,7 +12,7 @@
 
 ### 🧙J019 권오민 [@ohmink](https://github.com/ohmink)
 > 그냥 집순이 
-### :face_with_monocle:J167 이호영 [@2hoyeong](https://github.com/2hoyeong)
+### 🧐J167 이호영 [@2hoyeong](https://github.com/2hoyeong)
 > 불편한 코드는 못참는
 ### :kr:J184 정상우 [@sangw3433](https://github.com/sangw3433)
 > 롤을 좋아하는 한국인입니다. 
