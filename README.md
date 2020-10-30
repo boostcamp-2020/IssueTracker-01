@@ -1,8 +1,9 @@
 # IssueTracker-01
 
 <p align="middle">
-    <img alt="Swift" src="https://img.shields.io/badge/swift-v5.1-orange?logo=swift">
+    <img alt="Swift" src="https://img.shields.io/badge/swift-v5.3-orange?logo=swift">
     <img alt="Node.js" src="https://img.shields.io/badge/node.js-v12.18.3-cf?logo=node.js)">
+    <img alt="Javascript" src="https://img.shields.io/badge/javascript-ES6+-yellow?logo=javascript">
     <img alt="React" src="https://img.shields.io/badge/react-0.0.0-blue?logo=react">
     <img alt="Document" src="https://img.shields.io/badge/document-yes-important">
     <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/w/boostcamp-2020/IssueTracker-01">
