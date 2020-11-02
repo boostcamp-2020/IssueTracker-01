@@ -74,4 +74,12 @@ export default class MileStone extends Sequelize.Model {
       return [];
     }
   }
+
+  static async createMilestone({ title, dueDate, description }) {
+    await this.create({
+      title,
+      dueDate,
+      description,
+    });
+  }
 }
