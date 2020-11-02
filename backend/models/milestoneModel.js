@@ -35,4 +35,14 @@ export default class MileStone extends Sequelize.Model {
       },
     );
   }
+
+  static async readMilestoneList() {
+    try {
+      const milestones = await this.findAll({ attributes: ['title', 'dueDate'] });
+      return milestones.map((milestone) => milestone.dataValues);
+    } catch (err) {
+      console.log(err);
+      return [];
+    }
+  }
 }
