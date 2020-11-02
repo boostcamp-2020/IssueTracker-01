@@ -10,7 +10,7 @@ const passportConfig = () => {
       {
         clientID: Config.GITHUB_CLIENT_ID,
         clientSecret: Config.GITHUB_CLIENT_SECRET,
-        callbackURL: 'http://localhost:3000/oauth/github/callback',
+        callbackURL: Config.GITHUB_CALLBACK_URL,
       },
       async (accessToken, refreshToken, profile, done) => {
         const user = await User.findOrCreate({
