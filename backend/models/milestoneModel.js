@@ -36,6 +36,12 @@ export default class MileStone extends Sequelize.Model {
     );
   }
 
+  static associate(db) {
+    db.Milestone.hasMany(db.Issue, {
+      foreignKey: 'milestoneId',
+    });
+  }
+
   static async readMilestoneList() {
     try {
       const milestones = await this.findAll({ attributes: ['title', 'dueDate'] });
