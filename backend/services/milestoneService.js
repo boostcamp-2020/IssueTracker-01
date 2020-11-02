@@ -40,4 +40,8 @@ const addMilestone = async (req, res, next) => {
   }
 };
 
-export default { getMilestoneList, getMilestone, addMilestone };
+const updateMilestone = async (req, res, next) => {
+  res.json({ message: 'Success' });
+};
+
+export default { getMilestoneList, getMilestone, addMilestone, updateMilestone };
