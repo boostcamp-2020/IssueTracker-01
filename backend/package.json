@@ -39,7 +39,9 @@
     "@services": "services",
     "@routes": "routes",
     "@utils": "utils",
-    "@config": "config"
+    "@config": "config",
+    "@middlewares": "middlewares"
+
   },
   "babel": {
     "presets": [

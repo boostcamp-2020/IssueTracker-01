@@ -6,7 +6,8 @@
       "@services/*": ["services/*"],
       "@routes/*": ["routes/*"],
       "@utils/*": ["utils/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@middlewares/*": ["middlewares/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"]
