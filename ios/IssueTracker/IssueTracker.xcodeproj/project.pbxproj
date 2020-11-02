@@ -25,6 +25,8 @@
 		5C6DB9C31F7429A6C6E6C11E /* libPods-IssueTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E034FD863700386FD8006D2D /* libPods-IssueTracker.a */; };
 		DECEB67B254FF7C70004960A /* IssueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEB679254FF7C70004960A /* IssueCollectionViewCell.swift */; };
 		DECEB67C254FF7C70004960A /* IssueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECEB67A254FF7C70004960A /* IssueCollectionViewCell.xib */; };
+		DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */; };
+		DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEB65B254FE8F00004960A /* LabelBadge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		CD7A463B519574E490A4CDEF /* Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DECEB679254FF7C70004960A /* IssueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewCell.swift; sourceTree = "<group>"; };
 		DECEB67A254FF7C70004960A /* IssueCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCollectionViewCell.xib; sourceTree = "<group>"; };
+		DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexColor.swift"; sourceTree = "<group>"; };
+		DECEB65B254FE8F00004960A /* LabelBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBadge.swift; sourceTree = "<group>"; };
 		E034FD863700386FD8006D2D /* libPods-IssueTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A338802E0FAC5F54ABF501 /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		E874F56191945209810F25EC /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				DEF43B56254FDE5000F93A91 /* Issue */,
+				DEF43B78254FE3FF00F93A91 /* Label */,
 				0D356E022547E790008F2704 /* UIView+CornerRadius.swift */,
 			);
 			path = Views;
@@ -209,6 +214,15 @@
 				DECEB67A254FF7C70004960A /* IssueCollectionViewCell.xib */,
 			);
 			path = Issue;
+			sourceTree = "<group>";
+		};
+		DEF43B78254FE3FF00F93A91 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				DECEB65B254FE8F00004960A /* LabelBadge.swift */,
+				DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */,
+			);
+			path = Label;
 			sourceTree = "<group>";
 		};
 		ECE57AEDEDB89D434598B805 /* Frameworks */ = {
@@ -450,6 +464,8 @@
 				0DA6EDE02547D67C009EA88F /* SceneDelegate.swift in Sources */,
 				DECEB67B254FF7C70004960A /* IssueCollectionViewCell.swift in Sources */,
 				0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */,
+				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,
+				DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */,
 				0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
