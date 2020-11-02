@@ -1,6 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
+import milestone from './api/milestone';
 
 const router = express.Router();
 
@@ -22,5 +23,7 @@ router.get('/github/callback', (req, res) => {
 router.get('/test/jwt', passport.authenticate('jwt', { session: false }), (req, res) => {
   console.log('성공');
 });
+
+router.use('/milestone', milestone);
 
 module.exports = router;
