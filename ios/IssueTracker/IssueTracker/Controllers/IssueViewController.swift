@@ -9,14 +9,13 @@ import UIKit
 
 class IssueViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
-    private var items: [Int] = [0]
+    private var items: [Int] = [0, 1, 2]
     
     @IBOutlet weak var collectionView: UICollectionView?
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
     }
-
 }
 
 // MARK: - Storyboard identifier
@@ -29,15 +28,22 @@ extension IssueViewController {
 
 // MARK: - Configure CollectionView
 extension IssueViewController: UICollectionViewDelegate {
-    func configureCollectionView() {
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        // TODO: - Action for click issue cell
+    }
+    
+    private func configureCollectionView() {
+        configureCell()
         configureFlowLayout()
         collectionView?.delegate = self
         collectionView?.dataSource = dataSource
         applySnapshot()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        // TODO: - Action for click issue cell
+    private func configureCell() {
+        let name = "IssueCollectionViewCell"
+        let nibName = UINib(nibName: name, bundle: nil)
+        collectionView?.register(nibName, forCellWithReuseIdentifier: StoryBoard.cell)
     }
     
     private func configureFlowLayout() {
@@ -60,7 +66,6 @@ extension IssueViewController {
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard kind == UICollectionView.elementKindSectionHeader else { return nil }
-            print("hi")
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: StoryBoard.header, for: indexPath)
             return header
         }
