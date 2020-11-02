@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="IssueCollectionViewCell" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="326" height="77"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="326" height="77"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-i1-EoM">
+                        <rect key="frame" x="0.0" y="0.0" width="326" height="77"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="레이블 전체목록을 볼 수 있어야 한다" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Um3-3h-dVx">
+                                <rect key="frame" x="8" y="36" width="229.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szf-zu-BH0">
+                                <rect key="frame" x="8" y="10" width="129" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMr-Eq-aui">
+                                <rect key="frame" x="254" y="12" width="53" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="뱃지로대체될예정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSN-xT-HgB">
+                                <rect key="frame" x="237.5" y="38" width="69.5" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nSN-xT-HgB" firstAttribute="leading" secondItem="Um3-3h-dVx" secondAttribute="trailing" id="0me-4h-KuD"/>
+                            <constraint firstItem="Um3-3h-dVx" firstAttribute="top" secondItem="szf-zu-BH0" secondAttribute="bottom" constant="8" symbolic="YES" id="1en-p0-xqX"/>
+                            <constraint firstItem="nSN-xT-HgB" firstAttribute="top" secondItem="uMr-Eq-aui" secondAttribute="bottom" constant="10" id="6nJ-Mw-oFb"/>
+                            <constraint firstItem="szf-zu-BH0" firstAttribute="top" secondItem="BOC-i1-EoM" secondAttribute="top" constant="10" id="8EJ-ng-TKF"/>
+                            <constraint firstAttribute="trailing" secondItem="uMr-Eq-aui" secondAttribute="trailing" constant="19" id="9Yr-yi-2zw"/>
+                            <constraint firstItem="uMr-Eq-aui" firstAttribute="top" secondItem="BOC-i1-EoM" secondAttribute="top" constant="12" id="9uy-GA-OOo"/>
+                            <constraint firstItem="nSN-xT-HgB" firstAttribute="trailing" secondItem="uMr-Eq-aui" secondAttribute="trailing" id="CkP-sZ-w6K"/>
+                            <constraint firstItem="Um3-3h-dVx" firstAttribute="leading" secondItem="szf-zu-BH0" secondAttribute="leading" id="DsN-FL-sSV"/>
+                            <constraint firstItem="szf-zu-BH0" firstAttribute="leading" secondItem="BOC-i1-EoM" secondAttribute="leading" constant="8" id="fg1-YE-h9L"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="BOC-i1-EoM" secondAttribute="bottom" id="7wQ-hk-ldI"/>
+                <constraint firstAttribute="trailing" secondItem="BOC-i1-EoM" secondAttribute="trailing" id="Pct-xR-4t9"/>
+                <constraint firstItem="BOC-i1-EoM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="eSq-Lw-17B"/>
+                <constraint firstItem="BOC-i1-EoM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="iZm-bq-kaS"/>
+            </constraints>
+            <size key="customSize" width="326" height="77"/>
+            <point key="canvasLocation" x="291.304347826087" y="142.29910714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
