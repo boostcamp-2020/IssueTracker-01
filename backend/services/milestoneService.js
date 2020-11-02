@@ -26,4 +26,18 @@ const getMilestone = async (req, res, next) => {
   }
 };
 
-export default { getMilestoneList, getMilestone };
+const addMilestone = async (req, res, next) => {
+  try {
+    const { title, description, dueDate } = req.body;
+    await Milestone.createMilestone({ title, description, dueDate });
+    res.json({ message: 'Success' });
+  } catch (err) {
+    console.log(err);
+    next({
+      status: 500,
+      message: 'Fail',
+    });
+  }
+};
+
+export default { getMilestoneList, getMilestone, addMilestone };

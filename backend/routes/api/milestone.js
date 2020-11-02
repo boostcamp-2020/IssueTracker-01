@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.get('/', milestoneService.getMilestoneList);
 router.get('/detail', milestoneService.getMilestone);
+router.post('/', milestoneService.addMilestone);
 
 export default router;
