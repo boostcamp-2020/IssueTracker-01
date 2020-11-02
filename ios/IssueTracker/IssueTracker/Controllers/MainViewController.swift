@@ -16,7 +16,7 @@ class MainViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        checkAccessToken()
+        //checkAccessToken()
     }
     
     private func configureLoginViewController() -> LoginViewController {
