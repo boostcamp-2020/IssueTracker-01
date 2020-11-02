@@ -1,3 +1,4 @@
+import MileStone from '@models/milestoneModel';
 import Milestone from '@models/milestoneModel';
 
 const getMilestoneList = async (req, res, next) => {
@@ -41,7 +42,18 @@ const addMilestone = async (req, res, next) => {
 };
 
 const updateMilestone = async (req, res, next) => {
-  res.json({ message: 'Success' });
+  try {
+    const { id } = req.params;
+    const { title, dueDate, description } = req.body;
+    await MileStone.updateMilestone({ id, title, dueDate, description });
+    res.json({ message: 'Success' });
+  } catch (err) {
+    console.log(err);
+    next({
+      status: 500,
+      message: 'Fail',
+    });
+  }
 };
 
 export default { getMilestoneList, getMilestone, addMilestone, updateMilestone };

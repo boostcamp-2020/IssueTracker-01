@@ -82,4 +82,15 @@ export default class MileStone extends Sequelize.Model {
       description,
     });
   }
+
+  static async updateMilestone({ id, title, dueDate, description }) {
+    await this.update(
+      {
+        title,
+        dueDate,
+        description,
+      },
+      { where: { milestoneId: id } },
+    );
+  }
 }
