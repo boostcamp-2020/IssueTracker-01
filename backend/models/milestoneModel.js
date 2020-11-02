@@ -51,4 +51,27 @@ export default class MileStone extends Sequelize.Model {
       return [];
     }
   }
+
+  static async readMilestonesDetail() {
+    try {
+      const milestones = await this.findAll({
+        attributes: [
+          'title',
+          'dueDate',
+          'description',
+          [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`status` = "open", 1, 0)')), 'openIssues'],
+          [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`status` = "close", 1, 0)')), 'closeIssues'],
+        ],
+        include: ['Issues'],
+        group: ['MileStone.milestoneId'],
+      });
+      return milestones.map((milestone) => {
+        const { Issues, ...milestoneData } = milestone.dataValues;
+        return milestoneData;
+      });
+    } catch (err) {
+      console.log(err);
+      return [];
+    }
+  }
 }

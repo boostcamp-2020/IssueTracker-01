@@ -4,5 +4,6 @@ import milestoneService from '../../services/milestoneService';
 const router = express.Router();
 
 router.get('/', milestoneService.getMilestoneList);
+router.get('/detail', milestoneService.getMilestone);
 
 export default router;
