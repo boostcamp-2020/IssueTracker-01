@@ -18,6 +18,7 @@
 		0DA6EDEA2547D67D009EA88F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DA6EDE82547D67D009EA88F /* LaunchScreen.storyboard */; };
 		0DA6EDF52547D67D009EA88F /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6EDF42547D67D009EA88F /* IssueTrackerTests.swift */; };
 		0DA6EE002547D67D009EA88F /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6EDFF2547D67D009EA88F /* IssueTrackerUITests.swift */; };
+		0DB5B8BF254FDA4900C2118E /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */; };
 		0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB84C932549308C000B6651 /* GithubLoginManager.swift */; };
 		1D41EF98D8AD5662DAF8E5E8 /* libPods-IssueTracker-IssueTrackerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64833F0ACC622329624F531 /* libPods-IssueTracker-IssueTrackerUITests.a */; };
 		2A3273415820EBEE918C6BBB /* libPods-IssueTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7652936AE065428E1110A3 /* libPods-IssueTrackerTests.a */; };
@@ -60,6 +61,7 @@
 		0DA6EDFB2547D67D009EA88F /* IssueTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DA6EDFF2547D67D009EA88F /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
 		0DA6EE012547D67D009EA88F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		0DB84C932549308C000B6651 /* GithubLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManager.swift; sourceTree = "<group>"; };
 		4A7652936AE065428E1110A3 /* libPods-IssueTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB2F18A4D0EF2AA5045315E /* Pods-IssueTracker-IssueTrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				0DA6EDE12547D67C009EA88F /* LoginViewController.swift */,
 				0D7D234F2547F34E0012C943 /* MainViewController.swift */,
+				0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				0DA6EDE22547D67C009EA88F /* LoginViewController.swift in Sources */,
 				0D356E032547E790008F2704 /* UIView+CornerRadius.swift in Sources */,
 				0DA6EDDE2547D67C009EA88F /* AppDelegate.swift in Sources */,
+				0DB5B8BF254FDA4900C2118E /* IssueViewController.swift in Sources */,
 				0DA6EDE02547D67C009EA88F /* SceneDelegate.swift in Sources */,
 				0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */,
 				0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */,
