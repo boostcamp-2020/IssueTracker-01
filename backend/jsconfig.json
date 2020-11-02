@@ -5,7 +5,8 @@
       "@models/*": ["models/*"],
       "@services/*": ["services/*"],
       "@routes/*": ["routes/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@config/*": ["config/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"]
