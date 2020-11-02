@@ -1,5 +1,4 @@
 import MileStone from '@models/milestoneModel';
-import Milestone from '@models/milestoneModel';
 
 const getMilestoneList = async (req, res, next) => {
   try {

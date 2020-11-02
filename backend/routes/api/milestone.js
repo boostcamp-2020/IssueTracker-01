@@ -1,5 +1,5 @@
 import express from 'express';
-import milestoneService from '../../services/milestoneService';
+import milestoneService from '@services/milestoneService';
 
 const router = express.Router();
 
