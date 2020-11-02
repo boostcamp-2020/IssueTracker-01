@@ -93,4 +93,8 @@ export default class MileStone extends Sequelize.Model {
       { where: { milestoneId: id } },
     );
   }
+
+  static async deleteMilestone(id) {
+    await this.destroy({ where: { milestoneId: id } });
+  }
 }
