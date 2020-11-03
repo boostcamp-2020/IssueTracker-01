@@ -14,9 +14,9 @@ export default class Issue extends Sequelize.Model {
           type: Sequelize.STRING(45),
           allowNull: false,
         },
-        status: {
-          type: Sequelize.STRING(30),
-          defaultValue: 'open',
+        isOpen: {
+          type: Sequelize.TINYINT(1),
+          defaultValue: 1,
         },
       },
       {
