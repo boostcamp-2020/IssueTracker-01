@@ -31,5 +31,8 @@ export default class Comment extends Sequelize.Model {
     db.Comment.belongsTo(db.User, {
       foreignKey: 'userId',
     });
+    db.Comment.belongsTo(db.Issue, {
+      foreignKey: 'issueId',
+    });
   }
 }
