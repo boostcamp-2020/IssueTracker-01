@@ -35,6 +35,10 @@ export default class Issue extends Sequelize.Model {
     db.Issue.belongsTo(db.User, {
       foreignKey: 'userId',
     });
+    db.Issue.belongsTo(db.User, {
+      foreignKey: 'assignees',
+      targetKey: 'userId',
+    });
     db.Issue.belongsTo(db.Milestone, {
       foreignKey: 'milestoneId',
     });
