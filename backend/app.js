@@ -7,6 +7,7 @@ import logger from 'morgan';
 import { sequelize } from './models';
 import 'module-alias/register';
 import indexRouter from './routes/index';
+import labelRouter from './routes/api/label';
 import passport from 'passport';
 import passportConfig from './passport/passport';
 
@@ -29,6 +30,7 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use('/', indexRouter);
+app.use('/', labelRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
