@@ -1,6 +1,9 @@
 // TODO - 이슈 서비스 작성
 import Issue from '@models/issueModel';
 import IssueLabel from '@models/issueLabelModel';
+import User from '@models/userModel';
+import Label from '@models/labelModel';
+import Milestone from '@models/milestoneModel';
 
 const updateAssignee = async (req, res) => {
   try {
@@ -126,6 +129,33 @@ const create = async (req, res) => {
   }
 };
 
+const getIssueLists = async (req, res, next) => {
+  try {
+    const issueList = await Issue.findAll({
+      attributes: ['title', 'issueId', 'createdAt'],
+      include: [
+        { model: User, attributes: ['userId', 'profile_url'] },
+        {
+          model: IssueLabel,
+          include: [{ model: Label, attributes: ['labelName', 'color'] }],
+          attributes: ['id'],
+        },
+        {
+          model: Milestone,
+          attributes: ['title'],
+        },
+      ],
+    });
+    res.json(issueList);
+  } catch (err) {
+    console.log(err);
+    next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
 export default {
   create,
   updateTitle,
@@ -134,4 +164,5 @@ export default {
   addLabel,
   removeLabel,
   removeAllLabel,
+  getIssueLists,
 };

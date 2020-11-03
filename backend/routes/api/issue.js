@@ -10,5 +10,6 @@ router.delete('/issueLabel/all/:id', issueService.removeAllLabel);
 router.patch('/:id', issueService.updateTitle);
 router.patch('/:id/milestone', issueService.updateMilestone);
 router.post('/', issueService.create);
+router.get('/', issueService.getIssueLists);
 
 export default router;
