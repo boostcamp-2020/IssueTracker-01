@@ -8,7 +8,6 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-    var userData: Any?
     var githubLogin: GithubLogin?
     
     override func viewDidLoad() {
@@ -17,7 +16,7 @@ class MainViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        checkUserData()
+        checkAccessToken()
     }
     
     private func configureLoginViewController() -> LoginViewController {
@@ -26,8 +25,8 @@ class MainViewController: UITabBarController {
         return login
     }
     
-    private func checkUserData() {
-        guard userData == nil else { return }
+    private func checkAccessToken() {
+        guard githubLogin?.token == nil else { return }
         let login = configureLoginViewController()
         login.delegate = self
         login.modalPresentationStyle = .fullScreen
@@ -36,11 +35,9 @@ class MainViewController: UITabBarController {
 }
 
 extension MainViewController: LoginViewControllerDelegate {
-    func requestCode() {
-        githubLogin?.requestCode()
-    }
-    
-    func addUserData() {
-        userData = "user"
+    func requestCode(loginViewController: LoginViewController) {
+        githubLogin?.requestCode { 
+            loginViewController.dismiss(animated: true, completion: nil)
+        }
     }
 }
