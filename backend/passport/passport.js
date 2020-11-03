@@ -17,6 +17,7 @@ const passportConfig = () => {
           where: { userId: profile.username },
           defaults: {
             password: 'test',
+            profile_url: profile.photos[0].value,
           },
         });
         done(null, user);
