@@ -12,6 +12,7 @@ const updateTitle = async (req, res, next) => {
     );
     res.json({ message: 'Success' });
   } catch (err) {
+    console.log(err);
     next({
       status: 400,
       message: err.message,
@@ -19,4 +20,24 @@ const updateTitle = async (req, res, next) => {
   }
 };
 
-export default { updateTitle };
+const updateMilestone = async (req, res, next) => {
+  try {
+    const { id: issueId } = req.params;
+    const { milestoneId } = req.body;
+    await Issue.update(
+      {
+        milestoneId: milestoneId || null,
+      },
+      { where: { issueId } },
+    );
+    res.json({ message: 'Success' });
+  } catch (err) {
+    console.log(err);
+    next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
+export default { updateTitle, updateMilestone };
