@@ -19,6 +19,17 @@ class IssueViewController: UIViewController {
         configureFlowLayout()
         applySnapshot()
     }
+    @IBAction func clickFilterButton(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func clickEditButton(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func clickAddButton(_ sender: UIButton) {
+        
+    }
 }
 
 // MARK: - Storyboard identifier
