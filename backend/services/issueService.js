@@ -1,23 +1,12 @@
 // TODO - 이슈 서비스 작성
-import User from '@models/userModel';
 import Issue from '@models/issueModel';
 import IssueLabel from '@models/issueLabelModel';
 
-const getAssigneeCandidates = async (req, res) => {
+const updateAssignee = async (req, res) => {
     try {
-        const result = await User.findAll({attributes: ['userId', 'profile_url']});
+        const { id } = req.params;
         
-        return res.status(200).json({ data: result, message: "success" });
-    } catch (error) {
-        return res.status(400).json({ message: error.message });
-    }
-}
-
-const changeAssignee = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const result = await Issue.update({
+        await Issue.update({
             assignees: req.body.userId
           },
           {
@@ -25,7 +14,7 @@ const changeAssignee = async (req, res) => {
           }
         );
         
-        return res.status(200).json({ data: result, message: "success" });
+        return res.status(200).json({ message: "success" });
     } catch (error) {
         return res.status(400).json({ message: error.message });
     }
@@ -38,9 +27,10 @@ const addLabel = async (req, res) => {
         issueId: id,
         name: req.body.name
       };
-      const result = await IssueLabel.create(newData);
+      
+      await IssueLabel.create(newData);
 
-      return res.status(200).json({ data: result, message: "success" });
+      return res.status(200).json({ message: "success" });
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
@@ -50,11 +40,11 @@ const removeLabel = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const result = await IssueLabel.destroy({
+        await IssueLabel.destroy({
             where: { issueId: id, name: req.body.labelName }
         });
   
-        return res.status(200).json({ data: result, message: "success" });
+        return res.status(200).json({ message: "success" });
       } catch (error) {
         return res.status(400).json({ message: error.message });
     }
@@ -64,11 +54,11 @@ const removeAllLabel = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const result = await IssueLabel.destroy({
+        await IssueLabel.destroy({
             where: { issueId: id }
         });
   
-        return res.status(200).json({ data: result, message: "success" });
+        return res.status(200).json({ message: "success" });
       } catch (error) {
         return res.status(400).json({ message: error.message });
     }
@@ -135,4 +125,4 @@ const create = async (req, res) => {
   }
 };
 
-export default { create, updateTitle, updateMilestone, getAssigneeCandidates, changeAssignee, addLabel, removeLabel, removeAllLabel };
+export default { create, updateTitle, updateMilestone, updateAssignee, addLabel, removeLabel, removeAllLabel };
