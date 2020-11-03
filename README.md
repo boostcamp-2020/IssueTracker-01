@@ -38,20 +38,12 @@
 ##  :computer: Backend Server
 ### 구조
 ```
+├.vscode
 ├bin
-│  www
-├passport
-|  passport.js
 ├models
-│  commentModel.js
-│  index.js
-│  issueLabelModel.js
-│  issueModel.js
-│  labelModel.js
-│  milestoneModel.js
-│  userModel.js
-├services
-└routes
+├passport
+├routes
+└services
 ```
 ### 흐름
 ![](https://i.imgur.com/UTtN70S.png)
