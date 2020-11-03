@@ -1,8 +1,11 @@
 import express from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
+import labelRouter from './api/label';
 
 const router = express.Router();
+
+router.use('/api/label', labelRouter);
 
 router.get('/', (req, res) => {
   return res.send('ok');
