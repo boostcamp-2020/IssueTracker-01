@@ -9,16 +9,21 @@ import UIKit
 
 class IssueViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
-
-    let viewModel = IssueViewModel()
+    private var viewModel: IssueViewModel?
     @IBOutlet weak var collectionView: UICollectionView?
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureCell()
         configureFlowLayout()
+        configureDelegate()
         applySnapshot()
     }
+    
+    func configureDelegate() {
+        self.viewModel?.delegate = self.collectionView
+    }
+    
 }
 
 // MARK: - Storyboard identifier
@@ -59,11 +64,9 @@ extension IssueViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: {[weak self] (collectionView, indexPath, _) -> IssueCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, issue) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryBoard.cell, for: indexPath)
             guard let issueCell = cell as? IssueCell else { return IssueCell() }
-
-            let issue = self?.viewModel.items?.issues[indexPath.row]
             self?.binding(cell: issueCell, issue: issue)
             
             return issueCell
@@ -73,7 +76,7 @@ extension IssueViewController {
     private func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([0])
-        snapshot.appendItems(viewModel.items?.issues ?? [], toSection: 0)
+        snapshot.appendItems(viewModel?.items ?? [], toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 
@@ -81,5 +84,4 @@ extension IssueViewController {
         cell.issueTitle?.text = issue?.title
         cell.milestoneTitle?.text = issue?.milestoneTitle
     }
-    
 }
