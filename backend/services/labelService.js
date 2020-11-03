@@ -2,13 +2,9 @@ import Label from '../models/labelModel';
 
 exports.getLabels = async (req, res) => {
   try {
-    const labels = await Label.readLabels();
+    const labels = await Label.findAll();
 
-    if (labels !== false) {
-      return res.status(200).json({ data: labels, message: 'success' });
-    }
-
-    return res.status(400).json({ message: 'unexpected fail' });
+    return res.status(200).json({ data: labels, message: 'success' });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -16,7 +12,7 @@ exports.getLabels = async (req, res) => {
 
 exports.createLabel = async (req, res) => {
   try {
-    const isExist = await Label.isExist(req.body.name);
+    const isExist = await Label.findOne({ where: { labelName: req.body.name } });
 
     if (!isExist) {
       const newLabel = {
@@ -25,13 +21,9 @@ exports.createLabel = async (req, res) => {
         description: req.body.desc,
       };
 
-      const result = await Label.createLabel(newLabel);
+      const result = await Label.create(newLabel);
 
-      if (result) {
-        return res.status(200).json({ data: result, message: 'success' });
-      }
-
-      return res.status(400).json({ message: 'unexpected fail' });
+      return res.status(200).json({ data: result, message: 'success' });
     }
 
     return res.status(400).json({ message: 'name already exists.' });
@@ -42,16 +34,21 @@ exports.createLabel = async (req, res) => {
 
 exports.updateLabel = async (req, res) => {
   try {
-    const isExist = await Label.isExist(req.body.newName);
+    const isExist = await Label.findOne({ where: { labelName: req.body.newName } });
 
     if (!isExist) {
-      const result = await Label.updateLabel(req.body.curName, req.body.newName, req.body.color, req.body.desc);
+      await Label.update(
+        {
+          labelName: req.body.newName,
+          color: req.body.color,
+          description: req.body.desc,
+        },
+        {
+          where: { labelName: req.body.curName },
+        },
+      );
 
-      if (result !== false) {
-        return res.status(200).json({ message: 'success.' });
-      }
-
-      return res.status(400).json({ message: 'unexpected fail' });
+      return res.status(200).json({ message: 'success.' });
     }
 
     return res.status(400).json({ message: 'This name already exists.' });
@@ -62,7 +59,9 @@ exports.updateLabel = async (req, res) => {
 
 exports.deleteLabel = async (req, res) => {
   try {
-    const result = await Label.deleteLabel(req.body.name);
+    const result = await Label.destroy({
+      where: { labelName: req.body.name },
+    });
 
     if (result) {
       return res.status(200).json({ message: 'success.' });
