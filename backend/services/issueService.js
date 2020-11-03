@@ -4,6 +4,7 @@ import IssueLabel from '@models/issueLabelModel';
 import User from '@models/userModel';
 import Label from '@models/labelModel';
 import Milestone from '@models/milestoneModel';
+import Comment from '@models/commentModel';
 
 const updateAssignee = async (req, res) => {
   try {
@@ -131,10 +132,14 @@ const create = async (req, res) => {
 
 const getIssueLists = async (req, res, next) => {
   try {
+    const filters = req.query.q;
     const issueList = await Issue.findAll({
       attributes: ['title', 'issueId', 'createdAt'],
       include: [
-        { model: User, attributes: ['userId', 'profile_url'] },
+        {
+          model: User,
+          attributes: ['userId', 'profile_url'],
+        },
         {
           model: IssueLabel,
           include: [{ model: Label, attributes: ['labelName', 'color'] }],
@@ -144,7 +149,15 @@ const getIssueLists = async (req, res, next) => {
           model: Milestone,
           attributes: ['title'],
         },
+        {
+          model: Comment,
+          attributes: ['commentId', 'userId'],
+          where: { '$Comment.userId$': req.user.userId },
+        },
       ],
+    });
+    filters.split(' ').forEach((filter) => {
+      const [target, condition] = filter.split(':');
     });
     res.json(issueList);
   } catch (err) {

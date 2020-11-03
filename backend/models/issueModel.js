@@ -45,5 +45,8 @@ export default class Issue extends Sequelize.Model {
     db.Issue.hasMany(db.IssueLabel, {
       foreignKey: 'issueId',
     });
+    db.Issue.hasMany(db.Comment, {
+      foreignKey: 'issueId',
+    });
   }
 }
