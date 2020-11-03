@@ -3,4 +3,6 @@ import { Router } from 'express';
 
 const router = Router();
 
+router.patch('/:id', issueService.updateTitle);
+
 export default router;
