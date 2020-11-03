@@ -30,49 +30,4 @@ export default class Label extends Sequelize.Model {
       },
     );
   }
-
-  static async readLabels() {
-    try {
-      const labels = await this.findAll();
-
-      return labels;
-    } catch (error) {
-      return false;
-    }
-  }
-
-  static async createLabel(newLabel) {
-    const result = await this.create(newLabel);
-
-    return result;
-  }
-
-  static async updateLabel(curName, newName, labelColor, desc) {
-    const result = await this.update(
-      {
-        labelName: newName,
-        color: labelColor,
-        description: desc,
-      },
-      {
-        where: { labelName: curName },
-      },
-    );
-
-    return result;
-  }
-
-  static async deleteLabel(name) {
-    const result = await Label.destroy({
-      where: { labelName: name },
-    });
-
-    return result;
-  }
-
-  static async isExist(name) {
-    const check = await this.findOne({ where: { labelName: name } });
-
-    return check;
-  }
 }
