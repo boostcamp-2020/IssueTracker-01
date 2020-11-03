@@ -61,6 +61,7 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard !isEditing else { return }
         guard let detail = storyboard?.instantiateViewController(withIdentifier: ViewID.detail) else { return }
         navigationController?.pushViewController(detail, animated: true)
     }
