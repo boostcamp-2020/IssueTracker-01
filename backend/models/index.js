@@ -31,6 +31,7 @@ IssueLabel.init(sequelize);
 Comment.init(sequelize);
 
 Issue.associate(db);
+Milestone.associate(db);
 IssueLabel.associate(db);
 Comment.associate(db);
 
