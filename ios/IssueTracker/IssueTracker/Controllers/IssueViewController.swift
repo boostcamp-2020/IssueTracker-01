@@ -24,6 +24,11 @@ class IssueViewController: UIViewController {
         applySnapshot()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+  
     @IBAction func clickLeftTopButton(_ sender: UIButton) {
         if isEditing {
             selectAllCell()
@@ -43,6 +48,7 @@ class IssueViewController: UIViewController {
 extension IssueViewController {
     private struct ViewID {
         static let cell = String(describing: IssueCell.self)
+        static let detail = String(describing: IssueDetailViewController.self)
     }
 }
 
@@ -55,7 +61,8 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: - Action for click issue cell
+        guard let detail = storyboard?.instantiateViewController(withIdentifier: ViewID.detail) else { return }
+        navigationController?.pushViewController(detail, animated: true)
     }
     
     private func configureCollectionView() {
