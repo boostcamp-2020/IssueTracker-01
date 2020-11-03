@@ -1,9 +1,11 @@
 import express from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
+import apiComment from './api/comment';
 
 const router = express.Router();
 
+router.use('/api/comment', passport.authenticate('jwt', { session: false }), apiComment);
 router.get('/', (req, res) => {
   return res.send('ok');
 });
@@ -23,6 +25,7 @@ router.get('/github/callback', (req, res) => {
 });
 
 router.get('/test/jwt', passport.authenticate('jwt', { session: false }), (req, res) => {
+  console.log(req.user);
   console.log('성공');
 });
 

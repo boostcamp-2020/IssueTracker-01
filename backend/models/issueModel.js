@@ -14,9 +14,6 @@ export default class Issue extends Sequelize.Model {
           type: Sequelize.STRING(45),
           allowNull: false,
         },
-        content: {
-          type: Sequelize.STRING(200),
-        },
         status: {
           type: Sequelize.STRING(30),
           defaultValue: 'open',
@@ -26,8 +23,8 @@ export default class Issue extends Sequelize.Model {
         sequelize,
         underscored: false,
         paranoid: false,
-        modelName: 'Transaction',
-        tableName: 'transaction',
+        modelName: 'Issue',
+        tableName: 'issues',
         charset: 'utf8mb4',
         collate: 'utf8mb4_general_ci',
       },
