@@ -36,7 +36,7 @@ const update = async (req, res) => {
   }
 };
 
-const del = async (req, res) => {
+const remove = async (req, res) => {
   try {
     await Comment.destroy({ where: { commentId: req.params.commentId } });
     return res.status(200).json({ message: 'Success' });
@@ -45,4 +45,4 @@ const del = async (req, res) => {
   }
 };
 
-export default { create, read, update, del };
+export default { create, read, update, remove };
