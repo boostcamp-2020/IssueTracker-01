@@ -40,7 +40,7 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     private func configureCell() {
-        let name = String(describing: IssueCell.self)
+        let name = String(describing: IssueCollectionViewCell.self)
         let nibName = UINib(nibName: name, bundle: nil)
         collectionView?.register(nibName, forCellWithReuseIdentifier: StoryBoard.cell)
     }
@@ -59,18 +59,10 @@ extension IssueViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        let dataSource = DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, data) -> UICollectionViewCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, data) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryBoard.cell, for: indexPath)
             return cell
         })
-        
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: StoryBoard.header, for: indexPath)
-            return header
-        }
-        
-        return dataSource
     }
     
     private func applySnapshot(animatingDifferences: Bool = true) {
