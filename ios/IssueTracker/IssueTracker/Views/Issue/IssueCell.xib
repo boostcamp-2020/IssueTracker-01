@@ -19,18 +19,33 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-i1-EoM" userLabel="Content View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szf-zu-BH0" userLabel="Title">
-                                <rect key="frame" x="10" y="10" width="145" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Um3-3h-dVx" userLabel="Description">
-                                <rect key="frame" x="10" y="39" width="250" height="45"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bV6-YX-dT3" userLabel="Left Content View">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="94"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Um3-3h-dVx" userLabel="Description">
+                                        <rect key="frame" x="10" y="45.5" width="230" height="38.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szf-zu-BH0" userLabel="Title">
+                                        <rect key="frame" x="10" y="10" width="230" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="szf-zu-BH0" firstAttribute="leading" secondItem="bV6-YX-dT3" secondAttribute="leading" constant="10" id="0jv-IP-sxI"/>
+                                    <constraint firstAttribute="bottom" secondItem="Um3-3h-dVx" secondAttribute="bottom" constant="10" id="3w3-aV-FsJ"/>
+                                    <constraint firstItem="Um3-3h-dVx" firstAttribute="leading" secondItem="bV6-YX-dT3" secondAttribute="leading" constant="10" id="4cv-Mh-YA1"/>
+                                    <constraint firstItem="szf-zu-BH0" firstAttribute="top" secondItem="bV6-YX-dT3" secondAttribute="top" constant="10" id="HX1-fX-gfr"/>
+                                    <constraint firstAttribute="trailing" secondItem="szf-zu-BH0" secondAttribute="trailing" constant="10" id="MFM-m2-VWJ"/>
+                                    <constraint firstItem="Um3-3h-dVx" firstAttribute="top" secondItem="szf-zu-BH0" secondAttribute="bottom" constant="14.5" id="pAM-ak-RXk"/>
+                                    <constraint firstAttribute="trailing" secondItem="Um3-3h-dVx" secondAttribute="trailing" constant="10" id="pXT-Bz-c8T"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ns-fz-koM">
                                 <rect key="frame" x="292" y="10" width="73" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -70,31 +85,29 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4Wa-UW-esX" firstAttribute="top" secondItem="1ns-fz-koM" secondAttribute="bottom" constant="8" symbolic="YES" id="34g-ca-XCc"/>
-                            <constraint firstAttribute="bottom" secondItem="Um3-3h-dVx" secondAttribute="bottom" constant="10" id="5FI-8n-Vrz"/>
-                            <constraint firstItem="1ns-fz-koM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="szf-zu-BH0" secondAttribute="trailing" constant="10" id="5j0-Pz-Crk"/>
                             <constraint firstAttribute="bottom" secondItem="4Wa-UW-esX" secondAttribute="bottom" constant="34" id="64Z-UD-alS"/>
                             <constraint firstAttribute="trailing" secondItem="4Wa-UW-esX" secondAttribute="trailing" constant="10" id="68e-Tj-Jll"/>
-                            <constraint firstItem="Um3-3h-dVx" firstAttribute="width" secondItem="BOC-i1-EoM" secondAttribute="width" multiplier="2/3" id="DJR-E3-GBd"/>
-                            <constraint firstItem="Um3-3h-dVx" firstAttribute="leading" secondItem="BOC-i1-EoM" secondAttribute="leading" constant="10" id="Jb9-Q3-mrw"/>
                             <constraint firstItem="1ns-fz-koM" firstAttribute="top" secondItem="BOC-i1-EoM" secondAttribute="top" constant="10" id="LXO-g9-3JQ"/>
-                            <constraint firstItem="szf-zu-BH0" firstAttribute="leading" secondItem="BOC-i1-EoM" secondAttribute="leading" constant="10" id="Ti5-Ju-CbM"/>
-                            <constraint firstItem="4Wa-UW-esX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Um3-3h-dVx" secondAttribute="trailing" constant="10" id="X5X-28-eT2"/>
-                            <constraint firstItem="Um3-3h-dVx" firstAttribute="top" secondItem="szf-zu-BH0" secondAttribute="bottom" constant="8" symbolic="YES" id="eMP-KM-qkn"/>
-                            <constraint firstItem="szf-zu-BH0" firstAttribute="top" secondItem="BOC-i1-EoM" secondAttribute="top" constant="10" id="jXh-ac-ivy"/>
                             <constraint firstAttribute="trailing" secondItem="1ns-fz-koM" secondAttribute="trailing" constant="10" id="lRM-cI-dRn"/>
+                            <constraint firstItem="bV6-YX-dT3" firstAttribute="leading" secondItem="BOC-i1-EoM" secondAttribute="leading" priority="900" constant="40" id="pKp-Ae-ZE0"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="BOC-i1-EoM" firstAttribute="top" secondItem="bV6-YX-dT3" secondAttribute="top" id="3hQ-6o-4ti"/>
                 <constraint firstAttribute="bottom" secondItem="BOC-i1-EoM" secondAttribute="bottom" id="Jc9-9Q-idt"/>
+                <constraint firstItem="bV6-YX-dT3" firstAttribute="leading" secondItem="BOC-i1-EoM" secondAttribute="leading" id="QCe-xE-RoL"/>
                 <constraint firstAttribute="trailing" secondItem="BOC-i1-EoM" secondAttribute="trailing" id="hnG-Ls-rrW"/>
+                <constraint firstItem="BOC-i1-EoM" firstAttribute="bottom" secondItem="bV6-YX-dT3" secondAttribute="bottom" id="lta-SJ-I3f"/>
                 <constraint firstItem="BOC-i1-EoM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tj4-lz-Acn"/>
+                <constraint firstItem="bV6-YX-dT3" firstAttribute="width" secondItem="BOC-i1-EoM" secondAttribute="width" multiplier="2/3" id="v6s-24-tHW"/>
                 <constraint firstItem="BOC-i1-EoM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="yOB-Cg-XcS"/>
             </constraints>
             <size key="customSize" width="326" height="77"/>
             <connections>
+                <outlet property="defaultConstraint" destination="QCe-xE-RoL" id="0YW-SB-PnE"/>
                 <outlet property="issueDescription" destination="Um3-3h-dVx" id="PTd-TY-Iqc"/>
                 <outlet property="issueTitle" destination="szf-zu-BH0" id="VD0-Uf-5Po"/>
                 <outlet property="milestoneTitle" destination="1ns-fz-koM" id="ORc-eP-cIU"/>
