@@ -7,8 +7,8 @@ const getMilestoneList = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     next({
-      status: 500,
-      message: err,
+      status: 400,
+      message: err.message,
     });
   }
 };
@@ -20,7 +20,7 @@ const getMilestone = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     next({
-      status: 500,
+      status: 400,
       message: err.message,
     });
   }
@@ -34,7 +34,7 @@ const addMilestone = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     next({
-      status: 500,
+      status: 400,
       message: 'Fail',
     });
   }
@@ -49,7 +49,7 @@ const updateMilestone = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     next({
-      status: 500,
+      status: 400,
       message: 'Fail',
     });
   }
