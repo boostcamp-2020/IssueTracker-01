@@ -15,6 +15,6 @@ router.get('/validate/jwt', passport.authenticate('jwt', { session: false }), (r
 });
 
 router.use('/oauth/github', githubRouter);
-router.use('/milestone', milestone);
+router.use('/api/milestone', milestone);
 
 export default router;
