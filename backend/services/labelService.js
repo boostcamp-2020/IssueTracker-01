@@ -59,15 +59,11 @@ exports.updateLabel = async (req, res) => {
 
 exports.deleteLabel = async (req, res) => {
   try {
-    const result = await Label.destroy({
+    await Label.destroy({
       where: { labelName: req.body.name },
     });
 
-    if (result) {
-      return res.status(200).json({ message: 'success.' });
-    }
-
-    return res.status(409).json({ message: 'The label does not exist.' });
+    return res.status(200).json({ message: 'success.' });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
