@@ -19,19 +19,26 @@ class IssueViewController: UIViewController {
         configureFlowLayout()
         applySnapshot()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
 }
 
 // MARK: - Storyboard identifier
 extension IssueViewController {
-    private struct StoryBoard {
+    private struct ViewID {
         static let cell = "IssueMainCell"
+        static let detail = String(describing: IssueDetailViewController.self)
     }
 }
 
 // MARK: - Configure CollectionView
 extension IssueViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: - Action for click issue cell
+        guard let detail = storyboard?.instantiateViewController(withIdentifier: ViewID.detail) else { return }
+        navigationController?.pushViewController(detail, animated: true)
     }
     
     private func configureCollectionView() {
@@ -42,7 +49,7 @@ extension IssueViewController: UICollectionViewDelegate {
     private func configureCell() {
         let name = String(describing: IssueCell.self)
         let nibName = UINib(nibName: name, bundle: nil)
-        collectionView?.register(nibName, forCellWithReuseIdentifier: StoryBoard.cell)
+        collectionView?.register(nibName, forCellWithReuseIdentifier: ViewID.cell)
     }
     
     private func configureFlowLayout() {
@@ -60,7 +67,7 @@ extension IssueViewController {
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
         return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, data) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryBoard.cell, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             return cell
         })
     }
