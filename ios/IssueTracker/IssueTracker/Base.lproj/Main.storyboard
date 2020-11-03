@@ -132,10 +132,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcH-3S-zIr">
                                         <rect key="frame" x="331" y="8" width="30" height="30"/>
                                         <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="clickRightTopButton:" destination="U5U-OD-pjL" eventType="touchUpInside" id="zZ1-Pn-WN9"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AhU-B7-PUZ">
                                         <rect key="frame" x="14" y="8" width="35" height="30"/>
                                         <state key="normal" title="Filter"/>
+                                        <connections>
+                                            <action selector="clickLeftTopButton:" destination="U5U-OD-pjL" eventType="touchUpInside" id="fxQ-MM-QX1"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔍 Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="39F-uz-qDJ">
                                         <rect key="frame" x="14" y="106.5" width="347" height="34"/>
@@ -197,6 +203,9 @@
                                         <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickAddButton:" destination="U5U-OD-pjL" eventType="touchUpInside" id="K6Q-Ts-20l"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NbL-Ed-jtI"/>
@@ -216,7 +225,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="c6T-Fs-vWR"/>
                     <connections>
+                        <outlet property="addButton" destination="zTW-4I-fqq" id="F9w-ce-Afl"/>
                         <outlet property="collectionView" destination="Eqi-op-mx1" id="Mis-Fh-Icn"/>
+                        <outlet property="leftTopButton" destination="AhU-B7-PUZ" id="7FF-KQ-nEW"/>
+                        <outlet property="rightTopButton" destination="xcH-3S-zIr" id="mpL-7D-WL7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jng-k6-Hso" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
