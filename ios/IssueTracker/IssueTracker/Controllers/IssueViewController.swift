@@ -42,7 +42,7 @@ class IssueViewController: UIViewController {
 // MARK: - Storyboard identifier
 extension IssueViewController {
     private struct ViewID {
-        static let cell = "IssueMainCell"
+        static let cell = String(describing: IssueCell.self)
     }
 }
 
@@ -65,8 +65,7 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     private func configureCell() {
-        let name = String(describing: IssueCell.self)
-        let nibName = UINib(nibName: name, bundle: nil)
+        let nibName = UINib(nibName: ViewID.cell, bundle: nil)
         collectionView?.register(nibName, forCellWithReuseIdentifier: ViewID.cell)
     }
     
