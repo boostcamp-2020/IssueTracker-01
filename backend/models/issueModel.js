@@ -42,5 +42,8 @@ export default class Issue extends Sequelize.Model {
     db.Issue.belongsTo(db.Milestone, {
       foreignKey: 'milestoneId',
     });
+    db.Issue.hasMany(db.IssueLabel, {
+      foreignKey: 'issueId',
+    });
   }
 }
