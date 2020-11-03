@@ -12,6 +12,10 @@ class IssueViewController: UIViewController {
     private var items: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     
     @IBOutlet weak var collectionView: UICollectionView?
+    @IBOutlet weak var leftTopButton: UIButton?
+    @IBOutlet weak var rightTopButton: UIButton?
+    @IBOutlet weak var addButton: UIButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -19,12 +23,15 @@ class IssueViewController: UIViewController {
         configureFlowLayout()
         applySnapshot()
     }
-    @IBAction func clickFilterButton(_ sender: UIButton) {
-        
+    
+    @IBAction func clickLeftTopButton(_ sender: UIButton) {
+        if isEditing {
+            selectAllCell()
+        }
     }
     
-    @IBAction func clickEditButton(_ sender: UIButton) {
-        
+    @IBAction func clickRightTopButton(_ sender: UIButton) {
+        setEditing(!isEditing, animated: true)
     }
     
     @IBAction func clickAddButton(_ sender: UIButton) {
@@ -34,13 +41,19 @@ class IssueViewController: UIViewController {
 
 // MARK: - Storyboard identifier
 extension IssueViewController {
-    private struct StoryBoard {
+    private struct ViewID {
         static let cell = "IssueMainCell"
     }
 }
 
 // MARK: - Configure CollectionView
 extension IssueViewController: UICollectionViewDelegate {
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        collectionView?.isEditing = editing
+        setButtonModes(isEditing: editing)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: - Action for click issue cell
     }
@@ -48,18 +61,40 @@ extension IssueViewController: UICollectionViewDelegate {
     private func configureCollectionView() {
         collectionView?.delegate = self
         collectionView?.dataSource = dataSource
+        collectionView?.allowsMultipleSelectionDuringEditing = true
     }
     
     private func configureCell() {
         let name = String(describing: IssueCell.self)
         let nibName = UINib(nibName: name, bundle: nil)
-        collectionView?.register(nibName, forCellWithReuseIdentifier: StoryBoard.cell)
+        collectionView?.register(nibName, forCellWithReuseIdentifier: ViewID.cell)
     }
     
     private func configureFlowLayout() {
         guard let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize.width = view.frame.width
+    }
+    
+    private func setButtonModes(isEditing: Bool) {
+        if isEditing {
+            leftTopButton?.setTitle("SelectAll", for: .normal)
+            rightTopButton?.setTitle("Cancel", for: .normal)
+            addButton?.isHidden = true
+        } else {
+            leftTopButton?.setTitle("Filter", for: .normal)
+            rightTopButton?.setTitle("Edit", for: .normal)
+            addButton?.isHidden = false
+        }
+        
+        collectionView?.reloadData()
+    }
+    
+    private func selectAllCell() {
+        guard let size = collectionView?.numberOfItems(inSection: 0) else { return }
+        (0..<size).forEach {
+            collectionView?.selectItem(at: IndexPath(row: $0, section: 0), animated: false, scrollPosition: .init())
+        }
     }
 }
 
@@ -71,8 +106,10 @@ extension IssueViewController {
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
         return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, data) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryBoard.cell, for: indexPath)
-            return cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
+            guard let listCell = cell as? IssueCell else { return cell }
+            listCell.configureView(isEditing: self.isEditing)
+            return listCell
         })
     }
     
