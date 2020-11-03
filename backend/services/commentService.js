@@ -8,7 +8,7 @@ const create = async (req, res) => {
       issueId: req.params.issueId,
     };
     await Comment.create(data);
-    return res.status(200).send();
+    return res.status(200).json({ message: 'Success' });
   } catch (error) {
     return res.status(400).json({ message: 'Error' });
   }
@@ -30,7 +30,7 @@ const update = async (req, res) => {
   try {
     const data = { content: req.body.content };
     await Comment.update(data, { where: { commentId: req.params.commentId } });
-    return res.status(200).send();
+    return res.status(200).json({ message: 'Success' });
   } catch (error) {
     return res.status(400).json({ message: 'Error' });
   }
@@ -39,7 +39,7 @@ const update = async (req, res) => {
 const del = async (req, res) => {
   try {
     await Comment.destroy({ where: { commentId: req.params.commentId } });
-    return res.status(200).send();
+    return res.status(200).json({ message: 'Success' });
   } catch (error) {
     return res.status(400).json({ message: 'Error' });
   }
