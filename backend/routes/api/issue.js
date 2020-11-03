@@ -5,5 +5,6 @@ const router = Router();
 
 router.patch('/:id', issueService.updateTitle);
 router.patch('/:id/milestone', issueService.updateMilestone);
+router.post('/', issueService.create);
 
 export default router;
