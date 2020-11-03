@@ -117,11 +117,11 @@ extension IssueViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, issue) -> IssueCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, issue) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
-            listCell.configureView(isEditing: self?.isEditing)
-            self?.binding(cell: listCell, issue: issue)
+            listCell.configureView(isEditing: self.isEditing)
+            self.binding(cell: listCell, issue: issue)
             return listCell
         })
     }
