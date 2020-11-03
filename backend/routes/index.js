@@ -1,5 +1,5 @@
 import express from 'express';
-import validate from '@middlewares/validate';
+import passport from 'passport';
 import githubRouter from './oauth/github';
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 });
 
 router.use('/oauth/github', githubRouter);
-router.get('/validate/jwt', validate.authentication, (req, res) => {
+router.get('/validate/jwt', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.sendStatus(200);
 });
 
