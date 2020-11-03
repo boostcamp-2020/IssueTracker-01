@@ -40,7 +40,7 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     private func configureCell() {
-        let name = String(describing: IssueCollectionViewCell.self)
+        let name = String(describing: IssueCell.self)
         let nibName = UINib(nibName: name, bundle: nil)
         collectionView?.register(nibName, forCellWithReuseIdentifier: StoryBoard.cell)
     }

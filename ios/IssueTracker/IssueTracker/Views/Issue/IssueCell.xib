@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="IssueCell" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-i1-EoM" userLabel="Content View">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szf-zu-BH0" userLabel="Title">
+                                <rect key="frame" x="10" y="10" width="145" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Um3-3h-dVx" userLabel="Description">
+                                <rect key="frame" x="10" y="39" width="250" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ns-fz-koM">
+                                <rect key="frame" x="292" y="10" width="73" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="separatorColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" systemColor="separatorColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wa-UW-esX" userLabel="Label">
+                                <rect key="frame" x="311" y="39" width="54" height="21"/>
+                                <color key="backgroundColor" red="0.77011221649999995" green="0.85679936410000002" blue="0.98040896649999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.77011221649999995" green="0.85679936410000002" blue="0.98040896649999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4Wa-UW-esX" firstAttribute="top" secondItem="1ns-fz-koM" secondAttribute="bottom" constant="8" symbolic="YES" id="34g-ca-XCc"/>
+                            <constraint firstAttribute="bottom" secondItem="Um3-3h-dVx" secondAttribute="bottom" constant="10" id="5FI-8n-Vrz"/>
+                            <constraint firstItem="1ns-fz-koM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="szf-zu-BH0" secondAttribute="trailing" constant="10" id="5j0-Pz-Crk"/>
+                            <constraint firstAttribute="bottom" secondItem="4Wa-UW-esX" secondAttribute="bottom" constant="34" id="64Z-UD-alS"/>
+                            <constraint firstAttribute="trailing" secondItem="4Wa-UW-esX" secondAttribute="trailing" constant="10" id="68e-Tj-Jll"/>
+                            <constraint firstItem="Um3-3h-dVx" firstAttribute="width" secondItem="BOC-i1-EoM" secondAttribute="width" multiplier="2/3" id="DJR-E3-GBd"/>
+                            <constraint firstItem="Um3-3h-dVx" firstAttribute="leading" secondItem="BOC-i1-EoM" secondAttribute="leading" constant="10" id="Jb9-Q3-mrw"/>
+                            <constraint firstItem="1ns-fz-koM" firstAttribute="top" secondItem="BOC-i1-EoM" secondAttribute="top" constant="10" id="LXO-g9-3JQ"/>
+                            <constraint firstItem="szf-zu-BH0" firstAttribute="leading" secondItem="BOC-i1-EoM" secondAttribute="leading" constant="10" id="Ti5-Ju-CbM"/>
+                            <constraint firstItem="4Wa-UW-esX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Um3-3h-dVx" secondAttribute="trailing" constant="10" id="X5X-28-eT2"/>
+                            <constraint firstItem="Um3-3h-dVx" firstAttribute="top" secondItem="szf-zu-BH0" secondAttribute="bottom" constant="8" symbolic="YES" id="eMP-KM-qkn"/>
+                            <constraint firstItem="szf-zu-BH0" firstAttribute="top" secondItem="BOC-i1-EoM" secondAttribute="top" constant="10" id="jXh-ac-ivy"/>
+                            <constraint firstAttribute="trailing" secondItem="1ns-fz-koM" secondAttribute="trailing" constant="10" id="lRM-cI-dRn"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="BOC-i1-EoM" secondAttribute="bottom" id="Jc9-9Q-idt"/>
+                <constraint firstAttribute="trailing" secondItem="BOC-i1-EoM" secondAttribute="trailing" id="hnG-Ls-rrW"/>
+                <constraint firstItem="BOC-i1-EoM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tj4-lz-Acn"/>
+                <constraint firstItem="BOC-i1-EoM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="yOB-Cg-XcS"/>
+            </constraints>
+            <size key="customSize" width="326" height="77"/>
+            <connections>
+                <outlet property="issueDescription" destination="Um3-3h-dVx" id="PTd-TY-Iqc"/>
+                <outlet property="issueTitle" destination="szf-zu-BH0" id="VD0-Uf-5Po"/>
+                <outlet property="milestoneTitle" destination="1ns-fz-koM" id="ORc-eP-cIU"/>
+            </connections>
+            <point key="canvasLocation" x="290.57971014492756" y="141.29464285714286"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
