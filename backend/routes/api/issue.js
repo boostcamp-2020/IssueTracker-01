@@ -11,5 +11,6 @@ router.patch('/:id', issueService.updateTitle);
 router.patch('/:id/milestone', issueService.updateMilestone);
 router.post('/', issueService.create);
 router.get('/', issueService.getIssueLists);
+router.get('/detailIssue/:id', issueService.detailIssue);
 
 export default router;

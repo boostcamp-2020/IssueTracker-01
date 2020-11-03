@@ -117,14 +117,46 @@ const create = async (req, res) => {
       assignees: req.body.assignees,
       milestoneId: req.body.milestoneId,
     };
+    console.log(data);
     const { issueId } = await Issue.create(data);
     const label = req.body.label;
+    console.log(label);
     if (label.length) {
       label.forEach(async (name) => {
         await IssueLabel.create({ issueId, name });
       });
     }
     return res.status(200).json({ message: 'Success' });
+  } catch (error) {
+    return res.status(400).json({ message: 'Error' });
+  }
+};
+
+const detailIssue = async (req, res) => {
+  try {
+    const data = await Issue.findOne({
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: IssueLabel,
+        },
+        {
+          model: Milestone,
+        },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
+      where: { issueId: req.params.id },
+    });
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(400).json({ message: 'Error' });
   }
@@ -178,4 +210,5 @@ export default {
   removeLabel,
   removeAllLabel,
   getIssueLists,
+  detailIssue,
 };
