@@ -3,66 +3,67 @@ import Issue from '@models/issueModel';
 import IssueLabel from '@models/issueLabelModel';
 
 const updateAssignee = async (req, res) => {
-    try {
-        const { id } = req.params;
-        
-        await Issue.update({
-            assignees: req.body.userId
-          },
-          {
-            where: { issueId: id },
-          }
-        );
-        
-        return res.status(200).json({ message: "success" });
-    } catch (error) {
-        return res.status(400).json({ message: error.message });
-    }
-}
+  try {
+    const { id } = req.params;
+
+    await Issue.update(
+      {
+        assignees: req.body.userId,
+      },
+      {
+        where: { issueId: id },
+      },
+    );
+
+    return res.status(200).json({ message: 'success' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
 
 const addLabel = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const newData = {
-        issueId: id,
-        name: req.body.name
-      };
-      
-      await IssueLabel.create(newData);
+  try {
+    const { id } = req.params;
+    const newData = {
+      issueId: id,
+      name: req.body.name,
+    };
 
-      return res.status(200).json({ message: "success" });
-    } catch (error) {
-      return res.status(400).json({ message: error.message });
-    }
-}
+    await IssueLabel.create(newData);
+
+    return res.status(200).json({ message: 'success' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
 
 const removeLabel = async (req, res) => {
-    try {
-        const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-        await IssueLabel.destroy({
-            where: { issueId: id, name: req.body.labelName }
-        });
-  
-        return res.status(200).json({ message: "success" });
-      } catch (error) {
-        return res.status(400).json({ message: error.message });
-    }
-}
+    await IssueLabel.destroy({
+      where: { issueId: id, name: req.body.labelName },
+    });
+
+    return res.status(200).json({ message: 'success' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
 
 const removeAllLabel = async (req, res) => {
-    try {
-        const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-        await IssueLabel.destroy({
-            where: { issueId: id }
-        });
-  
-        return res.status(200).json({ message: "success" });
-      } catch (error) {
-        return res.status(400).json({ message: error.message });
-    }
-}
+    await IssueLabel.destroy({
+      where: { issueId: id },
+    });
+
+    return res.status(200).json({ message: 'success' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
 
 const updateTitle = async (req, res, next) => {
   try {
@@ -125,4 +126,12 @@ const create = async (req, res) => {
   }
 };
 
-export default { create, updateTitle, updateMilestone, updateAssignee, addLabel, removeLabel, removeAllLabel };
+export default {
+  create,
+  updateTitle,
+  updateMilestone,
+  updateAssignee,
+  addLabel,
+  removeLabel,
+  removeAllLabel,
+};
