@@ -9,8 +9,8 @@ import UIKit
 
 class IssueViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
-    private var items: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    
+
+    let viewModel = IssueViewModel()
     @IBOutlet weak var collectionView: UICollectionView?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,21 +54,32 @@ extension IssueViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDiffableDataSource
 extension IssueViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, Int>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Int>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, Issue>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Issue>
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, data) -> UICollectionViewCell? in
+        return DataSource(collectionView: collectionView, cellProvider: {[weak self] (collectionView, indexPath, _) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryBoard.cell, for: indexPath)
-            return cell
+            guard let issueCell = cell as? IssueCell else { return IssueCell() }
+
+            let issue = self?.viewModel.items?.issues[indexPath.row]
+            self?.binding(cell: issueCell, issue: issue)
+            
+            return issueCell
         })
     }
-    
+
     private func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([0])
-        snapshot.appendItems(items, toSection: 0)
+        snapshot.appendItems(viewModel.items?.issues ?? [], toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
+
+    private func binding(cell: IssueCell, issue: Issue?) {
+        cell.issueTitle?.text = issue?.title
+        cell.milestoneTitle?.text = issue?.milestoneTitle
+    }
+    
 }

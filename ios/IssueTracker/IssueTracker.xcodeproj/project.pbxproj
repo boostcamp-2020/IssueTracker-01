@@ -25,6 +25,8 @@
 		2A3273415820EBEE918C6BBB /* libPods-IssueTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7652936AE065428E1110A3 /* libPods-IssueTrackerTests.a */; };
 		5C6DB9C31F7429A6C6E6C11E /* libPods-IssueTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E034FD863700386FD8006D2D /* libPods-IssueTracker.a */; };
 		DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */; };
+		DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8C6E1F255103C800CAEC4E /* Issue.swift */; };
+		DE8C6E322551198100CAEC4E /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8C6E312551198100CAEC4E /* IssueViewModel.swift */; };
 		DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEB65B254FE8F00004960A /* LabelBadge.swift */; };
 		DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEB679254FF7C70004960A /* IssueCell.swift */; };
 		DECEB67C254FF7C70004960A /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECEB67A254FF7C70004960A /* IssueCell.xib */; };
@@ -74,6 +76,8 @@
 		A64833F0ACC622329624F531 /* libPods-IssueTracker-IssueTrackerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker-IssueTrackerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7A463B519574E490A4CDEF /* Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexColor.swift"; sourceTree = "<group>"; };
+		DE8C6E1F255103C800CAEC4E /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		DE8C6E312551198100CAEC4E /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		DECEB65B254FE8F00004960A /* LabelBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBadge.swift; sourceTree = "<group>"; };
 		DECEB679254FF7C70004960A /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		DECEB67A254FF7C70004960A /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		0DA6EDDC2547D67C009EA88F /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				DE8C6E302551197000CAEC4E /* ViewModels */,
 				0DB84C9B25493247000B6651 /* Models */,
 				0D7D23452547EAE20012C943 /* Controllers */,
 				0D356E072547E796008F2704 /* Views */,
@@ -193,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				0DB84C932549308C000B6651 /* GithubLoginManager.swift */,
+				DE8C6E1F255103C800CAEC4E /* Issue.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,6 +214,14 @@
 				E874F56191945209810F25EC /* Pods-IssueTrackerTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DE8C6E302551197000CAEC4E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DE8C6E312551198100CAEC4E /* IssueViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		DEF43B56254FDE5000F93A91 /* Issue */ = {
@@ -464,6 +478,7 @@
 				0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */,
 				0DA6EDDE2547D67C009EA88F /* AppDelegate.swift in Sources */,
 				0DB5B8BF254FDA4900C2118E /* IssueViewController.swift in Sources */,
+				DE8C6E322551198100CAEC4E /* IssueViewModel.swift in Sources */,
 				0DB5B8CD254FF78C00C2118E /* UIViewController+Keyboard.swift in Sources */,
 				0DA6EDE02547D67C009EA88F /* SceneDelegate.swift in Sources */,
 				DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */,
@@ -471,6 +486,7 @@
 				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,
 				DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */,
 				0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */,
+				DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
