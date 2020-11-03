@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D356E032547E790008F2704 /* UIView+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D356E022547E790008F2704 /* UIView+CornerRadius.swift */; };
+		0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D356E022547E790008F2704 /* UIView+IBInspectable.swift */; };
 		0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D234F2547F34E0012C943 /* MainViewController.swift */; };
 		0D7D23552547F9670012C943 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0D7D23542547F9670012C943 /* .swiftlint.yml */; };
 		0DA6EDDE2547D67C009EA88F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6EDDD2547D67C009EA88F /* AppDelegate.swift */; };
@@ -49,7 +49,7 @@
 
 /* Begin PBXFileReference section */
 		0791FA08BDA5505523FB53D6 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
-		0D356E022547E790008F2704 /* UIView+CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CornerRadius.swift"; sourceTree = "<group>"; };
+		0D356E022547E790008F2704 /* UIView+IBInspectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+IBInspectable.swift"; sourceTree = "<group>"; };
 		0D7D234F2547F34E0012C943 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0D7D23542547F9670012C943 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		0DA6EDDA2547D67C009EA88F /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +116,7 @@
 			children = (
 				DEF43B56254FDE5000F93A91 /* Issue */,
 				DEF43B78254FE3FF00F93A91 /* Label */,
-				0D356E022547E790008F2704 /* UIView+CornerRadius.swift */,
+				0D356E022547E790008F2704 /* UIView+IBInspectable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -461,7 +461,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DA6EDE22547D67C009EA88F /* LoginViewController.swift in Sources */,
-				0D356E032547E790008F2704 /* UIView+CornerRadius.swift in Sources */,
+				0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */,
 				0DA6EDDE2547D67C009EA88F /* AppDelegate.swift in Sources */,
 				0DB5B8BF254FDA4900C2118E /* IssueViewController.swift in Sources */,
 				0DB5B8CD254FF78C00C2118E /* UIViewController+Keyboard.swift in Sources */,
