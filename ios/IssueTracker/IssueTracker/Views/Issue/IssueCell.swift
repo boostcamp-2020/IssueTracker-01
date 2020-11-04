@@ -14,13 +14,14 @@ class IssueCell: UICollectionViewListCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        indentsAccessories = true
         configureMultiselect()
     }
     
     private func configureMultiselect() {
         let selector = UICellAccessory.multiselect(displayed: .whenEditing, options: .init())
         accessories.append(selector)
-        separatorLayoutGuide.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        guard let issueTitle = issueTitle, let issueDescription = issueDescription else { return }
+        separatorLayoutGuide.trailingAnchor.constraint(equalTo: issueTitle.leadingAnchor).isActive = true
+        separatorLayoutGuide.trailingAnchor.constraint(equalTo: issueDescription.leadingAnchor).isActive = true
     }
 }
