@@ -165,12 +165,19 @@ const detailIssue = async (req, res) => {
 const getIssueLists = async (req, res, next) => {
   try {
     const filters = req.query.q;
-    const issueList = await Issue.findAll({
-      attributes: ['title', 'issueId', 'createdAt'],
+    const { userId } = req.user;
+    let issueList = await Issue.findAll({
+      attributes: ['title', 'issueId', 'createdAt', 'isOpen'],
       include: [
         {
           model: User,
           attributes: ['userId', 'profile_url'],
+          as: 'UserAuthor',
+        },
+        {
+          model: User,
+          attributes: ['userId', 'profile_url'],
+          required: false,
         },
         {
           model: IssueLabel,
@@ -184,12 +191,25 @@ const getIssueLists = async (req, res, next) => {
         {
           model: Comment,
           attributes: ['commentId', 'userId'],
-          where: { '$Comment.userId$': req.user.userId },
+          where: { userId },
+          required: false,
         },
       ],
     });
-    filters.split(' ').forEach((filter) => {
+
+    filters?.split(' ').forEach((filter) => {
       const [target, condition] = filter.split(':');
+      if (target === 'is' && condition === 'open') {
+        issueList = issueList.filter((issue) => issue.isOpen === 1);
+      } else if (target === 'is' && condition === 'close') {
+        issueList = issueList.filter((issue) => issue.isOpen === 0);
+      } else if (target === 'author' && condition === '@me') {
+        issueList = issueList.filter((issue) => issue.UserAuthor?.userId === userId);
+      } else if (target === 'comment' && condition === '@me') {
+        issueList = issueList.filter((issue) => issue.Comments.length > 0);
+      } else if (target === 'assignee' && condition === '@me') {
+        issueList = issueList.filter((issue) => issue.User?.userId === userId);
+      }
     });
     res.json(issueList);
   } catch (err) {

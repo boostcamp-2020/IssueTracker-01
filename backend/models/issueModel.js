@@ -34,6 +34,7 @@ export default class Issue extends Sequelize.Model {
   static associate(db) {
     db.Issue.belongsTo(db.User, {
       foreignKey: 'userId',
+      as: 'UserAuthor',
     });
     db.Issue.belongsTo(db.User, {
       foreignKey: 'assignees',
