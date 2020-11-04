@@ -72,7 +72,7 @@ const removeAllLabel = async (req, res) => {
 const updateIssueStatus = async (req, res, next) => {
   try {
     const { status, id } = req.params;
-    
+
     await Issue.update(
       {
         isOpen: status,
@@ -86,7 +86,7 @@ const updateIssueStatus = async (req, res, next) => {
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
-}
+};
 
 const updateTitle = async (req, res, next) => {
   try {
@@ -154,21 +154,33 @@ const create = async (req, res) => {
 const detailIssue = async (req, res) => {
   try {
     const data = await Issue.findOne({
+      attributes: ['issueId', 'title', 'isOpen', 'createdAt'],
       include: [
         {
           model: User,
+          attributes: ['userId', 'profile_url'],
         },
         {
           model: IssueLabel,
+          attributes: ['id'],
+          include: [
+            {
+              model: Label,
+              attributes: ['labelName', 'color'],
+            },
+          ],
         },
         {
           model: Milestone,
+          attributes: ['title'],
         },
         {
           model: Comment,
+          attributes: ['commentId', 'content', 'createdAt'],
           include: [
             {
               model: User,
+              attributes: ['userId', 'profile_url'],
             },
           ],
         },
@@ -250,5 +262,5 @@ export default {
   removeAllLabel,
   getIssueLists,
   detailIssue,
-  updateIssueStatus
+  updateIssueStatus,
 };
