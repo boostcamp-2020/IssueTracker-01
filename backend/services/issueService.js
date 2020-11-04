@@ -1,4 +1,3 @@
-// TODO - 이슈 서비스 작성
 import Issue from '@models/issueModel';
 import IssueLabel from '@models/issueLabelModel';
 import User from '@models/userModel';
@@ -8,14 +7,14 @@ import Comment from '@models/commentModel';
 
 const updateAssignee = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { issueId } = req.params;
 
     await Issue.update(
       {
         assignees: req.body.userId,
       },
       {
-        where: { issueId: id },
+        where: { issueId: issueId },
       },
     );
 
@@ -27,10 +26,10 @@ const updateAssignee = async (req, res) => {
 
 const addLabel = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { issueId } = req.params;
     const newData = {
-      issueId: id,
-      name: req.body.name,
+      issueId: issueId,
+      labelName: req.body.labelName,
     };
 
     await IssueLabel.create(newData);
@@ -43,10 +42,10 @@ const addLabel = async (req, res) => {
 
 const removeLabel = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { issueId } = req.params;
 
     await IssueLabel.destroy({
-      where: { issueId: id, name: req.body.labelName },
+      where: { issueId: issueId, name: req.body.labelName },
     });
 
     return res.status(200).json({ message: 'success' });
@@ -57,10 +56,10 @@ const removeLabel = async (req, res) => {
 
 const removeAllLabel = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { issueId } = req.params;
 
     await IssueLabel.destroy({
-      where: { issueId: id },
+      where: { issueId: issueId },
     });
 
     return res.status(200).json({ message: 'success' });
@@ -71,14 +70,14 @@ const removeAllLabel = async (req, res) => {
 
 const updateIssueStatus = async (req, res, next) => {
   try {
-    const { status, id } = req.params;
-
+    const { status, issueId } = req.params;
+    
     await Issue.update(
       {
         isOpen: status,
       },
       {
-        where: { issueId: id },
+        where: { issueId: issueId },
       },
     );
 
@@ -86,17 +85,17 @@ const updateIssueStatus = async (req, res, next) => {
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
-};
+}
 
 const updateTitle = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { issueId } = req.params;
     const { title } = req.body;
     await Issue.update(
       {
         title,
       },
-      { where: { issueId: id } },
+      { where: { issueId: issueId } },
     );
     res.json({ message: 'Success' });
   } catch (err) {
@@ -110,13 +109,13 @@ const updateTitle = async (req, res, next) => {
 
 const updateMilestone = async (req, res, next) => {
   try {
-    const { id: issueId } = req.params;
+    const { issueId } = req.params;
     const { milestoneId } = req.body;
     await Issue.update(
       {
         milestoneId: milestoneId || null,
       },
-      { where: { issueId } },
+      { where: { issueId: issueId } },
     );
     res.json({ message: 'Success' });
   } catch (err) {
@@ -153,39 +152,28 @@ const create = async (req, res) => {
 
 const detailIssue = async (req, res) => {
   try {
+    const { issueId } = req.params;
     const data = await Issue.findOne({
-      attributes: ['issueId', 'title', 'isOpen', 'createdAt'],
       include: [
         {
           model: User,
-          attributes: ['userId', 'profile_url'],
         },
         {
           model: IssueLabel,
-          attributes: ['id'],
-          include: [
-            {
-              model: Label,
-              attributes: ['labelName', 'color'],
-            },
-          ],
         },
         {
           model: Milestone,
-          attributes: ['title'],
         },
         {
           model: Comment,
-          attributes: ['commentId', 'content', 'createdAt'],
           include: [
             {
               model: User,
-              attributes: ['userId', 'profile_url'],
             },
           ],
         },
       ],
-      where: { issueId: req.params.id },
+      where: { issueId: issueId },
     });
     return res.status(200).json(data);
   } catch (error) {
@@ -262,5 +250,5 @@ export default {
   removeAllLabel,
   getIssueLists,
   detailIssue,
-  updateIssueStatus,
+  updateIssueStatus
 };
