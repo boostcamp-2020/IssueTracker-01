@@ -1,5 +1,5 @@
 import Milestone from '@models/milestoneModel';
-import Sequelize from 'Sequelize';
+import Sequelize from 'sequelize';
 
 const getMilestoneList = async (req, res, next) => {
   try {
@@ -21,8 +21,8 @@ const getMilestone = async (req, res, next) => {
         'title',
         'dueDate',
         'description',
-        [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`status` = "open", 1, 0)')), 'openIssues'],
-        [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`status` = "close", 1, 0)')), 'closeIssues'],
+        [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`isOpen` = 1, 1, 0)')), 'openIssues'],
+        [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`isOpen` = 0, 1, 0)')), 'closeIssues'],
       ],
       include: ['Issues'],
       group: ['MileStone.milestoneId'],
