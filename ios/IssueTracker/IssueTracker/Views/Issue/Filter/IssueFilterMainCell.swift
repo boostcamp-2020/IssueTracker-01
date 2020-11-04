@@ -24,6 +24,13 @@ class IssueFilterMainCell: UICollectionViewListCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        configureSelectedBackgroundView()
+    }
+    
+    private func configureSelectedBackgroundView() {
+        let bgView = UIView(frame: bounds)
+        bgView.backgroundColor = .systemBackground
+        selectedBackgroundView = bgView
     }
     
     func configureView(title: String) {
