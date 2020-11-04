@@ -12,24 +12,15 @@ class IssueCell: UICollectionViewListCell {
     @IBOutlet weak var issueDescription: UILabel?
     @IBOutlet weak var milestoneTitle: UILabel?
     
-    @IBOutlet weak var defaultConstraint: NSLayoutConstraint?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        indentsAccessories = true
         configureMultiselect()
     }
     
     private func configureMultiselect() {
         let selector = UICellAccessory.multiselect(displayed: .whenEditing, options: .init())
         accessories.append(selector)
-    }
-    
-    func configureView(isEditing: Bool) {
-        configureEditing(isEditing: isEditing)
-    }
-    
-    private func configureEditing(isEditing: Bool) {
-        defaultConstraint?.isActive = !isEditing
+        separatorLayoutGuide.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     }
 }

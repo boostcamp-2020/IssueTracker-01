@@ -53,7 +53,7 @@ class IssueViewController: UIViewController {
     }
 }
 
-// MARK: - Storyboard identifier
+// MARK: - View identifier
 extension IssueViewController {
     private struct ViewID {
         static let cell = String(describing: IssueCell.self)
@@ -125,7 +125,6 @@ extension IssueViewController {
         return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, issue) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
-            listCell.configureView(isEditing: self.isEditing)
             self.binding(cell: listCell, issue: issue)
             return listCell
         })
