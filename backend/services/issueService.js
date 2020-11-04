@@ -69,6 +69,25 @@ const removeAllLabel = async (req, res) => {
   }
 };
 
+const updateIssueStatus = async (req, res, next) => {
+  try {
+    const { status, id } = req.params;
+    
+    await Issue.update(
+      {
+        isOpen: status,
+      },
+      {
+        where: { issueId: id },
+      },
+    );
+
+    return res.status(200).json({ message: 'success' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+}
+
 const updateTitle = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -231,4 +250,5 @@ export default {
   removeAllLabel,
   getIssueLists,
   detailIssue,
+  updateIssueStatus
 };
