@@ -28,12 +28,11 @@ class IssueViewController: UIViewController {
         self.viewModel?.delegate = self.collectionView
     }
     
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
-  
+    
     @IBAction func clickLeftTopButton(_ sender: UIButton) {
         if isEditing {
             selectAllCell()
@@ -125,14 +124,14 @@ extension IssueViewController {
             return listCell
         })
     }
-
+    
     private func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([0])
         snapshot.appendItems(viewModel?.items ?? [], toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
-
+    
     private func binding(cell: IssueCell, issue: Issue?) {
         cell.issueTitle?.text = issue?.title
         cell.milestoneTitle?.text = issue?.milestoneTitle

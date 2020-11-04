@@ -129,14 +129,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0D735DDC25526EB20040AAC4 /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+				0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */,
+				0D8643BD255130C3007747E5 /* IssueDetailViewController.swift */,
+			);
+			path = Issue;
+			sourceTree = "<group>";
+		};
 		0D7D23452547EAE20012C943 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0D735DDC25526EB20040AAC4 /* Issue */,
 				0DA6EDE12547D67C009EA88F /* LoginViewController.swift */,
 				0D7D234F2547F34E0012C943 /* MainViewController.swift */,
-				0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */,
 				0DB5B8CC254FF78C00C2118E /* UIViewController+Keyboard.swift */,
-				0D8643BD255130C3007747E5 /* IssueDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
