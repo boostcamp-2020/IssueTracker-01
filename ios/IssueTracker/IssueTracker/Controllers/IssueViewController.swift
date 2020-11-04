@@ -9,8 +9,7 @@ import UIKit
 
 class IssueViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
-    private var items: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    
+    private var viewModel: IssueViewModel?
     @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var leftTopButton: UIButton?
     @IBOutlet weak var rightTopButton: UIButton?
@@ -21,9 +20,15 @@ class IssueViewController: UIViewController {
         configureCollectionView()
         configureCell()
         configureFlowLayout()
+        configureDelegate()
         applySnapshot()
     }
     
+    func configureDelegate() {
+        self.viewModel?.delegate = self.collectionView
+    }
+    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -107,23 +112,29 @@ extension IssueViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDiffableDataSource
 extension IssueViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, Int>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Int>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, Issue>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Issue>
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, data) -> UICollectionViewCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, issue) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
-            guard let listCell = cell as? IssueCell else { return cell }
+            guard let listCell = cell as? IssueCell else { return IssueCell() }
             listCell.configureView(isEditing: self.isEditing)
+            self.binding(cell: listCell, issue: issue)
             return listCell
         })
     }
-    
+
     private func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([0])
-        snapshot.appendItems(items, toSection: 0)
+        snapshot.appendItems(viewModel?.items ?? [], toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+
+    private func binding(cell: IssueCell, issue: Issue?) {
+        cell.issueTitle?.text = issue?.title
+        cell.milestoneTitle?.text = issue?.milestoneTitle
     }
 }
