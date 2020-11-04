@@ -1,10 +1,10 @@
-// TODO - 이슈 서비스 작성
 import Issue from '@models/issueModel';
 import IssueLabel from '@models/issueLabelModel';
 import User from '@models/userModel';
 import Label from '@models/labelModel';
 import Milestone from '@models/milestoneModel';
 import Comment from '@models/commentModel';
+import Sequelize from 'Sequelize';
 
 const updateAssignee = async (req, res) => {
   try {
@@ -173,6 +173,12 @@ const detailIssue = async (req, res) => {
         {
           model: Milestone,
           attributes: ['title'],
+          include: [
+            {
+              model: Issue,
+              attributes: ['isOpen'],
+            },
+          ],
         },
         {
           model: Comment,
@@ -189,6 +195,7 @@ const detailIssue = async (req, res) => {
     });
     return res.status(200).json(data);
   } catch (error) {
+    console.log(error.message);
     return res.status(400).json({ message: 'Error' });
   }
 };
