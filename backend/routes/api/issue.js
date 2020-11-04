@@ -9,6 +9,7 @@ router.delete('/issueLabel/:id', issueService.removeLabel);
 router.delete('/issueLabel/all/:id', issueService.removeAllLabel);
 router.patch('/:id', issueService.updateTitle);
 router.patch('/:id/milestone', issueService.updateMilestone);
+router.patch('/status/:status/:id', issueService.updateIssueStatus);
 router.post('/', issueService.create);
 router.get('/', issueService.getIssueLists);
 router.get('/detailIssue/:id', issueService.detailIssue);
