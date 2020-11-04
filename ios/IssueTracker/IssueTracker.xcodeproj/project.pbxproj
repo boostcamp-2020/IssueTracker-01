@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D356E022547E790008F2704 /* UIView+IBInspectable.swift */; };
 		0D735DDE25526EF80040AAC4 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D735DDD25526EF80040AAC4 /* IssueFilterViewController.swift */; };
+		0D77BF5C255277040056E9E5 /* IssueFilterMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D77BF5A255277040056E9E5 /* IssueFilterMainCell.swift */; };
+		0D77BF5D255277040056E9E5 /* IssueFilterMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D77BF5B255277040056E9E5 /* IssueFilterMainCell.xib */; };
 		0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D234F2547F34E0012C943 /* MainViewController.swift */; };
 		0D7D23552547F9670012C943 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0D7D23542547F9670012C943 /* .swiftlint.yml */; };
 		0D8643BE255130C3007747E5 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8643BD255130C3007747E5 /* IssueDetailViewController.swift */; };
@@ -56,6 +58,8 @@
 		0791FA08BDA5505523FB53D6 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		0D356E022547E790008F2704 /* UIView+IBInspectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+IBInspectable.swift"; sourceTree = "<group>"; };
 		0D735DDD25526EF80040AAC4 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
+		0D77BF5A255277040056E9E5 /* IssueFilterMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterMainCell.swift; sourceTree = "<group>"; };
+		0D77BF5B255277040056E9E5 /* IssueFilterMainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueFilterMainCell.xib; sourceTree = "<group>"; };
 		0D7D234F2547F34E0012C943 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0D7D23542547F9670012C943 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		0D8643BD255130C3007747E5 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +143,15 @@
 				0D735DDD25526EF80040AAC4 /* IssueFilterViewController.swift */,
 			);
 			path = Issue;
+			sourceTree = "<group>";
+		};
+		0D77BF59255276DF0056E9E5 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				0D77BF5A255277040056E9E5 /* IssueFilterMainCell.swift */,
+				0D77BF5B255277040056E9E5 /* IssueFilterMainCell.xib */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		0D7D23452547EAE20012C943 /* Controllers */ = {
@@ -244,6 +257,7 @@
 		DEF43B56254FDE5000F93A91 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				0D77BF59255276DF0056E9E5 /* Filter */,
 				DECEB679254FF7C70004960A /* IssueCell.swift */,
 				DECEB67A254FF7C70004960A /* IssueCell.xib */,
 			);
@@ -377,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DECEB67C254FF7C70004960A /* IssueCell.xib in Resources */,
+				0D77BF5D255277040056E9E5 /* IssueFilterMainCell.xib in Resources */,
 				0D7D23552547F9670012C943 /* .swiftlint.yml in Resources */,
 				0DA6EDEA2547D67D009EA88F /* LaunchScreen.storyboard in Resources */,
 				0DA6EDE72547D67D009EA88F /* Assets.xcassets in Resources */,
@@ -493,6 +508,7 @@
 			files = (
 				0DA6EDE22547D67C009EA88F /* LoginViewController.swift in Sources */,
 				0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */,
+				0D77BF5C255277040056E9E5 /* IssueFilterMainCell.swift in Sources */,
 				0DA6EDDE2547D67C009EA88F /* AppDelegate.swift in Sources */,
 				0DB5B8BF254FDA4900C2118E /* IssueViewController.swift in Sources */,
 				DE8C6E322551198100CAEC4E /* IssueViewModel.swift in Sources */,
