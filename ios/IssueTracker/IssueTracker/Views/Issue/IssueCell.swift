@@ -11,7 +11,7 @@ class IssueCell: UICollectionViewListCell {
     @IBOutlet weak var issueTitle: UILabel?
     @IBOutlet weak var issueDescription: UILabel?
     @IBOutlet weak var milestoneTitle: UILabel?
-    
+    @IBOutlet weak var labelStackContentView: UIView?
     @IBOutlet weak var defaultConstraint: NSLayoutConstraint?
     
     override func awakeFromNib() {

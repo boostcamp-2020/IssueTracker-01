@@ -9,7 +9,7 @@ import UIKit
 
 class IssueViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
-    private var viewModel: IssueViewModel?
+    private var issueListViewModel = IssueListViewModel()
     @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var leftTopButton: UIButton?
     @IBOutlet weak var rightTopButton: UIButton?
@@ -17,6 +17,10 @@ class IssueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //dummy
+        issueListViewModel.items.append(IssueViewModel(issue: Issue(issueID: 0, title: "제목", milestoneTitle: "마일스톤")))
+        
         configureCollectionView()
         configureCell()
         configureFlowLayout()
@@ -25,9 +29,8 @@ class IssueViewController: UIViewController {
     }
     
     func configureDelegate() {
-        self.viewModel?.delegate = self.collectionView
+        self.issueListViewModel.delegate = self.collectionView
     }
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -112,16 +115,16 @@ extension IssueViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDiffableDataSource
 extension IssueViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, Issue>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Issue>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueViewModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, IssueViewModel>
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, issue) -> IssueCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, viewModel) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
             listCell.configureView(isEditing: self.isEditing)
-            self.binding(cell: listCell, issue: issue)
+            self.binding(cell: listCell, issueViewModel: viewModel)
             return listCell
         })
     }
@@ -129,12 +132,13 @@ extension IssueViewController {
     private func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([0])
-        snapshot.appendItems(viewModel?.items ?? [], toSection: 0)
+        snapshot.appendItems(issueListViewModel.items, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 
-    private func binding(cell: IssueCell, issue: Issue?) {
-        cell.issueTitle?.text = issue?.title
-        cell.milestoneTitle?.text = issue?.milestoneTitle
+    private func binding(cell: IssueCell, issueViewModel: IssueViewModel) {
+        cell.issueTitle?.text = issueViewModel.title
+        cell.milestoneTitle?.text = issueViewModel.milestoneTitle
+        cell.labelStackContentView?.addSubview(issueViewModel.makeLabelStackView(size: cell.labelStackContentView?.frame.size ?? CGSize.zero))
     }
 }
