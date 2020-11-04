@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D356E022547E790008F2704 /* UIView+IBInspectable.swift */; };
+		0D735DDE25526EF80040AAC4 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D735DDD25526EF80040AAC4 /* IssueFilterViewController.swift */; };
 		0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7D234F2547F34E0012C943 /* MainViewController.swift */; };
 		0D7D23552547F9670012C943 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0D7D23542547F9670012C943 /* .swiftlint.yml */; };
 		0D8643BE255130C3007747E5 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8643BD255130C3007747E5 /* IssueDetailViewController.swift */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		0791FA08BDA5505523FB53D6 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		0D356E022547E790008F2704 /* UIView+IBInspectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+IBInspectable.swift"; sourceTree = "<group>"; };
+		0D735DDD25526EF80040AAC4 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		0D7D234F2547F34E0012C943 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0D7D23542547F9670012C943 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		0D8643BD255130C3007747E5 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */,
 				0D8643BD255130C3007747E5 /* IssueDetailViewController.swift */,
+				0D735DDD25526EF80040AAC4 /* IssueFilterViewController.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				0DB5B8CD254FF78C00C2118E /* UIViewController+Keyboard.swift in Sources */,
 				0D8643BE255130C3007747E5 /* IssueDetailViewController.swift in Sources */,
 				0DA6EDE02547D67C009EA88F /* SceneDelegate.swift in Sources */,
+				0D735DDE25526EF80040AAC4 /* IssueFilterViewController.swift in Sources */,
 				DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */,
 				0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */,
 				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,

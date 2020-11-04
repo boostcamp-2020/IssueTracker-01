@@ -8,8 +8,13 @@
 import UIKit
 
 class IssueViewController: UIViewController {
+    private lazy var detailViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.detail)
+    private lazy var filterViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.filter)
+    
     private lazy var dataSource = makeDataSource()
+    
     private var viewModel: IssueViewModel?
+    
     @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var leftTopButton: UIButton?
     @IBOutlet weak var rightTopButton: UIButton?
@@ -34,9 +39,9 @@ class IssueViewController: UIViewController {
     }
     
     @IBAction func clickLeftTopButton(_ sender: UIButton) {
-        if isEditing {
-            selectAllCell()
-        }
+        guard !isEditing else { selectAllCell(); return }
+        guard let filter = filterViewController else { return }
+        present(filter, animated: true, completion: nil)
     }
     
     @IBAction func clickRightTopButton(_ sender: UIButton) {
@@ -53,6 +58,7 @@ extension IssueViewController {
     private struct ViewID {
         static let cell = String(describing: IssueCell.self)
         static let detail = String(describing: IssueDetailViewController.self)
+        static let filter = String(describing: IssueFilterViewController.self)
     }
 }
 
@@ -66,7 +72,7 @@ extension IssueViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard !isEditing else { return }
-        guard let detail = storyboard?.instantiateViewController(withIdentifier: ViewID.detail) else { return }
+        guard let detail = detailViewController else { return }
         navigationController?.pushViewController(detail, animated: true)
     }
     
