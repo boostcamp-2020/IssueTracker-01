@@ -17,19 +17,20 @@ class IssueViewModel {
         self.issueID = issue.issueID
         self.title = issue.title
         self.milestoneTitle = issue.milestoneTitle
-        self.labelBadges = [LabelBadge(text: "aaaaa", colorCode: "#FF00AA"), LabelBadge(text: "b", colorCode: "#AA1435"), LabelBadge(text: "bugddd", colorCode: "#AABB44") ] //dummy label
+        self.labelBadges = [LabelBadge(text: "ios", colorCode: "#BBBBFF"),
+                            LabelBadge(text: "feat", colorCode: "#AA22AA"),
+                            LabelBadge(text: "vv", colorCode: "#FFFFAA") ] //dummy label
     }
     
     func configureLabelStackView(stackView: UIStackView) {
-        //FIXME: 스택뷰 분배 수정 필요
-        stackView.distribution = .fillEqually
-        stackView.spacing = 1
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 3
         var sumOfLabelWidth = CGFloat.zero
         for badge in labelBadges {
             guard let badge = badge else { break }
             sumOfLabelWidth += badge.frame.size.width
             guard sumOfLabelWidth < stackView.frame.size.width else {
-                badge.text = " .. "
+                badge.text = "..."
                 stackView.addArrangedSubview(badge)
                 badge.translatesAutoresizingMaskIntoConstraints = false
                 badge.setContentHuggingPriority(.defaultLow, for: .horizontal)
