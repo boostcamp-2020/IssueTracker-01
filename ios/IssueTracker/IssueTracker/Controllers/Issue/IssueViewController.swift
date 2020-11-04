@@ -143,6 +143,6 @@ extension IssueViewController {
     private func binding(cell: IssueCell, issueViewModel: IssueViewModel) {
         cell.issueTitle?.text = issueViewModel.title
         cell.milestoneTitle?.text = issueViewModel.milestoneTitle
-        cell.labelStackContentView?.addSubview(issueViewModel.makeLabelStackView(size: cell.labelStackContentView?.frame.size ?? CGSize.zero))
+        cell.badgeStackView?.addSubview(issueViewModel.makeLabelStackView(size: cell.badgeStackView?.frame.size ?? CGSize.zero))
     }
 }

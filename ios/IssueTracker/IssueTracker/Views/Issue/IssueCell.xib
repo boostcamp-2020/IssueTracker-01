@@ -22,24 +22,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wa-UW-esX" userLabel="Label">
-                        <rect key="frame" x="311" y="41" width="54" height="21"/>
-                        <color key="backgroundColor" red="0.77011221649999995" green="0.85679936410000002" blue="0.98040896649999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="1"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" red="0.77011221649999995" green="0.85679936410000002" blue="0.98040896649999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Um3-3h-dVx" userLabel="Description">
                         <rect key="frame" x="10" y="45.5" width="250" height="38.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -63,25 +45,30 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttz-vC-21p">
+                        <rect key="frame" x="270" y="46" width="95" height="28"/>
+                    </stackView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="ttz-vC-21p" secondAttribute="trailing" constant="10" id="1Zj-jq-F6E"/>
                 <constraint firstAttribute="bottom" secondItem="Um3-3h-dVx" secondAttribute="bottom" constant="10" id="4Rp-TQ-deO"/>
                 <constraint firstItem="1ns-fz-koM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="szf-zu-BH0" secondAttribute="trailing" constant="10" id="AXd-pV-USV"/>
                 <constraint firstItem="Um3-3h-dVx" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="2/3" id="E5T-qa-Lz2"/>
                 <constraint firstItem="szf-zu-BH0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="JjC-bQ-mPa"/>
-                <constraint firstItem="4Wa-UW-esX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Um3-3h-dVx" secondAttribute="trailing" constant="10" id="MGQ-UA-5ub"/>
-                <constraint firstAttribute="trailing" secondItem="4Wa-UW-esX" secondAttribute="trailing" constant="10" id="MiO-vg-Db2"/>
                 <constraint firstItem="1ns-fz-koM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="QOF-HN-cxN"/>
                 <constraint firstItem="Um3-3h-dVx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="RsV-MF-IqO"/>
-                <constraint firstItem="4Wa-UW-esX" firstAttribute="top" secondItem="1ns-fz-koM" secondAttribute="bottom" constant="10" id="iqA-7d-Uhe"/>
+                <constraint firstItem="ttz-vC-21p" firstAttribute="leading" secondItem="Um3-3h-dVx" secondAttribute="trailing" constant="10" id="ZcM-Lf-pim"/>
                 <constraint firstAttribute="trailing" secondItem="1ns-fz-koM" secondAttribute="trailing" constant="10" id="lW3-tq-9eK"/>
+                <constraint firstItem="ttz-vC-21p" firstAttribute="top" secondItem="1ns-fz-koM" secondAttribute="bottom" constant="15" id="wb4-fR-9Gm"/>
                 <constraint firstItem="szf-zu-BH0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="xvG-Je-TbV"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="ttz-vC-21p" secondAttribute="bottom" constant="20" id="xzo-Dw-98b"/>
             </constraints>
             <size key="customSize" width="326" height="77"/>
             <connections>
+                <outlet property="badgeStackView" destination="ttz-vC-21p" id="CE7-c9-RYL"/>
                 <outlet property="issueDescription" destination="Um3-3h-dVx" id="PTd-TY-Iqc"/>
                 <outlet property="issueTitle" destination="szf-zu-BH0" id="VD0-Uf-5Po"/>
                 <outlet property="milestoneTitle" destination="1ns-fz-koM" id="ORc-eP-cIU"/>

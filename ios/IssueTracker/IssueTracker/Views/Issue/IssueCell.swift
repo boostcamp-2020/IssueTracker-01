@@ -12,7 +12,7 @@ class IssueCell: UICollectionViewListCell {
     @IBOutlet weak var issueDescription: UILabel?
     @IBOutlet weak var milestoneTitle: UILabel?
     
-    @IBOutlet weak var labelStackContentView: UIView?
+    @IBOutlet weak var badgeStackView: UIView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
