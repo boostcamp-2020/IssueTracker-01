@@ -4,7 +4,6 @@ import User from '@models/userModel';
 import Label from '@models/labelModel';
 import Milestone from '@models/milestoneModel';
 import Comment from '@models/commentModel';
-import Sequelize from 'Sequelize';
 
 const updateAssignee = async (req, res) => {
   try {
@@ -72,7 +71,7 @@ const removeAllLabel = async (req, res) => {
 const updateIssueStatus = async (req, res, next) => {
   try {
     const { status, issueId } = req.params;
-    
+
     await Issue.update(
       {
         isOpen: status,
@@ -86,7 +85,7 @@ const updateIssueStatus = async (req, res, next) => {
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
-}
+};
 
 const updateTitle = async (req, res, next) => {
   try {
@@ -164,7 +163,6 @@ const detailIssue = async (req, res) => {
         },
         {
           model: Milestone,
-<<<<<<< HEAD
           attributes: ['title'],
           include: [
             {
@@ -172,8 +170,6 @@ const detailIssue = async (req, res) => {
               attributes: ['isOpen'],
             },
           ],
-=======
->>>>>>> c1aded90c859e7b65a12796aa3ce78a0a2d6835c
         },
         {
           model: Comment,
@@ -262,5 +258,5 @@ export default {
   removeAllLabel,
   getIssueLists,
   detailIssue,
-  updateIssueStatus
+  updateIssueStatus,
 };

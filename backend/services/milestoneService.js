@@ -61,7 +61,7 @@ const addMilestone = async (req, res, next) => {
 
 const updateMilestone = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { milestoneId } = req.params;
     const { title, dueDate, description } = req.body;
     await Milestone.update(
       {
@@ -69,7 +69,7 @@ const updateMilestone = async (req, res, next) => {
         dueDate,
         description,
       },
-      { where: { milestoneId: id } },
+      { where: { milestoneId: milestoneId } },
     );
     res.json({ message: 'Success' });
   } catch (err) {
@@ -83,8 +83,8 @@ const updateMilestone = async (req, res, next) => {
 
 const deleteMilestone = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    await Milestone.destroy({ where: { milestoneId: id } });
+    const { milestoneId } = req.params;
+    await Milestone.destroy({ where: { milestoneId: milestoneId } });
     res.json({ message: 'Success' });
   } catch (err) {
     console.log(err);
