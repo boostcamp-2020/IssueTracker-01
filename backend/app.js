@@ -9,6 +9,7 @@ import 'module-alias/register';
 import indexRouter from './routes/index';
 import passport from 'passport';
 import passportConfig from './passport/passport';
+import cors from 'cors';
 
 const app = express();
 
@@ -22,6 +23,11 @@ sequelize
   });
 passportConfig();
 // view engine setup
+app.use(
+  cors({
+    credentials: true,
+  }),
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
