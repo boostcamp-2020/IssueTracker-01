@@ -15,7 +15,14 @@ class IssueCell: UICollectionViewListCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        configureSelectedBackgroundView()
         configureMultiselect()
+    }
+    
+    private func configureSelectedBackgroundView() {
+        let bgView = UIView(frame: bounds)
+        bgView.backgroundColor = .systemBackground
+        selectedBackgroundView = bgView
     }
     
     private func configureMultiselect() {

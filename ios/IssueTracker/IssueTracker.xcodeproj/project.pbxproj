@@ -25,6 +25,8 @@
 		0DB5B8BF254FDA4900C2118E /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */; };
 		0DB5B8CD254FF78C00C2118E /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB5B8CC254FF78C00C2118E /* UIViewController+Keyboard.swift */; };
 		0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB84C932549308C000B6651 /* GithubLoginManager.swift */; };
+		0DD6D43F2553BF6B0083D352 /* IssueAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD6D43E2553BF6B0083D352 /* IssueAddViewController.swift */; };
+		0DD6D4622553CDBA0083D352 /* IssueFilterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD6D4602553CDBA0083D352 /* IssueFilterHeader.swift */; };
 		1D41EF98D8AD5662DAF8E5E8 /* libPods-IssueTracker-IssueTrackerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64833F0ACC622329624F531 /* libPods-IssueTracker-IssueTrackerUITests.a */; };
 		2A3273415820EBEE918C6BBB /* libPods-IssueTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7652936AE065428E1110A3 /* libPods-IssueTrackerTests.a */; };
 		5C6DB9C31F7429A6C6E6C11E /* libPods-IssueTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E034FD863700386FD8006D2D /* libPods-IssueTracker.a */; };
@@ -81,6 +83,8 @@
 		0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		0DB5B8CC254FF78C00C2118E /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		0DB84C932549308C000B6651 /* GithubLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManager.swift; sourceTree = "<group>"; };
+		0DD6D43E2553BF6B0083D352 /* IssueAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddViewController.swift; sourceTree = "<group>"; };
+		0DD6D4602553CDBA0083D352 /* IssueFilterHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterHeader.swift; sourceTree = "<group>"; };
 		4A7652936AE065428E1110A3 /* libPods-IssueTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB2F18A4D0EF2AA5045315E /* Pods-IssueTracker-IssueTrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A64833F0ACC622329624F531 /* libPods-IssueTracker-IssueTrackerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker-IssueTrackerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +147,7 @@
 				0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */,
 				0D8643BD255130C3007747E5 /* IssueDetailViewController.swift */,
 				0D735DDD25526EF80040AAC4 /* IssueFilterViewController.swift */,
+				0DD6D43E2553BF6B0083D352 /* IssueAddViewController.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			children = (
 				0D77BF5A255277040056E9E5 /* IssueFilterMainCell.swift */,
 				0D77BF5B255277040056E9E5 /* IssueFilterMainCell.xib */,
+				0DD6D4602553CDBA0083D352 /* IssueFilterHeader.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -513,7 +519,9 @@
 				0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */,
 				0D77BF5C255277040056E9E5 /* IssueFilterMainCell.swift in Sources */,
 				0DA6EDDE2547D67C009EA88F /* AppDelegate.swift in Sources */,
+				0DD6D43F2553BF6B0083D352 /* IssueAddViewController.swift in Sources */,
 				0DB5B8BF254FDA4900C2118E /* IssueViewController.swift in Sources */,
+				0DD6D4622553CDBA0083D352 /* IssueFilterHeader.swift in Sources */,
 				DE546B1925527A51002B1AA6 /* IssueViewModel.swift in Sources */,
 				DE8C6E322551198100CAEC4E /* IssueListViewModel.swift in Sources */,
 				0DB5B8CD254FF78C00C2118E /* UIViewController+Keyboard.swift in Sources */,
