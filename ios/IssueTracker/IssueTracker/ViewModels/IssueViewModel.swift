@@ -10,16 +10,21 @@ import UIKit
 class IssueViewModel {
     var issueID: Int
     var title: String
-    var milestoneTitle: String
-    var labelBadges: [LabelBadge?]
+    var milestoneTitle: MileStone
+    var issueLabels: [IssueLabel]
+    var labelBadges = [LabelBadge?]()
     
     init(issue: Issue) {
         self.issueID = issue.issueID
         self.title = issue.title
         self.milestoneTitle = issue.milestoneTitle
-        self.labelBadges = [LabelBadge(text: "ios", colorCode: "#BBBBFF"),
-                            LabelBadge(text: "feat", colorCode: "#AA22AA"),
-                            LabelBadge(text: "vv", colorCode: "#FFFFAA") ] //dummy label
+        self.issueLabels = issue.issueLabels
+    }
+    
+    func configureLabel() {
+        for label in issueLabels {
+            labelBadges.append(LabelBadge(text: label.label.labelName, colorCode: label.label.color))
+        }
     }
     
     func configureLabelStackView(stackView: UIStackView) {

@@ -21,15 +21,30 @@ class IssueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //dummy
-        issueListViewModel.items.append(IssueViewModel(issue: Issue(issueID: 0, title: "제목", milestoneTitle: "마일스톤")))
+        //local json dummy
+        jsonTest()
         
         configureCollectionView()
         configureCell()
         configureFlowLayout()
         configureDelegate()
         applySnapshot()
+    }
+    
+    //local json dummy
+    func jsonTest() {
+        let jsonFile = Bundle.main.path(forResource: "dummy", ofType: "json")!
+        guard var jsonString = try? String(contentsOfFile: jsonFile) else { return }
+        jsonString = String(jsonString.trimmingCharacters(in: .whitespacesAndNewlines))
+        jsonString = String(jsonString.dropFirst().dropLast())
+        if let jsonData = jsonString.data(using: .utf8) {
+            do {
+                let issueElement = try JSONDecoder().decode(IssueElement.self, from: jsonData)
+                issueListViewModel.items = issueElement.issues.map { IssueViewModel(issue: $0) }
+            } catch {
+                dump(error)
+            }
+        }
     }
     
     func configureDelegate() {
@@ -142,8 +157,10 @@ extension IssueViewController {
     
     private func binding(cell: IssueCell, issueViewModel: IssueViewModel) {
         cell.issueTitle?.text = issueViewModel.title
-        cell.milestoneTitle?.text = issueViewModel.milestoneTitle
+        cell.milestoneTitle?.text = issueViewModel.milestoneTitle.title
+        issueViewModel.configureLabel()
         guard let stackView = cell.badgeStackView else { return }
         issueViewModel.configureLabelStackView(stackView: stackView)
+        
     }
 }
