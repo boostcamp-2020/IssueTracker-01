@@ -12,5 +12,6 @@ module.exports = {
   rules: {
     'no-unused-vars': 'warn',
     'prefer-arrow-callback': 'error',
+    'import/no-unresolved': 'none'
   },
 };

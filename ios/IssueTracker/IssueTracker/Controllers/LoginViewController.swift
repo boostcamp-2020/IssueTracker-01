@@ -8,8 +8,7 @@
 import UIKit
 
 protocol LoginViewControllerDelegate: class {
-    func addUserData()
-    func requestCode()
+    func requestCode(loginViewController: LoginViewController)
 }
 
 class LoginViewController: UIViewController {
@@ -28,6 +27,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginGitHub(_ sender: UIButton) {
-        delegate?.requestCode()
+        delegate?.requestCode(loginViewController: self)
     }
 }

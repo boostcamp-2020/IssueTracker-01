@@ -16,7 +16,11 @@ export default class MileStone extends Sequelize.Model {
         },
         description: {
           type: Sequelize.TEXT,
-          allowNull: false,
+          allowNull: true,
+        },
+        dueDate: {
+          type: Sequelize.DATE,
+          allowNull: true,
         },
       },
       {
@@ -30,5 +34,11 @@ export default class MileStone extends Sequelize.Model {
         collate: 'utf8mb4_general_ci',
       },
     );
+  }
+
+  static associate(db) {
+    db.Milestone.hasMany(db.Issue, {
+      foreignKey: 'milestoneId',
+    });
   }
 }
