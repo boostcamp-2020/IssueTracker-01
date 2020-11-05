@@ -27,7 +27,7 @@ class NetworkManager {
                 }
             guard let data =  responseObject.data else { return }
             do {
-                let issueElements = try JSONDecoder().decode(IssueElements.self, from: data)
+                let issueElements = try JSONDecoder().decode(IssueElement.self, from: data)
                 completion(.success(issueElements.issues))
             } catch let error {
                 completion(.error(error))

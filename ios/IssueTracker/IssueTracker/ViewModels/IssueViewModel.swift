@@ -10,26 +10,32 @@ import UIKit
 class IssueViewModel {
     var issueID: Int
     var title: String
-    var milestoneTitle: String
-    var labelBadges: [LabelBadge?]
+    var milestoneTitle: MileStone
+    var issueLabels: [IssueLabel]
+    var labelBadges = [LabelBadge?]()
     
     init(issue: Issue) {
         self.issueID = issue.issueID
         self.title = issue.title
         self.milestoneTitle = issue.milestoneTitle
-        self.labelBadges = [LabelBadge(text: "aaaaa", colorCode: "#FF00AA"), LabelBadge(text: "b", colorCode: "#AA1435"), LabelBadge(text: "bugddd", colorCode: "#AABB44") ] //dummy label
+        self.issueLabels = issue.issueLabels
+    }
+    
+    func configureLabel() {
+        for label in issueLabels {
+            labelBadges.append(LabelBadge(text: label.label.labelName, colorCode: label.label.color))
+        }
     }
     
     func configureLabelStackView(stackView: UIStackView) {
-        //FIXME: 스택뷰 분배 수정 필요
-        stackView.distribution = .fillEqually
-        stackView.spacing = 1
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 3
         var sumOfLabelWidth = CGFloat.zero
         for badge in labelBadges {
             guard let badge = badge else { break }
             sumOfLabelWidth += badge.frame.size.width
             guard sumOfLabelWidth < stackView.frame.size.width else {
-                badge.text = " .. "
+                badge.text = "..."
                 stackView.addArrangedSubview(badge)
                 badge.translatesAutoresizingMaskIntoConstraints = false
                 badge.setContentHuggingPriority(.defaultLow, for: .horizontal)
