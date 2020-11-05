@@ -1,5 +1,5 @@
 import Milestone from '@models/milestoneModel';
-import Sequelize from 'Sequelize';
+import Sequelize from 'sequelize';
 
 const getMilestoneList = async (req, res, next) => {
   try {
@@ -21,8 +21,8 @@ const getMilestone = async (req, res, next) => {
         'title',
         'dueDate',
         'description',
-        [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`status` = "open", 1, 0)')), 'openIssues'],
-        [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`status` = "close", 1, 0)')), 'closeIssues'],
+        [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`isOpen` = 1, 1, 0)')), 'openIssues'],
+        [Sequelize.fn('sum', Sequelize.literal('if(`Issues`.`isOpen` = 0, 1, 0)')), 'closeIssues'],
       ],
       include: ['Issues'],
       group: ['MileStone.milestoneId'],
@@ -61,7 +61,7 @@ const addMilestone = async (req, res, next) => {
 
 const updateMilestone = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { milestoneId } = req.params;
     const { title, dueDate, description } = req.body;
     await Milestone.update(
       {
@@ -69,7 +69,7 @@ const updateMilestone = async (req, res, next) => {
         dueDate,
         description,
       },
-      { where: { milestoneId: id } },
+      { where: { milestoneId: milestoneId } },
     );
     res.json({ message: 'Success' });
   } catch (err) {
@@ -83,8 +83,8 @@ const updateMilestone = async (req, res, next) => {
 
 const deleteMilestone = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    await Milestone.destroy({ where: { milestoneId: id } });
+    const { milestoneId } = req.params;
+    await Milestone.destroy({ where: { milestoneId: milestoneId } });
     res.json({ message: 'Success' });
   } catch (err) {
     console.log(err);

@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', milestoneService.getMilestoneList);
 router.get('/detail', milestoneService.getMilestone);
 router.post('/', milestoneService.addMilestone);
-router.patch('/:id', milestoneService.updateMilestone);
-router.delete('/:id', milestoneService.deleteMilestone);
+router.patch('/:milestoneId', milestoneService.updateMilestone);
+router.delete('/:milestoneId', milestoneService.deleteMilestone);
 
 export default router;

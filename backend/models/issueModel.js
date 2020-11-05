@@ -14,9 +14,9 @@ export default class Issue extends Sequelize.Model {
           type: Sequelize.STRING(45),
           allowNull: false,
         },
-        status: {
-          type: Sequelize.STRING(30),
-          defaultValue: 'open',
+        isOpen: {
+          type: Sequelize.TINYINT(1),
+          defaultValue: 1,
         },
       },
       {
@@ -34,9 +34,20 @@ export default class Issue extends Sequelize.Model {
   static associate(db) {
     db.Issue.belongsTo(db.User, {
       foreignKey: 'userId',
+      as: 'UserAuthor',
+    });
+    db.Issue.belongsTo(db.User, {
+      foreignKey: 'assignees',
+      targetKey: 'userId',
     });
     db.Issue.belongsTo(db.Milestone, {
       foreignKey: 'milestoneId',
+    });
+    db.Issue.hasMany(db.IssueLabel, {
+      foreignKey: 'issueId',
+    });
+    db.Issue.hasMany(db.Comment, {
+      foreignKey: 'issueId',
     });
   }
 }
