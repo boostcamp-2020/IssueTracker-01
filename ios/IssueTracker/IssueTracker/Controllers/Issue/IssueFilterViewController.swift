@@ -19,6 +19,10 @@ class IssueFilterViewController: UIViewController {
         configureFlowLayout()
         applySnapshot()
     }
+    
+    @IBAction func clickExit(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - View identifier
