@@ -25,6 +25,7 @@ passportConfig();
 // view engine setup
 app.use(
   cors({
+    origin: true,
     credentials: true,
   }),
 );
