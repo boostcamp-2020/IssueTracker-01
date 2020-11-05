@@ -36,7 +36,7 @@ extension IssueFilterViewController {
 }
 
 // MARK: - Configure CollectionView
-extension IssueFilterViewController: UICollectionViewDelegate {
+extension IssueFilterViewController: UICollectionViewDelegate {    
     private func configureCollectionView() {
         collectionView?.delegate = self
         collectionView?.allowsSelectionDuringEditing = true
@@ -64,7 +64,7 @@ extension IssueFilterViewController {
         let dataSource = DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, data) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let filterCell = cell as? IssueFilterMainCell else { return cell }
-            filterCell.configureView(title: data)
+            filterCell.configureView(title: data, isDetail: indexPath.section == 1)
             filterCell.indentsAccessories = true
             return filterCell
         })
