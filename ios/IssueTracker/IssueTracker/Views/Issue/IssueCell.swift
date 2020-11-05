@@ -25,4 +25,8 @@ class IssueCell: UICollectionViewListCell {
         separatorLayoutGuide.trailingAnchor.constraint(equalTo: issueTitle.leadingAnchor).isActive = true
         separatorLayoutGuide.trailingAnchor.constraint(equalTo: issueDescription.leadingAnchor).isActive = true
     }
+    
+    override func prepareForReuse() {
+        self.badgeStackView = nil
+    }
 }
