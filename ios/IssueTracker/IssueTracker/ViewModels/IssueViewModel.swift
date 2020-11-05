@@ -10,7 +10,7 @@ import UIKit
 class IssueViewModel {
     var issueID: Int
     var title: String
-    var milestoneTitle: MileStone
+    var milestoneTitle: MileStone?
     var issueLabels: [IssueLabel]
     var labelBadges = [LabelBadge?]()
     

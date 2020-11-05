@@ -21,34 +21,15 @@ class IssueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //local json dummy
-        jsonTest()
-        
         configureCollectionView()
         configureCell()
         configureFlowLayout()
-        configureDelegate()
         applySnapshot()
     }
     
-    //local json dummy
-    func jsonTest() {
-        let jsonFile = Bundle.main.path(forResource: "dummy", ofType: "json")!
-        guard var jsonString = try? String(contentsOfFile: jsonFile) else { return }
-        jsonString = String(jsonString.trimmingCharacters(in: .whitespacesAndNewlines))
-        jsonString = String(jsonString.dropFirst().dropLast())
-        if let jsonData = jsonString.data(using: .utf8) {
-            do {
-                let issueElement = try JSONDecoder().decode(IssueElement.self, from: jsonData)
-                issueListViewModel.items = issueElement.issues.map { IssueViewModel(issue: $0) }
-            } catch {
-                dump(error)
-            }
-        }
-    }
-    
-    func configureDelegate() {
-        self.issueListViewModel.delegate = self.collectionView
+    func downloadViewModel() {
+        self.issueListViewModel.delegate = self
+        self.issueListViewModel.download()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,7 +115,7 @@ extension IssueViewController: UICollectionViewDelegate {
 }
 
 // MARK: - UICollectionViewDiffableDataSource
-extension IssueViewController {
+extension IssueViewController: SnapshotApplicable {
     typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueViewModel>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, IssueViewModel>
     
@@ -148,7 +129,7 @@ extension IssueViewController {
         })
     }
     
-    private func applySnapshot(animatingDifferences: Bool = true) {
+    func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([0])
         snapshot.appendItems(issueListViewModel.items, toSection: 0)
@@ -157,7 +138,7 @@ extension IssueViewController {
     
     private func binding(cell: IssueCell, issueViewModel: IssueViewModel) {
         cell.issueTitle?.text = issueViewModel.title
-        cell.milestoneTitle?.text = issueViewModel.milestoneTitle.title
+        cell.milestoneTitle?.text = issueViewModel.milestoneTitle?.title
         issueViewModel.configureLabel()
         guard let stackView = cell.badgeStackView else { return }
         issueViewModel.configureLabelStackView(stackView: stackView)

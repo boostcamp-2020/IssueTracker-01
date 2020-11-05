@@ -35,7 +35,7 @@ final class GithubLoginManager: GithubLogin {
     private init() { }
     
     func requestCode(requestHandler: (() -> Void)?) {
-        let urlString = "http://hoyoung.me/oauth/login/github"
+        let urlString = "http://api.hoyoung.me/oauth/github"
         guard let url = URL(string: urlString)  else { return }
         guard let canOpenURL = delegate?.canOpenURL(url) else { return }
         guard canOpenURL else { return }

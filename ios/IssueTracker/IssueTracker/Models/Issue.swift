@@ -21,9 +21,9 @@ struct Issue: Codable {
     let issueID: Int
     let createdAt: String
     let isOpen: Int
-    let userAuthor, user: User
+    let userAuthor, user: User?
     let issueLabels: [IssueLabel]
-    let milestoneTitle: MileStone
+    let milestoneTitle: MileStone?
     let comments: [Comment]
 
     enum CodingKeys: String, CodingKey {

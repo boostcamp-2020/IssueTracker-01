@@ -80,6 +80,6 @@ extension IssueFilterViewController {
     
     private func binding(cell: IssueCell, issue: Issue?) {
         cell.issueTitle?.text = issue?.title
-        cell.milestoneTitle?.text = issue?.milestoneTitle.title
+        cell.milestoneTitle?.text = issue?.milestoneTitle?.title
     }
 }

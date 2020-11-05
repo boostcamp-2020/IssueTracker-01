@@ -7,18 +7,23 @@
 
 import UIKit
 
+protocol SnapshotApplicable: class {
+    func applySnapshot(animatingDifferences: Bool)
+}
+
 class IssueListViewModel {
-    
     var items = [IssueViewModel]()
-    weak var delegate: UICollectionView?
+    weak var delegate: SnapshotApplicable?
     
-    init() {
+    func download() {
         NetworkManager().downloadIssueList { [weak self] result in
             switch result {
-            case .success(let issues):
-                let issueViewModels = issues.map { IssueViewModel(issue: $0) }
+            case .success(let issueElement):
+                let issueViewModels = issueElement.issues.map { IssueViewModel(issue: $0) }
                 self?.items = issueViewModels
-                self?.delegate?.reloadData()
+                DispatchQueue.main.async {
+                    self?.delegate?.applySnapshot(animatingDifferences: true)
+                }
             case .error(let error):
                 print(error)
             }
