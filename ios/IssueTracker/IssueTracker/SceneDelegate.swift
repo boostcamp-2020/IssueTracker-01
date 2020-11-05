@@ -56,9 +56,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
     func configureLoginManager() {
-        guard let rootView = window?.rootViewController as? MainViewController else { return }
+        guard let rootViewController = window?.rootViewController as? UINavigationController else { return }
+        guard let mainViewController = rootViewController.viewControllers[0] as? MainViewController else { return }
         GithubLoginManager.shared.delegate = self
-        rootView.githubLogin = GithubLoginManager.shared
+        mainViewController.githubLogin = GithubLoginManager.shared
     }
 }
 
