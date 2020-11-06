@@ -36,7 +36,9 @@ class MainViewController: UITabBarController {
 
 extension MainViewController: LoginViewControllerDelegate {
     func requestCode(loginViewController: LoginViewController) {
-        githubLogin?.requestCode { 
+        githubLogin?.requestCode {
+            guard let issueViewController = self.viewControllers?.first as? IssueViewController else { return }
+            issueViewController.downloadViewModel()
             loginViewController.dismiss(animated: true, completion: nil)
         }
     }
