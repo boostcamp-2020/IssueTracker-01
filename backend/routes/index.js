@@ -1,29 +1,27 @@
 import express from 'express';
 import passport from 'passport';
-import jwt from 'jsonwebtoken';
+import milestone from './api/milestone';
+import githubRouter from './oauth/github';
+import apiComment from './api/comment';
+import labelRouter from './api/label';
+import issueRouter from './api/issue';
+import userRouter from './api/user';
 
 const router = express.Router();
+
+router.use('/oauth/github', githubRouter);
+router.use('/api/milestone', passport.authenticate('jwt', { session: false }), milestone);
+router.use('/api/comment', passport.authenticate('jwt', { session: false }), apiComment);
+router.use('/api/label', passport.authenticate('jwt', { session: false }), labelRouter);
+router.use('/api/issue', passport.authenticate('jwt', { session: false }), issueRouter);
+router.use('/api/user', passport.authenticate('jwt', { session: false }), userRouter);
 
 router.get('/', (req, res) => {
   return res.send('ok');
 });
 
-router.get('/github', passport.authenticate('github'));
-
-router.get('/github/callback', (req, res) => {
-  passport.authenticate('github', { failureRedirect: '/' }, (err, user) => {
-    const [User] = user;
-    const token = jwt.sign({ userId: User.dataValues.userId }, process.env.JWT_SECERT);
-    if (req.headers['user-agent'].includes('iPhone')) {
-      return res.redirect(`issuetracker://${token}`);
-    }
-    res.cookie('jwt', token);
-    return res.redirect('/');
-  })(req, res);
+router.get('/validate/jwt', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.sendStatus(200);
 });
 
-router.get('/test/jwt', passport.authenticate('jwt', { session: false }), (req, res) => {
-  console.log('성공');
-});
-
-module.exports = router;
+export default router;

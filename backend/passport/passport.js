@@ -1,26 +1,23 @@
 import passport from 'passport';
-
 import User from '@models/userModel';
-
 import { Strategy as GitHubStrategy } from 'passport-github';
-
 import { Strategy as JwtStrategy } from 'passport-jwt';
+import Config from '@config';
 
-require('dotenv').config();
-
-module.exports = () => {
+const passportConfig = () => {
   passport.use(
     new GitHubStrategy(
       {
-        clientID: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: 'http://127.0.0.1:3000/github/callback',
+        clientID: Config.GITHUB_CLIENT_ID,
+        clientSecret: Config.GITHUB_CLIENT_SECRET,
+        callbackURL: Config.GITHUB_CALLBACK_URL,
       },
       async (accessToken, refreshToken, profile, done) => {
         const user = await User.findOrCreate({
           where: { userId: profile.username },
           defaults: {
             password: 'test',
+            profile_url: profile.photos[0].value,
           },
         });
         done(null, user);
@@ -35,7 +32,7 @@ module.exports = () => {
     new JwtStrategy(
       {
         jwtFromRequest: cookieExtractor,
-        secretOrKey: process.env.JWT_SECERT,
+        secretOrKey: Config.JWT_SECRET,
       },
       async (payload, done) => {
         const user = await User.findOne({ where: { userId: payload.userId } });
@@ -48,3 +45,5 @@ module.exports = () => {
     ),
   );
 };
+
+export default passportConfig;
