@@ -103,7 +103,7 @@ extension IssueViewController: UICollectionViewDelegate {
             addButton?.isHidden = false
         }
         
-        collectionView?.reloadData()
+        self.applySnapshot()
     }
     
     private func selectAllCell() {
