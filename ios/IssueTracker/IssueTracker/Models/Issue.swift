@@ -40,11 +40,17 @@ struct Issue: Codable {
 
 struct Comment: Codable {
     let commentID: Int
-    let userID: String
+    let userID: String?
+    let content: String?
+    let createdAt: String?
+    let user: User?
 
     enum CodingKeys: String, CodingKey {
         case commentID = "commentId"
         case userID = "userId"
+        case content
+        case createdAt
+        case user = "User"
     }
 }
 
@@ -73,4 +79,16 @@ struct User: Codable {
         case userID = "userId"
         case profileURL = "profile_url"
     }
+}
+
+extension Comment: Hashable {
+    static func == (lhs: Comment, rhs: Comment) -> Bool {
+        lhs.commentID == rhs.commentID
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(commentID)
+    }
+    
+    
 }

@@ -31,6 +31,8 @@
 		45F3BEBA3DCD5E7676907491 /* Pods_IssueTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B8BF5D313828CFC0EE8190 /* Pods_IssueTrackerTests.framework */; };
 		5EB3D827B14A9E5DED4B63CE /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E679F2A5D8D19FCDC20238A /* Pods_IssueTracker.framework */; };
 		CFE493B22557BA4100BE8F3E /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */; };
+		CFE493BD2557C4CB00BE8F3E /* CommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */; };
+		CFE493C22557C4D900BE8F3E /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */; };
 		DE546B1925527A51002B1AA6 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE546B1825527A51002B1AA6 /* IssueViewModel.swift */; };
 		DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */; };
 		DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8C6E1F255103C800CAEC4E /* Issue.swift */; };
@@ -92,6 +94,8 @@
 		8E679F2A5D8D19FCDC20238A /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7A463B519574E490A4CDEF /* Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
+		CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListViewModel.swift; sourceTree = "<group>"; };
+		CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		DE546B1825527A51002B1AA6 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexColor.swift"; sourceTree = "<group>"; };
 		DE8C6E1F255103C800CAEC4E /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 			children = (
 				DE8C6E312551198100CAEC4E /* IssueListViewModel.swift */,
 				DE546B1825527A51002B1AA6 /* IssueViewModel.swift */,
+				CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */,
+				CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -562,6 +568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFE493C22557C4D900BE8F3E /* CommentViewModel.swift in Sources */,
 				0DA6EDE22547D67C009EA88F /* LoginViewController.swift in Sources */,
 				0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */,
 				0D77BF5C255277040056E9E5 /* IssueFilterMainCell.swift in Sources */,
@@ -582,6 +589,7 @@
 				DE8C6E4325514FA200CAEC4E /* NetworkManager.swift in Sources */,
 				DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */,
 				0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */,
+				CFE493BD2557C4CB00BE8F3E /* CommentListViewModel.swift in Sources */,
 				DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

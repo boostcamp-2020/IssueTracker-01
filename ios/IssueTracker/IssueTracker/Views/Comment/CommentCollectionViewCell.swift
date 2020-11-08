@@ -2,7 +2,7 @@
 //  CommentCollectionViewCell.swift
 //  IssueTracker
 //
-//  Created by DH Park on 2020/11/08.
+//  Created by 최광현 on 2020/11/08.
 //
 
 import UIKit
