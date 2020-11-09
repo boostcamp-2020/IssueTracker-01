@@ -57,8 +57,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     func configureLoginManager() {
         guard let mainViewController =  window?.rootViewController as? MainViewController else { return }
-        GithubLoginManager.shared.delegate = self
-        mainViewController.githubLogin = GithubLoginManager.shared
+        IssueTrackerGithubLoginManager.shared.delegate = self
+        mainViewController.githubLoginManager = IssueTrackerGithubLoginManager.shared
+        mainViewController.networkManager = IssueTrackerNetworkManager.shared
     }
 }
 
@@ -77,7 +78,7 @@ extension SceneDelegate {
         guard let url = URLContexts.first?.url else { return }
         guard url.absoluteString.starts(with: "issuetracker://") else { return }
         guard let token = url.absoluteString.split(separator: "/").last.map({ String($0) }) else { return }
-        GithubLoginManager.shared.token = token
-        GithubLoginManager.shared.completionHandler?()
+        IssueTrackerGithubLoginManager.shared.token = token
+        IssueTrackerGithubLoginManager.shared.completionHandler?()
     }
 }
