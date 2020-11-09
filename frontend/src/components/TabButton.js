@@ -7,24 +7,35 @@ const FlextDiv = styled.div`
   align-items: center;
 `;
 
-const TabBorder = styled.nav`
+const TabBorder = styled.nav``;
+
+const Button = styled.a`
+  padding: 0 10px;
   border: 1px solid #e1e4e8;
-  border-radius: 6px;
   padding: 5px 16px;
+  &:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
 `;
 
-const TabButton = ({}) => {
+const TabButton = ({ active }) => {
   return (
     <FlextDiv>
       <TabBorder>
-        <a>
+        <Button>
           <SVG name="labelImage" size="16" />
           Labels
-        </a>
-        <a>
+        </Button>
+        <Button>
           <SVG name="milestoneImage" size="16" />
           Milestones
-        </a>
+        </Button>
       </TabBorder>
     </FlextDiv>
   );
