@@ -15,8 +15,10 @@ class IssueViewController: UIViewController {
     private var issueListViewModel = IssueListViewModel()
     
     @IBOutlet weak var collectionView: UICollectionView?
-    @IBOutlet weak var leftTopButton: UIButton?
-    @IBOutlet weak var rightTopButton: UIButton?
+    @IBOutlet weak var filterButton: UIButton?
+    @IBOutlet weak var editButton: UIButton?
+    @IBOutlet weak var selectAllButton: UIButton?
+    @IBOutlet weak var cancelButton: UIButton?
     @IBOutlet weak var addButton: UIButton?
     
     override func viewDidLoad() {
@@ -32,23 +34,16 @@ class IssueViewController: UIViewController {
         self.issueListViewModel.download()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+    @IBAction func clickEditButton(_ sender: UIButton) {
+        setEditing(true, animated: true)
     }
     
-    @IBAction func clickLeftTopButton(_ sender: UIButton) {
-        guard !isEditing else { selectAllCell(); return }
-        guard let filter = filterViewController else { return }
-        present(filter, animated: true, completion: nil)
+    @IBAction func clickSelectAllButton(_ sender: Any) {
+        selectAllCell()
     }
     
-    @IBAction func clickRightTopButton(_ sender: UIButton) {
-        setEditing(!isEditing, animated: true)
-    }
-    
-    @IBAction func clickAddButton(_ sender: UIButton) {
-        
+    @IBAction func clickCancelButton(_ sender: Any) {
+        setEditing(false, animated: true)
     }
 }
 
@@ -94,12 +89,16 @@ extension IssueViewController: UICollectionViewDelegate {
     
     private func setButtonModes(isEditing: Bool) {
         if isEditing {
-            leftTopButton?.setTitle("SelectAll", for: .normal)
-            rightTopButton?.setTitle("Cancel", for: .normal)
+            filterButton?.isHidden = true
+            editButton?.isHidden = true
+            selectAllButton?.isHidden = false
+            cancelButton?.isHidden = false
             addButton?.isHidden = true
         } else {
-            leftTopButton?.setTitle("Filter", for: .normal)
-            rightTopButton?.setTitle("Edit", for: .normal)
+            filterButton?.isHidden = false
+            editButton?.isHidden = false
+            selectAllButton?.isHidden = true
+            cancelButton?.isHidden = true
             addButton?.isHidden = false
         }
         
