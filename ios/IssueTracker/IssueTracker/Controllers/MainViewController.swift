@@ -8,32 +8,34 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-    var githubLogin: GithubLogin?
+    lazy var loginViewController: LoginViewController = {
+        let login = storyboard?.instantiateViewController(withIdentifier: ViewID.login) as? LoginViewController ?? LoginViewController()
+        login.delegate = self
+        login.modalPresentationStyle = .fullScreen
+        return login
+    }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    var githubLogin: GithubLogin?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkAccessToken()
     }
     
-    private func configureLoginViewController() -> LoginViewController {
-        let login = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController ?? LoginViewController()
-        login.delegate = self
-        return login
-    }
-    
     private func checkAccessToken() {
         guard githubLogin?.token == nil else { return }
-        let login = configureLoginViewController()
-        login.delegate = self
-        login.modalPresentationStyle = .fullScreen
-        present(login, animated: true, completion: nil)
+        present(loginViewController, animated: true, completion: nil)
     }
 }
 
+// MARK: - View identifier
+extension MainViewController {
+    private struct ViewID {
+        static let login = String(describing: LoginViewController.self)
+    }
+}
+
+// MARK: - LoginViewControllerDelegate
 extension MainViewController: LoginViewControllerDelegate {
     func requestCode(loginViewController: LoginViewController) {
         githubLogin?.requestCode {
