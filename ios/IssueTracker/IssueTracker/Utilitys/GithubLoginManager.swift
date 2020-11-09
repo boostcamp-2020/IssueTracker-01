@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol GithubLogin {
+protocol GithubLoginManager {
     var token: String? { get }
     func requestCode(requestHandler: (() -> Void)?)
 }
@@ -18,7 +18,7 @@ protocol GithubLoginManagerDelegate: class {
     func open(_ url: URL)
 }
 
-final class GithubLoginManager: GithubLogin {
+final class IssueTrackerGithubLoginManager: GithubLoginManager {
     
     enum GithubLoginManagerError: Error {
         case haveNoAccessToken
@@ -26,7 +26,7 @@ final class GithubLoginManager: GithubLogin {
     
     var completionHandler: (() -> Void)?
     
-    static let shared = GithubLoginManager()
+    static let shared = IssueTrackerGithubLoginManager()
     
     weak var delegate: GithubLoginManagerDelegate?
     

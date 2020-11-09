@@ -143,6 +143,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0D6FB3AA255925240043BFD2 /* Utilitys */ = {
+			isa = PBXGroup;
+			children = (
+				0DB84C932549308C000B6651 /* GithubLoginManager.swift */,
+				DE8C6E4225514FA200CAEC4E /* NetworkManager.swift */,
+			);
+			path = Utilitys;
+			sourceTree = "<group>";
+		};
 		0D735DDC25526EB20040AAC4 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +211,7 @@
 		0DA6EDDC2547D67C009EA88F /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				0D6FB3AA255925240043BFD2 /* Utilitys */,
 				DE8C6E302551197000CAEC4E /* ViewModels */,
 				0DB84C9B25493247000B6651 /* Models */,
 				0D7D23452547EAE20012C943 /* Controllers */,
