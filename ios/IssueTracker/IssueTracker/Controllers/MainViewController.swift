@@ -39,7 +39,8 @@ extension MainViewController {
 extension MainViewController: LoginViewControllerDelegate {
     func requestCode(loginViewController: LoginViewController) {
         githubLogin?.requestCode {
-            guard let issueViewController = self.viewControllers?.first as? IssueViewController else { return }
+            guard let issueNavigationViewController = self.viewControllers?.first as? UINavigationController else { return }
+            guard let issueViewController = issueNavigationViewController.viewControllers.first as? IssueViewController else { return }
             issueViewController.downloadViewModel()
             loginViewController.dismiss(animated: true, completion: nil)
         }
