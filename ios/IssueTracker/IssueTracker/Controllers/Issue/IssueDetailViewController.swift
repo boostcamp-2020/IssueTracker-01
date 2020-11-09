@@ -8,20 +8,21 @@
 import UIKit
 
 class IssueDetailViewController: UIViewController {
-
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    private var commentListViewModel = CommentListViewModel()
     private lazy var dataSource = makeDataSource()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var collectionView: UICollectionView?
+    
+    var viewModel: CommentViewModel? {
+        didSet {
+            viewModel?.downloadData()
+        }
     }
 }
 
+// MARK: - UICollectionViewDiffableDataSource
 extension IssueDetailViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, CommentViewModel>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, CommentViewModel>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, CommentCellViewModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, CommentCellViewModel>
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
@@ -35,32 +36,23 @@ extension IssueDetailViewController {
             
             cell.heightAnchor.constraint(equalToConstant: newSize.height + 76).isActive = true
             cell.widthAnchor.constraint(equalToConstant: self.view.frame.size.width).isActive = true
-
+            
             return commentCell
         })
     }
     
     func applySnapshot(animatingDifferences: Bool = true) {
+        guard let viewModel = viewModel else { return }
         var snapshot = Snapshot()
         snapshot.appendSections([0])
-        snapshot.appendItems(commentListViewModel.items, toSection: 0)
+        snapshot.appendItems(viewModel.commentCellViewModels, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
-    func binding(cell: CommentCollectionViewCell, viewModel: CommentViewModel) {
+    func binding(cell: CommentCollectionViewCell, viewModel: CommentCellViewModel) {
         cell.userNameLabel.text = viewModel.user?.userID
         cell.commentDateLabel.text = viewModel.configureDate()
-//        cell.userImageView = viewModel.user?.profileURL //ImageDownload 기능 필요
+        //        cell.userImageView = viewModel.user?.profileURL //ImageDownload 기능 필요
         cell.commentLabel.text = viewModel.content
-        
-    }
-    
-}
-
-extension IssueDetailViewController: SnapshotApplicable {
-    func downloadViewModel(issueID: Int) {
-        self.commentListViewModel.delegate = self
-        self.commentListViewModel.download(issueID: issueID)
-
     }
 }

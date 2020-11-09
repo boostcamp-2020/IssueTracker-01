@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,8 +38,8 @@
 		70F3FA5C3C096C16DBF8C003 /* libPods-IssueTracker-IssueTrackerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CDC2B04FC8A9344D260530 /* libPods-IssueTracker-IssueTrackerUITests.a */; };
 		AD7ED7DEA5AA4140102359BE /* libPods-IssueTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3B86C1272A199E7EC96E12 /* libPods-IssueTracker.a */; };
 		CFE493B22557BA4100BE8F3E /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */; };
-		CFE493BD2557C4CB00BE8F3E /* CommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */; };
-		CFE493C22557C4D900BE8F3E /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */; };
+		CFE493BD2557C4CB00BE8F3E /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493BC2557C4CB00BE8F3E /* CommentViewModel.swift */; };
+		CFE493C22557C4D900BE8F3E /* CommentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493C12557C4D900BE8F3E /* CommentCellViewModel.swift */; };
 		DE546B1925527A51002B1AA6 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE546B1825527A51002B1AA6 /* IssueViewModel.swift */; };
 		DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */; };
 		DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8C6E1F255103C800CAEC4E /* Issue.swift */; };
@@ -106,8 +106,8 @@
 		7A852DE7971E87431BDB3D9A /* libPods-IssueTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7A463B519574E490A4CDEF /* Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
-		CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListViewModel.swift; sourceTree = "<group>"; };
-		CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		CFE493BC2557C4CB00BE8F3E /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		CFE493C12557C4D900BE8F3E /* CommentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellViewModel.swift; sourceTree = "<group>"; };
 		DC3B86C1272A199E7EC96E12 /* libPods-IssueTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE546B1825527A51002B1AA6 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexColor.swift"; sourceTree = "<group>"; };
@@ -300,8 +300,8 @@
 			children = (
 				DE546B1825527A51002B1AA6 /* IssueViewModel.swift */,
 				0D6FB3C42559947F0043BFD2 /* IssueCellViewModel.swift */,
-				CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */,
-				CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */,
+				CFE493BC2557C4CB00BE8F3E /* CommentViewModel.swift */,
+				CFE493C12557C4D900BE8F3E /* CommentCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -558,7 +558,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFE493C22557C4D900BE8F3E /* CommentViewModel.swift in Sources */,
+				CFE493C22557C4D900BE8F3E /* CommentCellViewModel.swift in Sources */,
 				0DA6EDE22547D67C009EA88F /* LoginViewController.swift in Sources */,
 				0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */,
 				0D77BF5C255277040056E9E5 /* IssueFilterMainCell.swift in Sources */,
@@ -584,7 +584,7 @@
 				DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */,
 				0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */,
 				0D13E93125590EC0000CA6BC /* IssueBottomSheetViewController.swift in Sources */,
-				CFE493BD2557C4CB00BE8F3E /* CommentListViewModel.swift in Sources */,
+				CFE493BD2557C4CB00BE8F3E /* CommentViewModel.swift in Sources */,
 				DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */,
 				0D6FB3A1255924EC0043BFD2 /* User.swift in Sources */,
 			);

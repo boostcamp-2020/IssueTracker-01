@@ -8,42 +8,29 @@
 import UIKit
 
 class CommentViewModel {
-    var commentID: Int
-    var userID: String?
-    var content: String?
-    var createdAt: String?
-    var user: User?
-    
-    init(comment: Comment) {
-        self.commentID = comment.commentID
-        self.userID = comment.userID
-        self.content = comment.content
-        self.createdAt = comment.createdAt
-        self.user = comment.user
+    var commentCellViewModels = [CommentCellViewModel]() {
+        didSet { itemSetHandler?() }
     }
     
-    func configureDate() -> String {
-        guard let dateString = createdAt else { return "" }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
-        if let date = formatter.date(from: dateString) {
-            let relativeFormatter = RelativeDateTimeFormatter()
-            relativeFormatter.locale = Locale.init(identifier: "ko_KR")
-            relativeFormatter.unitsStyle = .full
-            let relativeDate = relativeFormatter.localizedString(for: date, relativeTo: Date())
-            return relativeDate
+    var itemSetHandler: (() -> Void)?
+    var token: String?
+    var issueID: Int?
+    var networkManager: NetworkManager?
+    
+    init(token: String?, networkManager: NetworkManager?) {
+        self.token = token
+        self.networkManager = networkManager
+    }
+    
+    func downloadData() {
+        guard let token = token, let issueID = issueID else { return }
+        networkManager?.downloadComment(token: token, issueID: issueID) { [weak self] result in
+            switch result {
+            case let .success(result):
+                self?.commentCellViewModels = result.comments.map { CommentCellViewModel(comment: $0) }
+            case let .failure(result):
+                print(result.localizedDescription)
+            }
         }
-        return ""
-    }
-    
-}
-
-extension CommentViewModel: Hashable {
-    static func == (lhs: CommentViewModel, rhs: CommentViewModel) -> Bool {
-        lhs.commentID == rhs.commentID
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(commentID)
     }
 }
