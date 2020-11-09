@@ -8,50 +8,28 @@
 import UIKit
 
 class IssueViewModel {
-    var issueID: Int
-    var title: String
-    var milestoneTitle: MileStone?
-    var issueLabels: [IssueLabel]
-    var labelBadges = [LabelBadge?]()
-    
-    init(issue: Issue) {
-        self.issueID = issue.issueID
-        self.title = issue.title
-        self.milestoneTitle = issue.milestoneTitle
-        self.issueLabels = issue.issueLabels
+    var issueCellViewModels = [IssueCellViewModel]() {
+        didSet { itemSetHandler?() }
     }
     
-    func configureLabel() {
-        for label in issueLabels {
-            labelBadges.append(LabelBadge(text: label.label.labelName, colorCode: label.label.color))
-        }
+    var itemSetHandler: (() -> Void)?
+    var token: String?
+    var networkManager: NetworkManager?
+    
+    init(token: String?, networkManager: NetworkManager?) {
+        self.token = token
+        self.networkManager = networkManager
     }
     
-    func configureLabelStackView(stackView: UIStackView) {
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 3
-        var sumOfLabelWidth = CGFloat.zero
-        for badge in labelBadges {
-            guard let badge = badge else { break }
-            sumOfLabelWidth += badge.frame.size.width
-            guard sumOfLabelWidth < stackView.frame.size.width else {
-                badge.text = "..."
-                stackView.addArrangedSubview(badge)
-                badge.translatesAutoresizingMaskIntoConstraints = false
-                badge.setContentHuggingPriority(.defaultLow, for: .horizontal)
-                break
+    func downloadData() {
+        guard let token = token else { return }
+        networkManager?.downloadIssues(token: token) { [weak self] result in
+            switch result {
+            case let .success(result):
+                self?.issueCellViewModels = result.map { IssueCellViewModel(issue: $0) }
+            case let .failure(result):
+                print(result.localizedDescription)
             }
-            stackView.addArrangedSubview(badge)
         }
-    }
-}
-
-extension IssueViewModel: Hashable {
-    static func == (lhs: IssueViewModel, rhs: IssueViewModel) -> Bool {
-        lhs.issueID == rhs.issueID
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(issueID)
     }
 }

@@ -14,6 +14,7 @@ protocol NetworkManager {
 
 class IssueTrackerNetworkManager: NetworkManager {
     static let shared = IssueTrackerNetworkManager()
+    let baseURL = "http://api.hoyoung.me/api"
     
     private init() { }
     
@@ -22,7 +23,7 @@ class IssueTrackerNetworkManager: NetworkManager {
     }
     
     func downloadIssues(token: String, completion: @escaping (Result<[Issue], Error>) -> Void) {
-        let url = "http://api.hoyoung.me/api/issue"
+        let url = baseURL + "/issue"
         let cookieProps = [
             HTTPCookiePropertyKey.domain: "api.hoyoung.me",
             HTTPCookiePropertyKey.path: "/",

@@ -10,7 +10,7 @@ import UIKit
 
 protocol GithubLoginManager {
     var token: String? { get }
-    func requestCode(requestHandler: (() -> Void)?)
+    func requestGithubLogin(requestHandler: (() -> Void)?)
 }
 
 protocol GithubLoginManagerDelegate: class {
@@ -24,7 +24,7 @@ final class IssueTrackerGithubLoginManager: GithubLoginManager {
         case haveNoAccessToken
     }
     
-    var completionHandler: (() -> Void)?
+    var githubLoginCompletionHandler: (() -> Void)?
     
     static let shared = IssueTrackerGithubLoginManager()
     
@@ -34,12 +34,12 @@ final class IssueTrackerGithubLoginManager: GithubLoginManager {
     
     private init() { }
     
-    func requestCode(requestHandler: (() -> Void)?) {
+    func requestGithubLogin(requestHandler: (() -> Void)?) {
         let urlString = "http://api.hoyoung.me/oauth/github"
         guard let url = URL(string: urlString)  else { return }
         guard let canOpenURL = delegate?.canOpenURL(url) else { return }
         guard canOpenURL else { return }
-        self.completionHandler = requestHandler
+        self.githubLoginCompletionHandler = requestHandler
         delegate?.open(url)
     }
 }

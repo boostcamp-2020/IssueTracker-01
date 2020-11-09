@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Codable, Hashable {
     let userID, profileURL: String
 
     enum CodingKeys: String, CodingKey {

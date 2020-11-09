@@ -10,9 +10,13 @@ import UIKit
 class IssueViewController: UIViewController {
     private lazy var detailViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.detail)
     private lazy var filterViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.filter)
-    
     private lazy var dataSource = makeDataSource()
-    private var issueListViewModel = IssueListViewModel()
+    
+    var viewModel: IssueViewModel? {
+        didSet {
+            viewModel?.downloadData()
+        }
+    }
     
     @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var filterButton: UIButton?
@@ -24,14 +28,8 @@ class IssueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureCell()
+        registerCell()
         configureFlowLayout()
-        applySnapshot()
-    }
-    
-    func downloadViewModel() {
-        self.issueListViewModel.delegate = self
-        self.issueListViewModel.download()
     }
     
     @IBAction func clickEditButton(_ sender: UIButton) {
@@ -76,7 +74,7 @@ extension IssueViewController: UICollectionViewDelegate {
         collectionView?.allowsMultipleSelectionDuringEditing = true
     }
     
-    private func configureCell() {
+    private func registerCell() {
         let nibName = UINib(nibName: ViewID.cell, bundle: nil)
         collectionView?.register(nibName, forCellWithReuseIdentifier: ViewID.cell)
     }
@@ -114,33 +112,26 @@ extension IssueViewController: UICollectionViewDelegate {
 }
 
 // MARK: - UICollectionViewDiffableDataSource
-extension IssueViewController: SnapshotApplicable {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueViewModel>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, IssueViewModel>
+extension IssueViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueCellViewModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, IssueCellViewModel>
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, viewModel) -> IssueCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
-            self.binding(cell: listCell, issueViewModel: viewModel)
+            guard let issueViewModel = self?.viewModel?.issueCellViewModels[indexPath.row] else { return listCell }
+            listCell.configureCell(issueViewModel: issueViewModel)
             return listCell
         })
     }
     
     func applySnapshot(animatingDifferences: Bool = true) {
+        guard let viewModel = viewModel else { return }
         var snapshot = Snapshot()
         snapshot.appendSections([0])
-        snapshot.appendItems(issueListViewModel.items, toSection: 0)
+        snapshot.appendItems(viewModel.issueCellViewModels, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-    }
-    
-    private func binding(cell: IssueCell, issueViewModel: IssueViewModel) {
-        cell.issueTitle?.text = issueViewModel.title
-        cell.milestoneTitle?.text = issueViewModel.milestoneTitle?.title
-        issueViewModel.configureLabel()
-        guard let stackView = cell.badgeStackView else { return }
-        issueViewModel.configureLabelStackView(stackView: stackView)
-        
     }
 }

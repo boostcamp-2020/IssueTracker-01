@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Issue: Codable {
+struct Issue: Codable, Hashable {
     let title: String
     let issueID: Int
     let createdAt: String
@@ -27,5 +27,8 @@ struct Issue: Codable {
         case milestoneTitle = "MileStone"
         case comments = "Comments"
     }
+    
+    static func == (lhs: Issue, rhs: Issue) -> Bool {
+        lhs.issueID == rhs.issueID
+    }
 }
-

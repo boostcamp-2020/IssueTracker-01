@@ -7,16 +7,6 @@
 
 import Foundation
 
-struct Label: Codable {
+struct Label: Codable, Hashable {
     let labelName, color: String
-}
-
-struct IssueLabel: Codable {
-    let labelID: Int
-    let label: Label
-
-    enum CodingKeys: String, CodingKey {
-        case labelID = "id"
-        case label = "Label"
-    }
 }

@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Milestone: Codable {
+struct Milestone: Codable, Hashable {
     let title: String
 }

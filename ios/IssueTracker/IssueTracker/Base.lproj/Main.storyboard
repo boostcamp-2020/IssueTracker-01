@@ -325,12 +325,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="필터 선택" largeTitleDisplayMode="always" id="isE-8H-fpJ">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="MId-KL-uuo">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MId-KL-uuo">
                             <connections>
                                 <action selector="clickExit:" destination="oCi-36-Ezd" id="a9z-CI-R7c"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="4Kn-6L-Hpr"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="4Kn-6L-Hpr"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -504,12 +504,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="새 이슈" id="dGU-A5-d4c">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="iyo-C7-Il5">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="iyo-C7-Il5">
                             <connections>
                                 <action selector="clickExit:" destination="fOJ-ao-Iq0" id="ITZ-dn-r2x"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.up" catalog="system" style="plain" id="8Nk-60-O2i"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.up" catalog="system" id="8Nk-60-O2i"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnC-aV-8eB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

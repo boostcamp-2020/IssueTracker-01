@@ -79,6 +79,6 @@ extension SceneDelegate {
         guard url.absoluteString.starts(with: "issuetracker://") else { return }
         guard let token = url.absoluteString.split(separator: "/").last.map({ String($0) }) else { return }
         IssueTrackerGithubLoginManager.shared.token = token
-        IssueTrackerGithubLoginManager.shared.completionHandler?()
+        IssueTrackerGithubLoginManager.shared.githubLoginCompletionHandler?()
     }
 }
