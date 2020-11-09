@@ -12,6 +12,8 @@ class CommentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var commentDateLabel: UILabel!
-    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var commentLabel: UILabel!
+    
+    
     
 }

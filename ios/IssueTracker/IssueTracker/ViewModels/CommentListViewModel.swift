@@ -8,14 +8,14 @@
 import UIKit
 
 class CommentListViewModel {
-    var items = [Comment]()
+    var items = [CommentViewModel]()
     weak var delegate: SnapshotApplicable?
     
     func download() {
         NetworkManager().downloadCommentList { [weak self] result in
             switch result {
             case .success(let issue):
-                self?.items = issue.comments
+                self?.items = issue.comments.map { CommentViewModel(comment: $0) }
                 DispatchQueue.main.async {
                     self?.delegate?.applySnapshot(animatingDifferences: true)
                 }
