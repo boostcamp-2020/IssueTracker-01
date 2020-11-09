@@ -66,7 +66,8 @@ extension IssueViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard !isEditing else { return }
-        guard let detail = detailViewController else { return }
+        guard let detail = detailViewController as? IssueDetailViewController else { return }
+//        detail.downloadViewModel(issueID: 1)  값 넘겨주는 동작 필요
         navigationController?.pushViewController(detail, animated: true)
     }
     
@@ -102,7 +103,7 @@ extension IssueViewController: UICollectionViewDelegate {
             addButton?.isHidden = false
         }
         
-        collectionView?.reloadData()
+        self.applySnapshot()
     }
     
     private func selectAllCell() {

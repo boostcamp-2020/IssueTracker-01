@@ -22,7 +22,7 @@ struct Issue: Codable {
     let createdAt: String
     let isOpen: Int
     let userAuthor, user: User?
-    let issueLabels: [IssueLabel]
+    let issueLabels: [IssueLabel]?
     let milestoneTitle: MileStone?
     let comments: [Comment]
 
@@ -40,21 +40,31 @@ struct Issue: Codable {
 
 struct Comment: Codable {
     let commentID: Int
-    let userID: String
+    let userID: String?
+    let content: String?
+    let createdAt: String?
+    let user: User?
 
     enum CodingKeys: String, CodingKey {
         case commentID = "commentId"
         case userID = "userId"
+        case content
+        case createdAt
+        case user = "User"
     }
 }
 
 struct IssueLabel: Codable {
     let labelID: Int
-    let label: Label
+    let label: Label?
+    let issueId: Int?
+    let name: String?
 
     enum CodingKeys: String, CodingKey {
         case labelID = "id"
         case label = "Label"
+        case issueId
+        case name
     }
 }
 
@@ -73,4 +83,16 @@ struct User: Codable {
         case userID = "userId"
         case profileURL = "profile_url"
     }
+}
+
+extension Comment: Hashable {
+    static func == (lhs: Comment, rhs: Comment) -> Bool {
+        lhs.commentID == rhs.commentID
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(commentID)
+    }
+    
+    
 }

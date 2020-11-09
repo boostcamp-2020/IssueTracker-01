@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,9 +28,12 @@
 		0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB84C932549308C000B6651 /* GithubLoginManager.swift */; };
 		0DD6D43F2553BF6B0083D352 /* IssueAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD6D43E2553BF6B0083D352 /* IssueAddViewController.swift */; };
 		0DD6D4622553CDBA0083D352 /* IssueFilterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD6D4602553CDBA0083D352 /* IssueFilterHeader.swift */; };
-		1D41EF98D8AD5662DAF8E5E8 /* libPods-IssueTracker-IssueTrackerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64833F0ACC622329624F531 /* libPods-IssueTracker-IssueTrackerUITests.a */; };
-		2A3273415820EBEE918C6BBB /* libPods-IssueTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7652936AE065428E1110A3 /* libPods-IssueTrackerTests.a */; };
-		5C6DB9C31F7429A6C6E6C11E /* libPods-IssueTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E034FD863700386FD8006D2D /* libPods-IssueTracker.a */; };
+		2B3D022A903AE303F996D7BC /* libPods-IssueTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A852DE7971E87431BDB3D9A /* libPods-IssueTrackerTests.a */; };
+		70F3FA5C3C096C16DBF8C003 /* libPods-IssueTracker-IssueTrackerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CDC2B04FC8A9344D260530 /* libPods-IssueTracker-IssueTrackerUITests.a */; };
+		AD7ED7DEA5AA4140102359BE /* libPods-IssueTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3B86C1272A199E7EC96E12 /* libPods-IssueTracker.a */; };
+		CFE493B22557BA4100BE8F3E /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */; };
+		CFE493BD2557C4CB00BE8F3E /* CommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */; };
+		CFE493C22557C4D900BE8F3E /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */; };
 		DE546B1925527A51002B1AA6 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE546B1825527A51002B1AA6 /* IssueViewModel.swift */; };
 		DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */; };
 		DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8C6E1F255103C800CAEC4E /* Issue.swift */; };
@@ -87,10 +90,14 @@
 		0DB84C932549308C000B6651 /* GithubLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManager.swift; sourceTree = "<group>"; };
 		0DD6D43E2553BF6B0083D352 /* IssueAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddViewController.swift; sourceTree = "<group>"; };
 		0DD6D4602553CDBA0083D352 /* IssueFilterHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterHeader.swift; sourceTree = "<group>"; };
-		4A7652936AE065428E1110A3 /* libPods-IssueTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33CDC2B04FC8A9344D260530 /* libPods-IssueTracker-IssueTrackerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker-IssueTrackerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB2F18A4D0EF2AA5045315E /* Pods-IssueTracker-IssueTrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
-		A64833F0ACC622329624F531 /* libPods-IssueTracker-IssueTrackerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker-IssueTrackerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A852DE7971E87431BDB3D9A /* libPods-IssueTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7A463B519574E490A4CDEF /* Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
+		CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListViewModel.swift; sourceTree = "<group>"; };
+		CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		DC3B86C1272A199E7EC96E12 /* libPods-IssueTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE546B1825527A51002B1AA6 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexColor.swift"; sourceTree = "<group>"; };
 		DE8C6E1F255103C800CAEC4E /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
@@ -99,7 +106,6 @@
 		DECEB65B254FE8F00004960A /* LabelBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBadge.swift; sourceTree = "<group>"; };
 		DECEB679254FF7C70004960A /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		DECEB67A254FF7C70004960A /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
-		E034FD863700386FD8006D2D /* libPods-IssueTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A338802E0FAC5F54ABF501 /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		E874F56191945209810F25EC /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F223843C7962E1826CC6ACA2 /* Pods-IssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,7 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C6DB9C31F7429A6C6E6C11E /* libPods-IssueTracker.a in Frameworks */,
+				AD7ED7DEA5AA4140102359BE /* libPods-IssueTracker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A3273415820EBEE918C6BBB /* libPods-IssueTrackerTests.a in Frameworks */,
+				2B3D022A903AE303F996D7BC /* libPods-IssueTrackerTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D41EF98D8AD5662DAF8E5E8 /* libPods-IssueTracker-IssueTrackerUITests.a in Frameworks */,
+				70F3FA5C3C096C16DBF8C003 /* libPods-IssueTracker-IssueTrackerUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +142,7 @@
 		0D356E072547E796008F2704 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFE493B02557BA2900BE8F3E /* Comment */,
 				DEF43B56254FDE5000F93A91 /* Issue */,
 				DEF43B78254FE3FF00F93A91 /* Label */,
 				0D356E022547E790008F2704 /* UIView+IBInspectable.swift */,
@@ -257,11 +264,21 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CFE493B02557BA2900BE8F3E /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		DE8C6E302551197000CAEC4E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				DE8C6E312551198100CAEC4E /* IssueListViewModel.swift */,
 				DE546B1825527A51002B1AA6 /* IssueViewModel.swift */,
+				CFE493BC2557C4CB00BE8F3E /* CommentListViewModel.swift */,
+				CFE493C12557C4D900BE8F3E /* CommentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -288,9 +305,9 @@
 		ECE57AEDEDB89D434598B805 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E034FD863700386FD8006D2D /* libPods-IssueTracker.a */,
-				A64833F0ACC622329624F531 /* libPods-IssueTracker-IssueTrackerUITests.a */,
-				4A7652936AE065428E1110A3 /* libPods-IssueTrackerTests.a */,
+				DC3B86C1272A199E7EC96E12 /* libPods-IssueTracker.a */,
+				33CDC2B04FC8A9344D260530 /* libPods-IssueTracker-IssueTrackerUITests.a */,
+				7A852DE7971E87431BDB3D9A /* libPods-IssueTrackerTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -518,6 +535,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFE493C22557C4D900BE8F3E /* CommentViewModel.swift in Sources */,
 				0DA6EDE22547D67C009EA88F /* LoginViewController.swift in Sources */,
 				0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */,
 				0D77BF5C255277040056E9E5 /* IssueFilterMainCell.swift in Sources */,
@@ -531,6 +549,7 @@
 				0D8643BE255130C3007747E5 /* IssueDetailViewController.swift in Sources */,
 				0DA6EDE02547D67C009EA88F /* SceneDelegate.swift in Sources */,
 				0D735DDE25526EF80040AAC4 /* IssueFilterViewController.swift in Sources */,
+				CFE493B22557BA4100BE8F3E /* CommentCollectionViewCell.swift in Sources */,
 				DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */,
 				0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */,
 				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,
@@ -538,6 +557,7 @@
 				DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */,
 				0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */,
 				0D13E93125590EC0000CA6BC /* IssueBottomSheetViewController.swift in Sources */,
+				CFE493BD2557C4CB00BE8F3E /* CommentListViewModel.swift in Sources */,
 				DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
