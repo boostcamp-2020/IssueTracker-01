@@ -21,9 +21,9 @@ const StyledButton = styled.button`
 
 const Button = ({ text, onClick }) => {
   return (
-    <buttonDiv>
+    <ButtonDiv>
       <StyledButton onClick={onClick}>{text}</StyledButton>
-    </buttonDiv>
+    </ButtonDiv>
   );
 };
 
