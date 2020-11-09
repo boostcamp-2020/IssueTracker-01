@@ -19,7 +19,7 @@ const StyledButton = styled.button`
   border-radius: 6px;
 `;
 
-const Button = ({ text, onClick }) => {
+const GreenButton = ({ text, onClick }) => {
   return (
     <ButtonDiv>
       <StyledButton onClick={onClick}>{text}</StyledButton>
@@ -27,4 +27,4 @@ const Button = ({ text, onClick }) => {
   );
 };
 
-export default Button;
+export default GreenButton;

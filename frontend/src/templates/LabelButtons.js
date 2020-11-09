@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TabButton from '@components/TabButton';
-import Button from '@components/Button';
+import GreenButton from '@components/GreenButton';
 
 const FlexDiv = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const LabelButtons = () => {
   return (
     <FlexDiv>
       <TabButton />
-      <Button text={'New label'} />
+      <GreenButton text={'New label'} />
     </FlexDiv>
   );
 };

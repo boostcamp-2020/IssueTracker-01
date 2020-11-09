@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from './Button';
+import GreenButton from './GreenButton';
 import WhiteButton from './WhiteButton';
 
 const EditForm = styled.form`
@@ -63,7 +63,7 @@ const LabelEdit = () => {
       </GroupDiv>
       <GroupEndDv width={'25%'}>
         <WhiteButton text="Cancel" />
-        <Button text="Save changes" />
+        <GreenButton text="Save changes" />
       </GroupEndDv>
     </EditForm>
   );
