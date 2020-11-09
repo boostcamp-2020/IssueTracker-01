@@ -35,8 +35,8 @@ class NetworkManager {
         }
     }
     
-    func downloadCommentList(completion: @escaping (Result<Issue>) -> Void) {
-        let url = "http://api.hoyoung.me/api/issue" //FIXME: 이슈 ID에 따른 url 변경 필요
+    func downloadCommentList(issueID: Int, completion: @escaping (Result<Issue>) -> Void) {
+        let url = "http://api.hoyoung.me/api/issue/detailIssue/" + "\(issueID)"
         let cookieProps = [
             HTTPCookiePropertyKey.domain: "api.hoyoung.me",
             HTTPCookiePropertyKey.path: "/",

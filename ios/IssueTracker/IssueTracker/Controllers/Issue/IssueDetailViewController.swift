@@ -16,85 +16,12 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
-        
-        downloadtest()
-//        downloadViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-    func downloadtest() {
-        let jsonString = """
-        {
-           "issueId": 1,
-           "title": "test",
-           "isOpen": 1,
-           "createdAt": "2020-11-03T12:39:18.000Z",
-           "User": {
-               "userId": "sangw3433",
-               "profile_url": "https://avatars2.githubusercontent.com/u/66261552?v=4"
-           },
-           "IssueLabels": [
-               {
-                   "id": 1,
-                   "Label": {
-                       "labelName": "frontend",
-                       "color": "red"
-                   }
-               },
-               {
-                   "id": 2,
-                   "Label": {
-                       "labelName": "backend",
-                       "color": "blue"
-                   }
-               }
-           ],
-           "MileStone": {
-               "title": "week1",
-               "Issues": [
-                   {
-                       "isOpen": 1
-                   },
-                   {
-                       "isOpen": 1
-                   }
-               ]
-           },
-           "Comments": [
-               {
-                   "commentId": 1,
-                   "content": "gooooood",
-                   "createdAt": "2020-11-03T12:42:51.000Z",
-                   "User": {
-                       "userId": "sangw3433",
-                       "profile_url": "https://avatars2.githubusercontent.com/u/66261552?v=4"
-                   }
-               },
-               {
-                   "commentId": 2,
-                   "content": "test gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest gooooddatest goooodda",
-                   "createdAt": "2020-11-03T12:44:06.000Z",
-                   "User": {
-                       "userId": "jsangwoo",
-                       "profile_url": "https://avatars3.githubusercontent.com/u/56758228?v=4"
-                   }
-               }
-           ]
-        }
-        """
-        
-        let jsonData = jsonString.data(using: .utf8)!
-        let issue = try? JSONDecoder().decode(Issue.self, from: jsonData)
-        self.commentListViewModel.items = issue?.comments.map { CommentViewModel(comment: $0) } ?? []
-        self.applySnapshot()
-    }
-    
 }
 
 extension IssueDetailViewController {
@@ -136,9 +63,9 @@ extension IssueDetailViewController {
 }
 
 extension IssueDetailViewController: SnapshotApplicable {
-    func downloadViewModel() {
+    func downloadViewModel(issueID: Int) {
         self.commentListViewModel.delegate = self
-        self.commentListViewModel.download()
+        self.commentListViewModel.download(issueID: issueID)
 
     }
 }

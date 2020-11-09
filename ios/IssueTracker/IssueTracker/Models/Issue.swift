@@ -22,7 +22,7 @@ struct Issue: Codable {
     let createdAt: String
     let isOpen: Int
     let userAuthor, user: User?
-    let issueLabels: [IssueLabel]
+    let issueLabels: [IssueLabel]?
     let milestoneTitle: MileStone?
     let comments: [Comment]
 
@@ -56,11 +56,15 @@ struct Comment: Codable {
 
 struct IssueLabel: Codable {
     let labelID: Int
-    let label: Label
+    let label: Label?
+    let issueId: Int?
+    let name: String?
 
     enum CodingKeys: String, CodingKey {
         case labelID = "id"
         case label = "Label"
+        case issueId
+        case name
     }
 }
 

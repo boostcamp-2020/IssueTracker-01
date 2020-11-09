@@ -11,8 +11,8 @@ class CommentListViewModel {
     var items = [CommentViewModel]()
     weak var delegate: SnapshotApplicable?
     
-    func download() {
-        NetworkManager().downloadCommentList { [weak self] result in
+    func download(issueID: Int) {
+        NetworkManager().downloadCommentList(issueID: issueID ) { [weak self] result in
             switch result {
             case .success(let issue):
                 self?.items = issue.comments.map { CommentViewModel(comment: $0) }

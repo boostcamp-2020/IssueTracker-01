@@ -11,7 +11,7 @@ class IssueViewModel {
     var issueID: Int
     var title: String
     var milestoneTitle: MileStone?
-    var issueLabels: [IssueLabel]
+    var issueLabels: [IssueLabel]?
     var labelBadges = [LabelBadge?]()
     
     init(issue: Issue) {
@@ -22,8 +22,12 @@ class IssueViewModel {
     }
     
     func configureLabel() {
-        for label in issueLabels {
-            labelBadges.append(LabelBadge(text: label.label.labelName, colorCode: label.label.color))
+        guard let labels = issueLabels else { return }
+        for label in labels {
+            guard let text = label.label?.labelName else { continue }
+            guard let code = label.label?.color else { continue }
+            let badge = LabelBadge(text: text, colorCode: code)
+            labelBadges.append(badge)
         }
     }
     
