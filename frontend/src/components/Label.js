@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import LabelEdit from './LabelEdit';
 
 const LabelDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
   padding: 16px;
   border: 1px solid #eaecef;
   border-top: 0;
@@ -43,19 +42,27 @@ const WidthDiv = styled.div`
   width: ${(props) => props.width};
 `;
 
+const LabelInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Label = ({ item }) => {
   return (
     <LabelDiv>
-      <WidthDiv width={'25%'}>
-        <PreviewLabel color={item.color}>{item.labelName}</PreviewLabel>
-      </WidthDiv>
-      <WidthDiv width={'58.33333%'}>
-        <Description>{item.description}</Description>
-      </WidthDiv>
-      <ButtonDiv>
-        <Button>Edit</Button>
-        <Button>Delete</Button>
-      </ButtonDiv>
+      <LabelInfo>
+        <WidthDiv width={'25%'}>
+          <PreviewLabel color={item.color}>{item.labelName}</PreviewLabel>
+        </WidthDiv>
+        <WidthDiv width={'58.33333%'}>
+          <Description>{item.description}</Description>
+        </WidthDiv>
+        <ButtonDiv>
+          <Button>Edit</Button>
+          <Button>Delete</Button>
+        </ButtonDiv>
+      </LabelInfo>
+      <LabelEdit />
     </LabelDiv>
   );
 };
