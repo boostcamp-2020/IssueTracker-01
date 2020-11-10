@@ -28,7 +28,7 @@ struct Issue: Codable, Hashable {
         case comments = "Comments"
     }
     
-    init(title: String, user: User? = nil, label: [IssueLabel]? = nil, milestoneTitle: Milestone? = nil) {
+    init(title: String, user: User? = nil, label: [IssueLabel]? = [], milestoneTitle: Milestone? = nil) {
         self.title = title
         self.issueID = nil
         self.createdAt = nil
