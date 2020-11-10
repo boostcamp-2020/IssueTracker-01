@@ -21,4 +21,8 @@ class IssueAddViewController: UIViewController {
     @IBAction func clickExit(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func addIssue(_ sender: Any) {
+        
+    }
 }
