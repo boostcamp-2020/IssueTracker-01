@@ -809,19 +809,122 @@
         <!--마일스톤-->
         <scene sceneID="wWm-Is-DiK">
             <objects>
-                <viewController id="qJh-3V-oNe" sceneMemberID="viewController">
+                <viewController id="qJh-3V-oNe" customClass="MilestoneViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UEM-dW-Exe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="emX-pN-7Uq">
+                                <rect key="frame" x="0.0" y="45" width="375" height="573"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xhy-Ie-CRg">
+                                    <size key="itemSize" width="375" height="92"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MilestoneCell" id="2Cg-ru-Oq5" customClass="MilestoneCell" customModule="IssueTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dIl-zd-PqK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTt-xZ-NBv">
+                                                    <rect key="frame" x="12" y="15" width="73" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="separatorColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" systemColor="separatorColor"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이번 배포를 위한 스프린트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndE-6V-KTt">
+                                                    <rect key="frame" x="12" y="51" width="145" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 opened" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpl-XC-wzM">
+                                                    <rect key="frame" x="306" y="50" width="59" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="64%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLJ-qd-Og9">
+                                                    <rect key="frame" x="336.5" y="15" width="28.5" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 closed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUU-kP-vEE">
+                                                    <rect key="frame" x="317" y="63" width="48" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020년 6월 19일까지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1Q-h8-wHh">
+                                                    <rect key="frame" x="105" y="19" width="101" height="13.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="j1Q-h8-wHh" firstAttribute="centerY" secondItem="CTt-xZ-NBv" secondAttribute="centerY" id="81g-Oq-MzD"/>
+                                                <constraint firstItem="j1Q-h8-wHh" firstAttribute="leading" secondItem="CTt-xZ-NBv" secondAttribute="trailing" constant="20" id="9Gl-lC-LvA"/>
+                                                <constraint firstItem="Kpl-XC-wzM" firstAttribute="top" secondItem="QLJ-qd-Og9" secondAttribute="bottom" constant="19" id="C4L-Ny-amf"/>
+                                                <constraint firstAttribute="trailing" secondItem="QLJ-qd-Og9" secondAttribute="trailing" constant="10" id="D1z-Ik-9mo"/>
+                                                <constraint firstItem="Kpl-XC-wzM" firstAttribute="trailing" secondItem="QLJ-qd-Og9" secondAttribute="trailing" id="FMj-u1-JnF"/>
+                                                <constraint firstItem="tUU-kP-vEE" firstAttribute="trailing" secondItem="QLJ-qd-Og9" secondAttribute="trailing" id="HXI-Nr-sOW"/>
+                                                <constraint firstItem="tUU-kP-vEE" firstAttribute="top" secondItem="Kpl-XC-wzM" secondAttribute="bottom" constant="-2" id="Wry-2s-NqM"/>
+                                                <constraint firstItem="CTt-xZ-NBv" firstAttribute="leading" secondItem="dIl-zd-PqK" secondAttribute="leading" constant="12" id="kcV-9P-k1w"/>
+                                                <constraint firstItem="ndE-6V-KTt" firstAttribute="top" secondItem="CTt-xZ-NBv" secondAttribute="bottom" constant="15" id="mCc-44-FXS"/>
+                                                <constraint firstItem="ndE-6V-KTt" firstAttribute="leading" secondItem="CTt-xZ-NBv" secondAttribute="leading" id="mLO-sD-lIF"/>
+                                                <constraint firstItem="CTt-xZ-NBv" firstAttribute="top" secondItem="dIl-zd-PqK" secondAttribute="top" constant="15" id="oWP-yn-Dd3"/>
+                                                <constraint firstItem="QLJ-qd-Og9" firstAttribute="top" secondItem="dIl-zd-PqK" secondAttribute="top" constant="15" id="u9m-mn-7Vu"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="375" height="92"/>
+                                        <connections>
+                                            <outlet property="closedIssue" destination="tUU-kP-vEE" id="f1m-cZ-e8d"/>
+                                            <outlet property="dueDate" destination="j1Q-h8-wHh" id="Kjk-w7-88j"/>
+                                            <outlet property="milestoneDescription" destination="ndE-6V-KTt" id="jfl-yf-S5E"/>
+                                            <outlet property="milestoneTitle" destination="CTt-xZ-NBv" id="J9L-Qj-ymH"/>
+                                            <outlet property="openedIssue" destination="Kpl-XC-wzM" id="Dih-HB-I7u"/>
+                                            <outlet property="percentage" destination="QLJ-qd-Og9" id="sW6-SG-fxe"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="v0V-Gd-Tyo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="emX-pN-7Uq" firstAttribute="leading" secondItem="v0V-Gd-Tyo" secondAttribute="leading" id="RGU-1j-16W"/>
+                            <constraint firstItem="v0V-Gd-Tyo" firstAttribute="bottom" secondItem="emX-pN-7Uq" secondAttribute="bottom" id="b6J-Nt-LTD"/>
+                            <constraint firstItem="v0V-Gd-Tyo" firstAttribute="trailing" secondItem="emX-pN-7Uq" secondAttribute="trailing" id="sSb-7X-FVf"/>
+                            <constraint firstItem="emX-pN-7Uq" firstAttribute="top" secondItem="v0V-Gd-Tyo" secondAttribute="top" constant="1" id="zQ4-0S-x7X"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="마일스톤" image="3.circle.fill" catalog="system" id="A0h-pM-FBQ"/>
                     <navigationItem key="navigationItem" title="마일스톤" id="OsM-Fb-ccI"/>
+                    <connections>
+                        <outlet property="collectionView" destination="emX-pN-7Uq" id="8OJ-5c-RIK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iW3-n8-jj7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2337" y="924"/>
+            <point key="canvasLocation" x="2336.8000000000002" y="923.38830584707648"/>
         </scene>
         <!--Item-->
         <scene sceneID="5SU-Zr-uDd">
