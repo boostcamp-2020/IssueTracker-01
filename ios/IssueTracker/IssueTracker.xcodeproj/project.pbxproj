@@ -37,7 +37,7 @@
 		2B3D022A903AE303F996D7BC /* libPods-IssueTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A852DE7971E87431BDB3D9A /* libPods-IssueTrackerTests.a */; };
 		70F3FA5C3C096C16DBF8C003 /* libPods-IssueTracker-IssueTrackerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CDC2B04FC8A9344D260530 /* libPods-IssueTracker-IssueTrackerUITests.a */; };
 		AD7ED7DEA5AA4140102359BE /* libPods-IssueTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3B86C1272A199E7EC96E12 /* libPods-IssueTracker.a */; };
-		CFE493B22557BA4100BE8F3E /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */; };
+		CFE493B22557BA4100BE8F3E /* IssueCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493B12557BA4100BE8F3E /* IssueCommentCell.swift */; };
 		CFE493BD2557C4CB00BE8F3E /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493BC2557C4CB00BE8F3E /* CommentViewModel.swift */; };
 		CFE493C22557C4D900BE8F3E /* CommentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE493C12557C4D900BE8F3E /* CommentCellViewModel.swift */; };
 		DE546B1925527A51002B1AA6 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE546B1825527A51002B1AA6 /* IssueViewModel.swift */; };
@@ -105,7 +105,7 @@
 		5EB2F18A4D0EF2AA5045315E /* Pods-IssueTracker-IssueTrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7A852DE7971E87431BDB3D9A /* libPods-IssueTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7A463B519574E490A4CDEF /* Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker-IssueTrackerUITests/Pods-IssueTracker-IssueTrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
+		CFE493B12557BA4100BE8F3E /* IssueCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentCell.swift; sourceTree = "<group>"; };
 		CFE493BC2557C4CB00BE8F3E /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		CFE493C12557C4D900BE8F3E /* CommentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellViewModel.swift; sourceTree = "<group>"; };
 		DC3B86C1272A199E7EC96E12 /* libPods-IssueTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,7 +152,6 @@
 		0D356E072547E796008F2704 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CFE493B02557BA2900BE8F3E /* Comment */,
 				DEF43B56254FDE5000F93A91 /* Issue */,
 				DEF43B78254FE3FF00F93A91 /* Label */,
 				0D356E022547E790008F2704 /* UIView+IBInspectable.swift */,
@@ -290,7 +289,7 @@
 		CFE493B02557BA2900BE8F3E /* Comment */ = {
 			isa = PBXGroup;
 			children = (
-				CFE493B12557BA4100BE8F3E /* CommentCollectionViewCell.swift */,
+				CFE493B12557BA4100BE8F3E /* IssueCommentCell.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -309,6 +308,7 @@
 		DEF43B56254FDE5000F93A91 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				CFE493B02557BA2900BE8F3E /* Comment */,
 				0D77BF59255276DF0056E9E5 /* Filter */,
 				DECEB679254FF7C70004960A /* IssueCell.swift */,
 				DECEB67A254FF7C70004960A /* IssueCell.xib */,
@@ -575,7 +575,7 @@
 				0D8643BE255130C3007747E5 /* IssueDetailViewController.swift in Sources */,
 				0DA6EDE02547D67C009EA88F /* SceneDelegate.swift in Sources */,
 				0D735DDE25526EF80040AAC4 /* IssueFilterViewController.swift in Sources */,
-				CFE493B22557BA4100BE8F3E /* CommentCollectionViewCell.swift in Sources */,
+				CFE493B22557BA4100BE8F3E /* IssueCommentCell.swift in Sources */,
 				DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */,
 				0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */,
 				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,

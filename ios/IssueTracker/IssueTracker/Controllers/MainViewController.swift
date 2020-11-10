@@ -43,8 +43,9 @@ extension MainViewController: LoginViewControllerDelegate {
             loginViewController.dismiss(animated: true, completion: nil)
             guard let navigation = self?.viewControllers?.first as? UINavigationController else { return }
             guard let issue = navigation.viewControllers.first as? IssueViewController else { return }
+            
             let issueViewModel = IssueViewModel(token: self?.githubLoginManager?.token, networkManager: self?.networkManager)
-            issueViewModel.itemSetHandler = { issue.applySnapshot() }
+            issueViewModel.issueChangeHandler = { issue.applySnapshot() }
             issue.viewModel = issueViewModel
         }
     }

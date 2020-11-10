@@ -26,9 +26,9 @@ extension IssueDetailViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, commentViewModel) -> CommentCollectionViewCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, commentViewModel) -> IssueCommentCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath)
-            guard let commentCell = cell as? CommentCollectionViewCell else { return CommentCollectionViewCell() }
+            guard let commentCell = cell as? IssueCommentCell else { return IssueCommentCell() }
             self.binding(cell: commentCell, viewModel: commentViewModel)
             commentCell.layoutIfNeeded()
             
@@ -49,10 +49,10 @@ extension IssueDetailViewController {
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
-    func binding(cell: CommentCollectionViewCell, viewModel: CommentCellViewModel) {
-        cell.userNameLabel.text = viewModel.user?.userID
-        cell.commentDateLabel.text = viewModel.configureDate()
+    func binding(cell: IssueCommentCell, viewModel: CommentCellViewModel) {
+        cell?.userNameLabel.text = viewModel.user?.userID
+        cell?.commentDateLabel.text = viewModel.configureDate()
         //        cell.userImageView = viewModel.user?.profileURL //ImageDownload 기능 필요
-        cell.commentLabel.text = viewModel.content
+        cell?.commentLabel.text = viewModel.content
     }
 }

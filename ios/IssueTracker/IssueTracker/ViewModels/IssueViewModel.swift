@@ -9,10 +9,10 @@ import UIKit
 
 class IssueViewModel {
     var issueCellViewModels = [IssueCellViewModel]() {
-        didSet { itemSetHandler?() }
+        didSet { issueChangeHandler?() }
     }
     
-    var itemSetHandler: (() -> Void)?
+    var issueChangeHandler: (() -> Void)?
     var token: String?
     var networkManager: NetworkManager?
     
