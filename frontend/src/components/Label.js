@@ -9,6 +9,7 @@ const LabelDiv = styled.div`
 `;
 
 const PreviewLabel = styled.span`
+  display: inline-block;
   background: ${(props) => props.color};
   color: ${(props) => (props.fontContrast ? '#fff' : '#000')};
   font-size: 12px;
@@ -81,6 +82,8 @@ const Label = ({ id, item }) => {
   const [hide, setHide] = useState(true);
   const [label, setLabel] = useState({ ...item, fontContrast: contrastColor(hexToRgb(item.color)) });
 
+  let debounce = undefined;
+
   const toggleHide = (e) => {
     e.preventDefault();
     setHide(!hide);
@@ -102,12 +105,23 @@ const Label = ({ id, item }) => {
     });
   };
 
+  const changeName = (e) => {
+    let { value } = e.target;
+    clearTimeout(debounce);
+    debounce = setTimeout(() => {
+      setLabel({
+        ...label,
+        labelName: value,
+      });
+    }, 500);
+  };
+
   return (
     <LabelDiv>
       <LabelInfo>
         <WidthDiv width={'25%'}>
           <PreviewLabel color={label.color} fontContrast={label.fontContrast}>
-            {label.labelName}
+            <span>{label.labelName}</span>
           </PreviewLabel>
         </WidthDiv>
         <WidthDiv width={'58.33333%'}>
@@ -118,7 +132,14 @@ const Label = ({ id, item }) => {
           <Button>Delete</Button>
         </ButtonDiv>
       </LabelInfo>
-      <LabelEdit id={id} hide={hide} onClick={toggleHide} label={label} changeColor={changeColor} />
+      <LabelEdit
+        id={id}
+        hide={hide}
+        onClick={toggleHide}
+        label={label}
+        changeColor={changeColor}
+        changeName={changeName}
+      />
     </LabelDiv>
   );
 };

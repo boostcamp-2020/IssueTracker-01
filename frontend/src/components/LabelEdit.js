@@ -60,7 +60,7 @@ const RefreshButton = styled.button`
   background-color: ${(props) => props.color};
 `;
 
-const LabelEdit = ({ id, hide, onClick, label, changeColor }) => {
+const LabelEdit = ({ id, hide, onClick, label, changeColor, changeName }) => {
   return (
     <EditForm hide={hide}>
       <GroupDiv width={'25%'}>
@@ -71,6 +71,7 @@ const LabelEdit = ({ id, hide, onClick, label, changeColor }) => {
           name="labelName"
           maxLength="50"
           defaultValue={label.labelName}
+          onChange={(e) => changeName(e)}
         />
       </GroupDiv>
       <GroupDiv width={'33.33333%'}>
