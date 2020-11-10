@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ListHead from '@components/ListHead';
 import LabelCount from '@components/LabelCount';
 import List from '@components/List';
-import test from '@contexts/label';
+import { useLabelState } from '@contexts/label';
 
 const SummaryDiv = styled.div`
   color: #586069;
@@ -11,13 +11,14 @@ const SummaryDiv = styled.div`
 `;
 
 const LabelList = () => {
+  const labels = useLabelState();
   return (
     <div>
       <ListHead>
         <LabelCount count={1} />
         <SummaryDiv>Sort</SummaryDiv>
       </ListHead>
-      <List items={test.data} />
+      <List items={labels} />
     </div>
   );
 };
