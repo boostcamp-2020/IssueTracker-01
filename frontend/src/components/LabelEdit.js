@@ -100,7 +100,7 @@ const LabelEdit = ({ id, hide, onClick, label, changeColor }) => {
         </FlexDiv>
       </GroupDiv>
       <GroupEndDv width={'25%'}>
-        <WhiteButton text="Cancel" onClick={onClick} />
+        <WhiteButton text="Cancel" onClick={(e) => onClick(e)} />
         <GreenButton text="Save changes" />
       </GroupEndDv>
     </EditForm>

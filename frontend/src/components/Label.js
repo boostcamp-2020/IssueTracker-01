@@ -81,7 +81,8 @@ const Label = ({ id, item }) => {
   const [hide, setHide] = useState(true);
   const [label, setLabel] = useState({ ...item, fontContrast: contrastColor(hexToRgb(item.color)) });
 
-  const toggleHide = () => {
+  const toggleHide = (e) => {
+    e.preventDefault();
     setHide(!hide);
   };
 
