@@ -10,6 +10,7 @@ import Alamofire
 
 protocol NetworkManager {
     func downloadIssues(token: String, completion: @escaping (Result<[Issue], Error>) -> Void)
+    func downloadLabels(token: String, completion: @escaping (Result<[Label], Error>) -> Void)
 }
 
 class IssueTrackerNetworkManager: NetworkManager {
