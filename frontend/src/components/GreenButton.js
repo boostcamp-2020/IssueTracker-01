@@ -19,10 +19,12 @@ const StyledButton = styled.button`
   border-radius: 6px;
 `;
 
-const GreenButton = ({ text, onClick }) => {
+const GreenButton = ({ type, text, onClick }) => {
   return (
     <ButtonDiv>
-      <StyledButton onClick={onClick}>{text}</StyledButton>
+      <StyledButton type={type || 'button'} onClick={onClick}>
+        {text}
+      </StyledButton>
     </ButtonDiv>
   );
 };
