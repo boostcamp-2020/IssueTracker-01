@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { GoMarkGithub } from "react-icons/go";
+import React from 'react';
+import styled from 'styled-components';
+import { GoMarkGithub } from 'react-icons/go';
 
 const GitHubLoginButton = styled.button`
   width: 100%;
@@ -26,10 +26,13 @@ const GitHubLoginButton = styled.button`
 `;
 
 const GitHubButton = () => {
+  const onClick = () => {
+    window.location.href = 'http://127.0.0.1:3000/oauth/github';
+  };
   return (
-    <GitHubLoginButton>
+    <GitHubLoginButton onClick={onClick}>
       <p>Sign in with GitHub&nbsp;</p>
-      <GoMarkGithub style={{ color: "black" }} />
+      <GoMarkGithub style={{ color: 'black' }} />
     </GitHubLoginButton>
   );
 };

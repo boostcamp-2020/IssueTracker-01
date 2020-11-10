@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import GitHubButton from "./GitHubButton";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import GitHubButton from './GitHubButton';
 
 const FormBox = styled.div`
   width: 400px;
@@ -34,12 +34,12 @@ const inputStyle = css`
   }
 `;
 const InputId = styled.input.attrs({
-  type: "text",
+  type: 'text',
 })`
   ${inputStyle}
 `;
 const InputPwd = styled.input.attrs({
-  type: "password",
+  type: 'password',
 })`
   ${inputStyle}
 `;
