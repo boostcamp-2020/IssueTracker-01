@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react';
+import Label from '@pages/Label';
+import { Route } from 'react-router-dom';
 
 const App = () => {
   return (
     <div>
-      <h1>Hello world</h1>
+      <Route path="/" exact={true}>
+        <div>hello World</div>
+      </Route>
+      <Route path="/label" component={Label} />
     </div>
   );
 };
