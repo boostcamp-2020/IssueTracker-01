@@ -8,6 +8,10 @@
 import UIKit
 
 class IssueDetailViewController: UIViewController {
+    private lazy var bottomSheetViewController: IssueBottomSheetViewController = {
+        guard let bottom = storyboard?.instantiateViewController(withIdentifier: ViewID.bottomView) as? IssueBottomSheetViewController else { return IssueBottomSheetViewController() }
+        return bottom
+    }()
     private lazy var dataSource = makeDataSource()
     
     @IBOutlet weak var collectionView: UICollectionView?
@@ -21,12 +25,24 @@ class IssueDetailViewController: UIViewController {
         configureFlowLayout()
         applySnapshot()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureBottomSheetView()
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
 }
 
 // MARK: - View identifier
 extension IssueDetailViewController {
     private struct ViewID {
         static let cell = String(describing: IssueCommentCell.self)
+        static let bottomView = String(describing: IssueBottomSheetViewController.self)
     }
 }
 
@@ -61,10 +77,10 @@ extension IssueDetailViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCommentCell else { return IssueCommentCell() }
             listCell.configureCell(viewModel: viewModel)
-//            let newSize = commentCell.commentLabel.sizeThatFits(CGSize(width: commentCell.commentLabel.frame.width, height: CGFloat.greatestFiniteMagnitude))
-//            
-//            cell.heightAnchor.constraint(equalToConstant: newSize.height + 76).isActive = true
-//            cell.widthAnchor.constraint(equalToConstant: self.view.frame.size.width).isActive = true
+            //            let newSize = commentCell.commentLabel.sizeThatFits(CGSize(width: commentCell.commentLabel.frame.width, height: CGFloat.greatestFiniteMagnitude))
+            //
+            //            cell.heightAnchor.constraint(equalToConstant: newSize.height + 76).isActive = true
+            //            cell.widthAnchor.constraint(equalToConstant: self.view.frame.size.width).isActive = true
             
             return listCell
         })
@@ -76,5 +92,18 @@ extension IssueDetailViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(viewModel.commentCellViewModels, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+}
+
+// MARK: - IssueBottomSheetViewController
+extension IssueDetailViewController {
+    func configureBottomSheetView() {
+        addChild(bottomSheetViewController)
+        view.addSubview(bottomSheetViewController.view)
+        bottomSheetViewController.didMove(toParent: self)
+        let height = view.frame.height
+        let width  = view.frame.width
+        let maxY = view.frame.maxY
+        bottomSheetViewController.view.frame = CGRect(x: 0, y: maxY, width: width, height: height)
     }
 }
