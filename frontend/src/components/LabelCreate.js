@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import GreenButton from './GreenButton';
 import WhiteButton from './WhiteButton';
 import SVG from './SVG';
+import { useLabelState, useLabelDispatch, createLabel } from '@contexts/label';
 
 const EditForm = styled.form`
   display: flex;
@@ -80,6 +81,22 @@ const BackgroundDiv = styled.div`
 `;
 
 const LabelCreate = ({ hide, onClick }) => {
+  const [label, setLabel] = useState({});
+  const dispatch = useLabelDispatch();
+
+  const setFormData = (e) => {
+    const { id, value } = e.target;
+    setLabel({
+      ...label,
+      [id]: value,
+    });
+  };
+
+  const fetchCreateLabel = (e) => {
+    e.preventDefault();
+    createLabel(dispatch, label);
+  };
+
   return (
     <BackgroundDiv hide={hide}>
       <PreviewLabel color="#ff0000">test</PreviewLabel>
@@ -88,11 +105,17 @@ const LabelCreate = ({ hide, onClick }) => {
           <InputLabel htmlFor="labelName" placeholder="Label Name">
             Label name
           </InputLabel>
-          <StyledInput type="text" id="labelName" name="labelName" maxLength="50" />
+          <StyledInput type="text" id="labelName" name="labelName" maxLength="50" onChange={(e) => setFormData(e)} />
         </GroupDiv>
         <GroupDiv width={'33.33333%'}>
           <InputLabel htmlFor="description">Description</InputLabel>
-          <StyledInput type="text" id="description" name="description" maxLength="100" />
+          <StyledInput
+            type="text"
+            id="description"
+            name="description"
+            maxLength="100"
+            onChange={(e) => setFormData(e)}
+          />
         </GroupDiv>
         <GroupDiv width={'16.66667%'}>
           <InputLabel htmlFor="color">Color</InputLabel>
@@ -100,12 +123,12 @@ const LabelCreate = ({ hide, onClick }) => {
             <RefreshButton>
               <SVG name="refreshButton" size="16" />{' '}
             </RefreshButton>
-            <StyledInput type="text" id="color" name="color" maxLength="7" />
+            <StyledInput type="text" id="color" name="color" maxLength="7" onChange={(e) => setFormData(e)} />
           </FlexDiv>
         </GroupDiv>
         <GroupEndDv width={'25%'}>
           <WhiteButton text="Cancel" onClick={(e) => onClick(e)} />
-          <GreenButton text="Create label" />
+          <GreenButton type="submit" text="Create label" onClick={(e) => fetchCreateLabel(e)} />
         </GroupEndDv>
       </EditForm>
     </BackgroundDiv>
