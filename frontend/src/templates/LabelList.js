@@ -18,7 +18,7 @@ const LabelList = () => {
         <LabelCount count={1} />
         <SummaryDiv>Sort</SummaryDiv>
       </ListHead>
-      <List items={labels} />
+      <List items={labels} keys={labels.map((label) => label.labelName)} />
     </div>
   );
 };

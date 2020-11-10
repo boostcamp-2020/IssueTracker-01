@@ -4,11 +4,11 @@ import Label from '@components/Label';
 
 const ListItem = styled.div``;
 
-const List = ({ items }) => {
+const List = ({ items, keys }) => {
   return (
     <div>
       {items.map((item, i) => (
-        <Label key={i} id={i} item={item} />
+        <Label key={Array.isArray(keys) && keys.length ? keys[i] : i} id={i} item={item} />
       ))}
     </div>
   );
