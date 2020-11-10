@@ -8,5 +8,13 @@
 import Foundation
 
 struct Label: Codable, Hashable {
-    let labelName, color: String
+    let labelName: String
+    let color: String
+    let description: String?
+    
+    init(labelName: String, color: String, description: String? = nil) {
+        self.labelName = labelName
+        self.color = color
+        self.description = description
+    }
 }
