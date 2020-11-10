@@ -66,7 +66,7 @@ extension IssueViewController: UICollectionViewDelegate {
         guard !isEditing else { return }
         guard let detail = detailViewController as? IssueDetailViewController else { return }
         guard let viewModel = viewModel else { return }
-        detail.viewModel = CommentViewModel(comments: viewModel.issueCellViewModels[indexPath.row].comments)
+        detail.viewModel = CommentViewModel(comments: viewModel.issueCellViewModels[indexPath.row].comments ?? [])
         navigationController?.pushViewController(detail, animated: true)
     }
     

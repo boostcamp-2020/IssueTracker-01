@@ -711,7 +711,11 @@
                                 <action selector="clickExit:" destination="fOJ-ao-Iq0" id="ITZ-dn-r2x"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.up" catalog="system" id="8Nk-60-O2i"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.up" catalog="system" style="plain" id="8Nk-60-O2i">
+                            <connections>
+                                <action selector="addIssue:" destination="fOJ-ao-Iq0" id="54z-0q-wkD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnC-aV-8eB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
