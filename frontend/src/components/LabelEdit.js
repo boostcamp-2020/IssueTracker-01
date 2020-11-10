@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GreenButton from './GreenButton';
 import WhiteButton from './WhiteButton';
+import SVG from './SVG';
 
 const EditForm = styled.form`
   display: flex;
@@ -46,6 +47,19 @@ const StyledInput = styled.input`
   outline: none;
 `;
 
+const FlexDiv = styled.div`
+  display: flex;
+`;
+
+const RefreshButton = styled.button`
+  width: 34px;
+  border-radius: 6px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  border: 0;
+  background-color: ${(props) => props.color};
+`;
+
 const LabelEdit = () => {
   return (
     <EditForm>
@@ -59,7 +73,12 @@ const LabelEdit = () => {
       </GroupDiv>
       <GroupDiv width={'16.66667%'}>
         <InputLabel htmlFor="color">Color</InputLabel>
-        <StyledInput type="text" id="color" name="color" maxLength="7" />
+        <FlexDiv>
+          <RefreshButton>
+            <SVG name="refreshButton" size="16" />{' '}
+          </RefreshButton>
+          <StyledInput type="text" id="color" name="color" maxLength="7" />
+        </FlexDiv>
       </GroupDiv>
       <GroupEndDv width={'25%'}>
         <WhiteButton text="Cancel" />
