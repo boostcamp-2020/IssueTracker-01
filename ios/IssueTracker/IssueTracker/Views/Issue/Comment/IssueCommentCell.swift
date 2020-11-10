@@ -12,4 +12,10 @@ class IssueCommentCell: UICollectionViewListCell {
     @IBOutlet weak var userNameLabel: UILabel?
     @IBOutlet weak var commentDateLabel: UILabel?
     @IBOutlet weak var commentLabel: UILabel?
+    
+    func configureCell(viewModel: CommentCellViewModel) {
+        userNameLabel?.text = viewModel.user?.userID
+        commentDateLabel?.text = viewModel.configureDate()
+        commentLabel?.text = viewModel.content
+    }
 }

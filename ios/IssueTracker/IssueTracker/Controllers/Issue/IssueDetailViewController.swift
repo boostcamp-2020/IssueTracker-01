@@ -14,8 +14,42 @@ class IssueDetailViewController: UIViewController {
     
     var viewModel: CommentViewModel? {
         didSet {
-            viewModel?.downloadData()
+            applySnapshot()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureCollectionView()
+        registerCell()
+        configureFlowLayout()
+    }
+}
+
+// MARK: - View identifier
+extension IssueDetailViewController {
+    private struct ViewID {
+        static let cell = String(describing: IssueCommentCell.self)
+    }
+}
+
+// MARK: - Configure CollectionView
+extension IssueDetailViewController: UICollectionViewDelegate {    
+    private func configureCollectionView() {
+        collectionView?.delegate = self
+        collectionView?.dataSource = dataSource
+        collectionView?.allowsMultipleSelectionDuringEditing = true
+    }
+    
+    private func registerCell() {
+        let nibName = UINib(nibName: ViewID.cell, bundle: nil)
+        collectionView?.register(nibName, forCellWithReuseIdentifier: ViewID.cell)
+    }
+    
+    private func configureFlowLayout() {
+        guard let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        layout.sectionHeadersPinToVisibleBounds = true
+        layout.itemSize.width = view.frame.width
     }
 }
 
@@ -26,18 +60,16 @@ extension IssueDetailViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, commentViewModel) -> IssueCommentCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath)
-            guard let commentCell = cell as? IssueCommentCell else { return IssueCommentCell() }
-            self.binding(cell: commentCell, viewModel: commentViewModel)
-            commentCell.layoutIfNeeded()
+        return DataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, viewModel) -> IssueCommentCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
+            guard let listCell = cell as? IssueCommentCell else { return IssueCommentCell() }
+            listCell.configureCell(viewModel: viewModel)
+//            let newSize = commentCell.commentLabel.sizeThatFits(CGSize(width: commentCell.commentLabel.frame.width, height: CGFloat.greatestFiniteMagnitude))
+//            
+//            cell.heightAnchor.constraint(equalToConstant: newSize.height + 76).isActive = true
+//            cell.widthAnchor.constraint(equalToConstant: self.view.frame.size.width).isActive = true
             
-            let newSize = commentCell.commentLabel.sizeThatFits(CGSize(width: commentCell.commentLabel.frame.width, height: CGFloat.greatestFiniteMagnitude))
-            
-            cell.heightAnchor.constraint(equalToConstant: newSize.height + 76).isActive = true
-            cell.widthAnchor.constraint(equalToConstant: self.view.frame.size.width).isActive = true
-            
-            return commentCell
+            return listCell
         })
     }
     
@@ -47,12 +79,5 @@ extension IssueDetailViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(viewModel.commentCellViewModels, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-    }
-    
-    func binding(cell: IssueCommentCell, viewModel: CommentCellViewModel) {
-        cell?.userNameLabel.text = viewModel.user?.userID
-        cell?.commentDateLabel.text = viewModel.configureDate()
-        //        cell.userImageView = viewModel.user?.profileURL //ImageDownload 기능 필요
-        cell?.commentLabel.text = viewModel.content
     }
 }

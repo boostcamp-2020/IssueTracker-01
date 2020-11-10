@@ -53,9 +53,9 @@ class IssueCell: UICollectionViewListCell {
         }
     }
     
-    func configureCell(issueViewModel: IssueCellViewModel) {
-        issueTitle?.text = issueViewModel.title
-        milestoneTitle?.text = issueViewModel.milestone?.title
-        configureLabelStackView(labelBadges: issueViewModel.labelBadges)
+    func configureCell(viewModel: IssueCellViewModel) {
+        issueTitle?.text = viewModel.title
+        milestoneTitle?.text = viewModel.milestone?.title
+        configureLabelStackView(labelBadges: viewModel.labelBadges)
     }
 }

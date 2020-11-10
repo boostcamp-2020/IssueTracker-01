@@ -65,7 +65,8 @@ extension IssueViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard !isEditing else { return }
         guard let detail = detailViewController as? IssueDetailViewController else { return }
-//        detail.downloadViewModel(issueID: 1)  값 넘겨주는 동작 필요
+        guard let viewModel = viewModel else { return }
+        detail.viewModel = CommentViewModel(comments: viewModel.issueCellViewModels[indexPath.row].comments)
         navigationController?.pushViewController(detail, animated: true)
     }
     
@@ -123,7 +124,7 @@ extension IssueViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
             guard let issueViewModel = self?.viewModel?.issueCellViewModels[indexPath.row] else { return listCell }
-            listCell.configureCell(issueViewModel: issueViewModel)
+            listCell.configureCell(viewModel: issueViewModel)
             return listCell
         })
     }
