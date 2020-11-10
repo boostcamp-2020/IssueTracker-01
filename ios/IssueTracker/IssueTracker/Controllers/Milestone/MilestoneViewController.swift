@@ -18,11 +18,11 @@ class MilestoneViewController: UIViewController {
         let networkManager = IssueTrackerNetworkManager.shared.self
         let dummyVM = MilestoneViewModel(token: IssueTrackerGithubLoginManager.shared.token ?? "", networkManager: networkManager)
         dummyVM.milestoneCellViewModels = [
-            MilestoneCellViewModel(milestone: Milestone(milestoneID: 0, title: "마일스톤1")),
-            MilestoneCellViewModel(milestone: Milestone(milestoneID: 1, title: "마일스톤2")),
-            MilestoneCellViewModel(milestone: Milestone(milestoneID: 2, title: "마일스톤3")),
-            MilestoneCellViewModel(milestone: Milestone(milestoneID: 3, title: "마일스톤4")),
-            MilestoneCellViewModel(milestone: Milestone(milestoneID: 4, title: "마일스톤5")),
+            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤1", dueDate: "20201111", description: "마일스톤설명1" )),
+            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤2", dueDate: "20201112", description: "마일스톤설명2")),
+            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤3", dueDate: "20201113", description: "마일스톤설명3")),
+            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤4", dueDate: "20201114", description: "마일스톤설명4" )),
+            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤5", dueDate: "20201115", description: "마일스톤설명5")),
             ]
         
         self.viewModel = dummyVM
