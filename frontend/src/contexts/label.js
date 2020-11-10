@@ -20,9 +20,21 @@ export const loadLabels = async (dispatch) => {
     console.log(err);
   }
 };
+
 export const createLabel = async (dispatch, label) => {
   try {
     const response = await axios.post('http://localhost:3000/api/label', label, {
+      withCredentials: true,
+    });
+    await loadLabels(dispatch);
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+export const updateLabel = async (dispatch, label) => {
+  try {
+    const response = await axios.patch('http://localhost:3000/api/label', label, {
       withCredentials: true,
     });
     await loadLabels(dispatch);

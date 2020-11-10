@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import GreenButton from './GreenButton';
 import WhiteButton from './WhiteButton';
 import SVG from './SVG';
+import { updateLabel, useLabelDispatch } from '@contexts/label';
 
 const EditForm = styled.form`
   display: ${(props) => (props.hide ? 'none' : 'flex')};
@@ -61,17 +62,37 @@ const RefreshButton = styled.button`
 `;
 
 const LabelEdit = ({ id, hide, onClick, label, changeColor, changeName }) => {
+  const [labelState, setLabel] = useState({ labelName: label.labelName });
+  const dispatch = useLabelDispatch();
+  const setFormData = (e) => {
+    const { name, value } = e.target;
+    setLabel({
+      ...labelState,
+      [name]: value,
+    });
+  };
+
+  const fetchUpdateLabel = (e) => {
+    e.preventDefault();
+    console.log(labelState);
+    updateLabel(dispatch, labelState);
+    onClick(e);
+  };
+
   return (
     <EditForm hide={hide}>
       <GroupDiv width={'25%'}>
-        <InputLabel htmlFor={`labelName-${id}`}>Label name</InputLabel>
+        <InputLabel htmlFor={`newName-${id}`}>Label name</InputLabel>
         <StyledInput
           type="text"
-          id={`labelName-${id}`}
-          name="labelName"
+          id={`newName-${id}`}
+          name="newName"
           maxLength="50"
           defaultValue={label.labelName}
-          onChange={(e) => changeName(e)}
+          onChange={(e) => {
+            changeName(e);
+            setFormData(e);
+          }}
         />
       </GroupDiv>
       <GroupDiv width={'33.33333%'}>
@@ -82,12 +103,19 @@ const LabelEdit = ({ id, hide, onClick, label, changeColor, changeName }) => {
           name="description"
           maxLength="100"
           defaultValue={label.description}
+          onChange={(e) => setFormData(e)}
         />
       </GroupDiv>
       <GroupDiv width={'16.66667%'}>
         <InputLabel htmlFor={`color-${id}`}>Color</InputLabel>
         <FlexDiv>
-          <RefreshButton color={label.color} onClick={(e) => changeColor(e)}>
+          <RefreshButton
+            color={label.color}
+            onClick={(e) => {
+              changeColor(e);
+              setFormData(e);
+            }}
+          >
             <SVG name="refreshButton" size="16" />{' '}
           </RefreshButton>
           <StyledInput
@@ -102,7 +130,7 @@ const LabelEdit = ({ id, hide, onClick, label, changeColor, changeName }) => {
       </GroupDiv>
       <GroupEndDv width={'25%'}>
         <WhiteButton text="Cancel" onClick={(e) => onClick(e)} />
-        <GreenButton text="Save changes" />
+        <GreenButton type="submit" text="Save changes" onClick={(e) => fetchUpdateLabel(e)} />
       </GroupEndDv>
     </EditForm>
   );
