@@ -4,13 +4,13 @@ import axios from 'axios';
 const labelReducer = (state, action) => {
   switch (action.type) {
     case 'LOAD':
-      return (state = action.data);
+      return [...action.data];
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
 };
 
-const loadLabels = async (dispatch) => {
+export const loadLabels = async (dispatch) => {
   try {
     const response = await axios.get('http://localhost:3000/api/label', {
       withCredentials: true,
@@ -18,6 +18,16 @@ const loadLabels = async (dispatch) => {
     dispatch({ type: 'LOAD', data: response.data.data });
   } catch (err) {
     console.log(err);
+  }
+};
+export const createLabel = async (dispatch, label) => {
+  try {
+    const response = await axios.post('http://localhost:3000/api/label', label, {
+      withCredentials: true,
+    });
+    await loadLabels(dispatch);
+  } catch (err) {
+    console.log(err.response);
   }
 };
 
