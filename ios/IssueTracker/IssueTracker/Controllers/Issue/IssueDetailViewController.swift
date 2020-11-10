@@ -12,17 +12,14 @@ class IssueDetailViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView?
     
-    var viewModel: CommentViewModel? {
-        didSet {
-            applySnapshot()
-        }
-    }
+    var viewModel: CommentViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         registerCell()
         configureFlowLayout()
+        applySnapshot()
     }
 }
 
