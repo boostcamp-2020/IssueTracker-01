@@ -71,6 +71,7 @@ const PreviewLabel = styled.span`
 `;
 
 const BackgroundDiv = styled.div`
+  ${(props) => (props.hide ? 'display: none;' : '')}
   padding: 16px;
   border: 1px solid #d1d5da;
   border-radius: 6px;
@@ -78,9 +79,9 @@ const BackgroundDiv = styled.div`
   margin-bottom: 16px;
 `;
 
-const LabelCreate = () => {
+const LabelCreate = ({ hide, onClick }) => {
   return (
-    <BackgroundDiv>
+    <BackgroundDiv hide={hide}>
       <PreviewLabel color="#ff0000">test</PreviewLabel>
       <EditForm>
         <GroupDiv width={'25%'}>
@@ -103,7 +104,7 @@ const LabelCreate = () => {
           </FlexDiv>
         </GroupDiv>
         <GroupEndDv width={'25%'}>
-          <WhiteButton text="Cancel" />
+          <WhiteButton text="Cancel" onClick={(e) => onClick(e)} />
           <GreenButton text="Create label" />
         </GroupEndDv>
       </EditForm>

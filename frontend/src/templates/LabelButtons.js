@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TabButton from '@components/TabButton';
 import GreenButton from '@components/GreenButton';
@@ -11,13 +11,18 @@ const FlexDiv = styled.div`
 `;
 
 const LabelButtons = () => {
+  const [hide, setHide] = useState(true);
+  const onClick = (e) => {
+    e.preventDefault();
+    setHide(!hide);
+  };
   return (
     <div>
       <FlexDiv>
         <TabButton />
-        <GreenButton text={'New label'} />
+        <GreenButton text={'New label'} onClick={(e) => onClick(e)} />
       </FlexDiv>
-      <LabelCreate />
+      <LabelCreate hide={hide} onClick={onClick} />
     </div>
   );
 };
