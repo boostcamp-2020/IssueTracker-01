@@ -735,25 +735,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Snz-So-AwR">
-                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
+                                <rect key="frame" x="0.0" y="45" width="375" height="573"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YfA-0r-rBk">
-                                    <size key="itemSize" width="375" height="86"/>
+                                    <size key="itemSize" width="375" height="80"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="LYf-a7-2YZ" customClass="LabelCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LabelCell" id="LYf-a7-2YZ" customClass="LabelCell" customModule="IssueTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="peX-ZI-lHe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Py-zV-D53">
                                                     <rect key="frame" x="15" y="15" width="345" height="25"/>
-                                                    <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="HOm-mb-nDX"/>
                                                     </constraints>
@@ -761,7 +760,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnd-1q-Boz">
                                                     <rect key="frame" x="15" y="48" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -773,7 +772,7 @@
                                                 <constraint firstItem="0Py-zV-D53" firstAttribute="top" secondItem="peX-ZI-lHe" secondAttribute="top" constant="15" id="bKd-Gw-h7x"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="375" height="86"/>
+                                        <size key="customSize" width="375" height="80"/>
                                         <connections>
                                             <outlet property="labelDescription" destination="fnd-1q-Boz" id="nqA-pW-iGY"/>
                                             <outlet property="wrapperView" destination="0Py-zV-D53" id="LSb-4K-ucS"/>
@@ -788,11 +787,20 @@
                             <constraint firstItem="xuG-Rs-mih" firstAttribute="trailing" secondItem="Snz-So-AwR" secondAttribute="trailing" id="Jt0-bD-q5N"/>
                             <constraint firstItem="Snz-So-AwR" firstAttribute="leading" secondItem="xuG-Rs-mih" secondAttribute="leading" id="bmg-rX-7Xt"/>
                             <constraint firstItem="Snz-So-AwR" firstAttribute="bottom" secondItem="xuG-Rs-mih" secondAttribute="bottom" id="vfe-gx-KM5"/>
-                            <constraint firstItem="Snz-So-AwR" firstAttribute="top" secondItem="xuG-Rs-mih" secondAttribute="top" id="xhB-ri-J3j"/>
+                            <constraint firstItem="Snz-So-AwR" firstAttribute="top" secondItem="xuG-Rs-mih" secondAttribute="top" constant="1" id="xhB-ri-J3j"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="레이블" image="2.circle.fill" catalog="system" id="SXB-BE-SFc"/>
-                    <navigationItem key="navigationItem" title="레이블" id="Ika-kH-Ix0"/>
+                    <navigationItem key="navigationItem" title="레이블" id="Ika-kH-Ix0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gCo-Hd-hXc">
+                            <connections>
+                                <action selector="addLabel:" destination="Hts-hU-iCV" id="FVP-o2-uBa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="Snz-So-AwR" id="2o0-Yb-gu6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPg-w2-I0H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1020,9 +1028,6 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
