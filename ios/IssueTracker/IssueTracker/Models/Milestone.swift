@@ -9,7 +9,7 @@ import Foundation
 
 struct Milestone: Codable, Hashable {
     let title: String?
-    let milestoneID: Int
+    let milestoneID: Int?
     
     enum CodingKeys: String, CodingKey {
         case title
