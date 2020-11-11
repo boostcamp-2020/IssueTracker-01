@@ -13,6 +13,7 @@ class IssueCellViewModel {
     let comments: [Comment]?
     let milestone: Milestone?
     let labelBadges: [LabelBadge]?
+    let assignee: User?
     
     init(issue: Issue) {
         issueID = issue.issueID
@@ -22,6 +23,7 @@ class IssueCellViewModel {
         labelBadges = issue.issueLabels?.map {
             LabelBadge(text: $0.label.labelName, colorCode: $0.label.color)
         }
+        assignee = issue.user
     }
 }
 

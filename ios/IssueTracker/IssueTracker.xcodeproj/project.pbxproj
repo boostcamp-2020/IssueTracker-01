@@ -44,6 +44,8 @@
 		DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */; };
 		DE8C6E20255103C800CAEC4E /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8C6E1F255103C800CAEC4E /* Issue.swift */; };
 		DE8C6E4325514FA200CAEC4E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8C6E4225514FA200CAEC4E /* NetworkManager.swift */; };
+		DE9B06B4255BB81F005E0B4B /* IssueEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9B06B3255BB81F005E0B4B /* IssueEditViewController.swift */; };
+		DE9B06B9255BCA8F005E0B4B /* AssigneeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9B06B8255BCA8F005E0B4B /* AssigneeCell.swift */; };
 		DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEB65B254FE8F00004960A /* LabelBadge.swift */; };
 		DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEB679254FF7C70004960A /* IssueCell.swift */; };
 		DECEB67C254FF7C70004960A /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECEB67A254FF7C70004960A /* IssueCell.xib */; };
@@ -113,6 +115,8 @@
 		DE67A394254FFDB7006A4C2A /* UIColor+hexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexColor.swift"; sourceTree = "<group>"; };
 		DE8C6E1F255103C800CAEC4E /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		DE8C6E4225514FA200CAEC4E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DE9B06B3255BB81F005E0B4B /* IssueEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueEditViewController.swift; sourceTree = "<group>"; };
+		DE9B06B8255BCA8F005E0B4B /* AssigneeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeCell.swift; sourceTree = "<group>"; };
 		DECEB65B254FE8F00004960A /* LabelBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBadge.swift; sourceTree = "<group>"; };
 		DECEB679254FF7C70004960A /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		DECEB67A254FF7C70004960A /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 				0D735DDD25526EF80040AAC4 /* IssueFilterViewController.swift */,
 				0DD6D43E2553BF6B0083D352 /* IssueAddViewController.swift */,
 				0D13E93025590EC0000CA6BC /* IssueBottomSheetViewController.swift */,
+				DE9B06B3255BB81F005E0B4B /* IssueEditViewController.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				0D77BF59255276DF0056E9E5 /* Filter */,
 				DECEB679254FF7C70004960A /* IssueCell.swift */,
 				DECEB67A254FF7C70004960A /* IssueCell.xib */,
+				DE9B06B8255BCA8F005E0B4B /* AssigneeCell.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -573,9 +579,11 @@
 				0D6FB39C255924C80043BFD2 /* Comment.swift in Sources */,
 				0DB5B8CD254FF78C00C2118E /* UIViewController+Keyboard.swift in Sources */,
 				0D8643BE255130C3007747E5 /* IssueDetailViewController.swift in Sources */,
+				DE9B06B9255BCA8F005E0B4B /* AssigneeCell.swift in Sources */,
 				0DA6EDE02547D67C009EA88F /* SceneDelegate.swift in Sources */,
 				0D735DDE25526EF80040AAC4 /* IssueFilterViewController.swift in Sources */,
 				CFE493B22557BA4100BE8F3E /* IssueCommentCell.swift in Sources */,
+				DE9B06B4255BB81F005E0B4B /* IssueEditViewController.swift in Sources */,
 				DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */,
 				0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */,
 				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,

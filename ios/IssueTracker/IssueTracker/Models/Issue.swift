@@ -34,7 +34,7 @@ struct Issue: Codable, Hashable {
         self.createdAt = nil
         self.isOpen = nil
         self.userAuthor = nil
-        self.user = nil
+        self.user = user
         self.issueLabels = label
         self.milestone = milestoneTitle
         self.comments = nil
