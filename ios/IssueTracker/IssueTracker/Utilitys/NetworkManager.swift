@@ -122,6 +122,7 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .post, parameters: IssueParameter(issue: issue), completion: completion)
     }
     
+    // FIXME:
     func changeIssueTitle(title: String, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = Info.baseURL + "/issue/\(issueID)"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
@@ -146,11 +147,10 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .patch, parameters: label, completion: completion)
     }
     
-    // FIXME: addIssueLable()과 기능이 같음
     func deleteIssueLabel(label: Label, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = Info.baseURL + "/issue/issueLabel/\(issueID)"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
-        request(url: url, method: .patch, parameters: label, completion: completion)
+        request(url: url, method: .delete, parameters: label, completion: completion)
     }
     
     // TODO: 모든 레이블을 삭제하는 동작 필요

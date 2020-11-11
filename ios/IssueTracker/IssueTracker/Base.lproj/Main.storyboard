@@ -869,10 +869,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBQ-TT-plD">
-                                <rect key="frame" x="16" y="473" width="343" height="133"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMV-hR-yTu">
                                 <rect key="frame" x="329" y="20" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
@@ -969,6 +965,78 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uFh-gs-Y6B">
+                                <rect key="frame" x="16" y="473" width="343" height="133"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ec5-Wi-aCj">
+                                    <size key="itemSize" width="343" height="68"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="milestone" id="0gQ-vS-h73" customClass="MilestoneCell" customModule="IssueTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8z9-dO-S5H">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="68"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVq-q7-NAQ">
+                                                    <rect key="frame" x="14" y="14" width="59" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aea-s6-xWJ">
+                                                    <rect key="frame" x="14" y="42" width="315" height="8"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="8" id="iiK-T1-c91"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YsX-Bd-fIq">
+                                                    <rect key="frame" x="14" y="42" width="1" height="8"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="8" id="83G-3x-gTV"/>
+                                                        <constraint firstAttribute="width" constant="1" placeholder="YES" id="9Sf-h0-pFe"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZVq-q7-NAQ" firstAttribute="top" secondItem="8z9-dO-S5H" secondAttribute="top" constant="14" id="IlM-Md-gcD"/>
+                                                <constraint firstItem="ZVq-q7-NAQ" firstAttribute="leading" secondItem="8z9-dO-S5H" secondAttribute="leading" constant="14" id="JVF-Az-QrE"/>
+                                                <constraint firstItem="aea-s6-xWJ" firstAttribute="top" secondItem="ZVq-q7-NAQ" secondAttribute="bottom" constant="7" id="Kcr-Xo-lqb"/>
+                                                <constraint firstItem="aea-s6-xWJ" firstAttribute="leading" secondItem="ZVq-q7-NAQ" secondAttribute="leading" id="NTg-DW-E61"/>
+                                                <constraint firstAttribute="trailing" secondItem="aea-s6-xWJ" secondAttribute="trailing" constant="14" id="QsQ-lS-jve"/>
+                                                <constraint firstItem="YsX-Bd-fIq" firstAttribute="leading" secondItem="aea-s6-xWJ" secondAttribute="leading" id="ami-vz-7ih"/>
+                                                <constraint firstItem="YsX-Bd-fIq" firstAttribute="top" secondItem="aea-s6-xWJ" secondAttribute="top" id="w3i-2a-Eda"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="343" height="68"/>
+                                        <connections>
+                                            <outlet property="completedBar" destination="YsX-Bd-fIq" id="xZ2-IT-3MR"/>
+                                            <outlet property="milestoneTitle" destination="ZVq-q7-NAQ" id="fjK-JK-qgK"/>
+                                            <outlet property="progressBar" destination="aea-s6-xWJ" id="zAM-Vo-tXZ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="HIr-uj-di2" id="r10-ZU-21L"/>
+                                    <outlet property="delegate" destination="HIr-uj-di2" id="wTJ-hI-p8F"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4fk-6J-5Bf"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -978,9 +1046,13 @@
                             <constraint firstItem="Z65-Ce-Gaj" firstAttribute="top" secondItem="xWH-zf-YEc" secondAttribute="bottom" constant="20" id="6Dn-6z-nVW"/>
                             <constraint firstItem="xWH-zf-YEc" firstAttribute="top" secondItem="7t3-d5-D7X" secondAttribute="bottom" constant="20" id="7G3-jS-PMf"/>
                             <constraint firstItem="Z65-Ce-Gaj" firstAttribute="trailing" secondItem="0Gn-SE-LQH" secondAttribute="trailingMargin" id="AWd-Dd-TR8"/>
+                            <constraint firstItem="uFh-gs-Y6B" firstAttribute="leading" secondItem="4fk-6J-5Bf" secondAttribute="leading" constant="16" id="CJD-72-D5h"/>
                             <constraint firstItem="7t3-d5-D7X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OcB-yu-WMP" secondAttribute="trailing" constant="10" id="DWT-gx-tgB"/>
+                            <constraint firstItem="uFh-gs-Y6B" firstAttribute="height" secondItem="0Gn-SE-LQH" secondAttribute="height" multiplier="0.2" id="E7M-Ow-jVg"/>
                             <constraint firstItem="OcB-yu-WMP" firstAttribute="leading" secondItem="0Gn-SE-LQH" secondAttribute="leadingMargin" id="Fc4-Vh-xF7"/>
+                            <constraint firstItem="uFh-gs-Y6B" firstAttribute="top" secondItem="Ofv-Gj-vUO" secondAttribute="bottom" constant="10" id="Fgs-Mu-DAA"/>
                             <constraint firstItem="Ofv-Gj-vUO" firstAttribute="leading" secondItem="0Gn-SE-LQH" secondAttribute="leadingMargin" id="HVq-T6-td7"/>
+                            <constraint firstItem="4fk-6J-5Bf" firstAttribute="trailing" secondItem="uFh-gs-Y6B" secondAttribute="trailing" constant="16" id="J8l-Wg-IPF"/>
                             <constraint firstItem="xWH-zf-YEc" firstAttribute="leading" secondItem="4fk-6J-5Bf" secondAttribute="leading" constant="16" id="Kft-2c-PTL"/>
                             <constraint firstItem="d9P-OO-EVK" firstAttribute="top" secondItem="coD-Nm-zKg" secondAttribute="bottom" constant="20" id="Mqn-tj-hnG"/>
                             <constraint firstItem="d9P-OO-EVK" firstAttribute="leading" secondItem="4fk-6J-5Bf" secondAttribute="leading" constant="16" id="NVX-g3-rF9"/>
@@ -988,18 +1060,14 @@
                             <constraint firstItem="7t3-d5-D7X" firstAttribute="top" secondItem="d9P-OO-EVK" secondAttribute="bottom" constant="20" id="RfZ-XR-ghE"/>
                             <constraint firstItem="xWH-zf-YEc" firstAttribute="top" secondItem="OcB-yu-WMP" secondAttribute="bottom" constant="20" id="Xek-vv-1h7"/>
                             <constraint firstItem="coD-Nm-zKg" firstAttribute="leading" secondItem="0Gn-SE-LQH" secondAttribute="leadingMargin" id="b0U-us-3Bf"/>
-                            <constraint firstItem="sBQ-TT-plD" firstAttribute="height" secondItem="0Gn-SE-LQH" secondAttribute="height" multiplier="1/5" id="bpO-qW-ehs"/>
-                            <constraint firstItem="sBQ-TT-plD" firstAttribute="leading" secondItem="0Gn-SE-LQH" secondAttribute="leadingMargin" id="eov-N8-RIj"/>
                             <constraint firstItem="HMV-hR-yTu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="coD-Nm-zKg" secondAttribute="trailing" constant="10" id="iA1-m7-YvM"/>
-                            <constraint firstItem="sBQ-TT-plD" firstAttribute="top" secondItem="Z65-Ce-Gaj" secondAttribute="bottom" constant="10" id="jfk-LU-Wtd"/>
                             <constraint firstItem="coD-Nm-zKg" firstAttribute="top" secondItem="0Gn-SE-LQH" secondAttribute="topMargin" constant="20" id="lEx-Hb-Jcp"/>
                             <constraint firstItem="4fk-6J-5Bf" firstAttribute="trailing" secondItem="xWH-zf-YEc" secondAttribute="trailing" constant="16" id="nse-99-c5f"/>
                             <constraint firstItem="4fk-6J-5Bf" firstAttribute="trailing" secondItem="d9P-OO-EVK" secondAttribute="trailing" constant="16" id="o9D-qK-H8D"/>
                             <constraint firstItem="d9P-OO-EVK" firstAttribute="height" secondItem="0Gn-SE-LQH" secondAttribute="height" multiplier="0.2" id="pLq-kv-H20"/>
-                            <constraint firstItem="sBQ-TT-plD" firstAttribute="top" secondItem="Ofv-Gj-vUO" secondAttribute="bottom" constant="10" id="rgK-Ax-LDL"/>
                             <constraint firstItem="Z65-Ce-Gaj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ofv-Gj-vUO" secondAttribute="trailing" constant="10" id="sj0-kA-Ngb"/>
-                            <constraint firstItem="sBQ-TT-plD" firstAttribute="trailing" secondItem="0Gn-SE-LQH" secondAttribute="trailingMargin" id="t2Q-xf-wHH"/>
                             <constraint firstItem="7t3-d5-D7X" firstAttribute="trailing" secondItem="0Gn-SE-LQH" secondAttribute="trailingMargin" id="wgx-XX-gEE"/>
+                            <constraint firstItem="uFh-gs-Y6B" firstAttribute="top" secondItem="Z65-Ce-Gaj" secondAttribute="bottom" constant="10" id="wi1-Ct-gDD"/>
                             <constraint firstItem="d9P-OO-EVK" firstAttribute="bottom" secondItem="OcB-yu-WMP" secondAttribute="top" constant="20" id="wtc-Gh-7HB"/>
                             <constraint firstItem="xWH-zf-YEc" firstAttribute="height" secondItem="0Gn-SE-LQH" secondAttribute="height" multiplier="0.2" id="xW7-Mr-tcM"/>
                             <constraint firstItem="HMV-hR-yTu" firstAttribute="trailing" secondItem="0Gn-SE-LQH" secondAttribute="trailingMargin" id="xkf-4o-UlQ"/>
@@ -1008,6 +1076,7 @@
                     <connections>
                         <outlet property="assigneeCollectionView" destination="d9P-OO-EVK" id="ayG-1z-txV"/>
                         <outlet property="labelCollectionView" destination="xWH-zf-YEc" id="c3g-Ma-jAh"/>
+                        <outlet property="milestoneCollectionView" destination="uFh-gs-Y6B" id="Zd4-rs-caP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h1t-hN-rBv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
