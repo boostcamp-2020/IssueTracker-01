@@ -18,7 +18,7 @@ class IssueCellViewModel {
         issueID = issue.issueID
         title = issue.title
         comments = issue.comments
-        milestone = issue.milestoneTitle
+        milestone = issue.milestone
         labelBadges = issue.issueLabels?.map {
             LabelBadge(text: $0.label.labelName, colorCode: $0.label.color)
         }

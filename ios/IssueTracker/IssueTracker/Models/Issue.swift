@@ -14,7 +14,7 @@ struct Issue: Codable, Hashable {
     let isOpen: Int?
     let userAuthor, user: User?
     let issueLabels: [IssueLabel]?
-    let milestoneTitle: Milestone?
+    let milestone: Milestone?
     let comments: [Comment]?
 
     enum CodingKeys: String, CodingKey {
@@ -24,7 +24,7 @@ struct Issue: Codable, Hashable {
         case userAuthor = "UserAuthor"
         case user = "User"
         case issueLabels = "IssueLabels"
-        case milestoneTitle = "MileStone"
+        case milestone = "MileStone"
         case comments = "Comments"
     }
     
@@ -36,11 +36,27 @@ struct Issue: Codable, Hashable {
         self.userAuthor = nil
         self.user = nil
         self.issueLabels = label
-        self.milestoneTitle = milestoneTitle
+        self.milestone = milestoneTitle
         self.comments = nil
     }
     
     static func == (lhs: Issue, rhs: Issue) -> Bool {
         lhs.issueID == rhs.issueID
+    }
+}
+
+struct IssueParameter {
+    let title: String
+    let assignees: String?
+    let milestoneId: Int?
+    let label: [String]?
+    
+    init(issue: Issue) {
+        self.title = issue.title
+        self.assignees = issue.userAuthor?.userID
+        self.label = issue.issueLabels?.map({ issueLabel -> String in
+            issueLabel.label.labelName
+        })
+        self.milestoneId = issue.milestone?.milestoneID
     }
 }
