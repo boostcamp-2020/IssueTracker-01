@@ -8,6 +8,8 @@
 import UIKit
 
 class IssueBottomSheetViewController: UIViewController {
+    var viewModel: IssueBottomSheetViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -19,6 +21,36 @@ class IssueBottomSheetViewController: UIViewController {
         UIView.animate(withDuration: 0.6) {
             self.moveView(state: .partial)
         }
+    }
+    
+    @IBAction func clickCloseIssueButton(_ sender: Any) {
+        viewModel?.closeIssue()
+    }
+}
+
+// MARK: - Configure View
+extension IssueBottomSheetViewController {
+    private func configureView() {
+        view.cornerRadius = 10
+        view.clipsToBounds = true
+    }
+}
+
+// MARK: - Configure Gesture
+extension IssueBottomSheetViewController {
+    private enum State {
+        case partial
+        case full
+    }
+    
+    private enum Constant {
+        static let fullViewYPosition: CGFloat = 100
+        static var partialViewYPosition: CGFloat { UIScreen.main.bounds.height - 100 }
+    }
+    
+    private func configureGesture() {
+        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
+        view.addGestureRecognizer(gesture)
     }
     
     private func moveView(state: State) {
@@ -45,28 +77,5 @@ class IssueBottomSheetViewController: UIViewController {
                 self.moveView(state: state)
             }
         }
-    }
-}
-
-// MARK: - Configure View
-extension IssueBottomSheetViewController {
-    private enum State {
-        case partial
-        case full
-    }
-    
-    private enum Constant {
-        static let fullViewYPosition: CGFloat = 100
-        static var partialViewYPosition: CGFloat { UIScreen.main.bounds.height - 100 }
-    }
-    
-    private func configureView() {
-        view.cornerRadius = 10
-        view.clipsToBounds = true
-    }
-    
-    private func configureGesture() {
-        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
-        view.addGestureRecognizer(gesture)
     }
 }

@@ -38,12 +38,12 @@ extension MainViewController {
 // MARK: - LoginViewControllerDelegate
 extension MainViewController: LoginViewControllerDelegate {
     func requestCode(loginViewController: LoginViewController) {
-        networkManager?.requestGithubLogin { [weak self] in
+        guard let networkManager = networkManager else { return }
+        networkManager.requestGithubLogin { [weak self] in
             loginViewController.dismiss(animated: true, completion: nil)
             guard let navigation = self?.viewControllers?.first as? UINavigationController else { return }
             guard let issue = navigation.viewControllers.first as? IssueViewController else { return }
-            
-            let issueViewModel = IssueViewModel(networkManager: self?.networkManager)
+            let issueViewModel = IssueViewModel(networkManager: networkManager)
             issueViewModel.issueChangeHandler = { issue.applySnapshot() }
             issue.viewModel = issueViewModel
         }

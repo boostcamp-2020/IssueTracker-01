@@ -12,6 +12,8 @@ protocol NetworkManager {
     var hasToken: Bool { get }
     func requestGithubLogin(requestHandler: (() -> Void)?)
     func downloadIssues(completion: @escaping (Result<[Issue], Error>) -> Void)
+    func addIssue(issue: Issue, completion: @escaping (Result<ServerResponse, Error>) -> Void)
+    func closeIssue(issueID: Int, completion: @escaping (Result<ServerResponse, Error>) -> Void)
 }
 
 protocol GithubLoginDelegate: class {
@@ -116,13 +118,18 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .get, completion: completion)
     }
     
-    func addIssue(issue: Issue, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func addIssue(issue: Issue, completion: @escaping (Result<ServerResponse, Error>) -> Void) {
         let url = Info.baseURL + "/issue"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: IssueParameter(issue: issue), completion: completion)
     }
     
-    // FIXME:
+    func closeIssue(issueID: Int, completion: @escaping (Result<ServerResponse, Error>) -> Void) {
+        let url = Info.baseURL + "/issue/status/2/\(issueID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
+        request(url: url, method: .patch, completion: completion)
+    }
+    
     func changeIssueTitle(title: String, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = Info.baseURL + "/issue/\(issueID)"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
