@@ -38,13 +38,13 @@ class IssueCell: UICollectionViewListCell {
         separatorLayoutGuide.trailingAnchor.constraint(equalTo: issueDescription.leadingAnchor).isActive = true
     }
     
-    private func configureLabelStackView(labelBadges: [LabelBadge]) {
+    private func configureLabelStackView(labelBadges: [LabelBadge]?) {
         guard let stackView = badgeStackView else { return }
         stackView.distribution = .fillProportionally
         stackView.spacing = 3
         
         var sumOfLabelWidth = CGFloat.zero
-        labelBadges.forEach { badge in
+        labelBadges?.forEach { badge in
             sumOfLabelWidth += badge.frame.size.width
             stackView.addArrangedSubview(badge)
             guard sumOfLabelWidth > stackView.frame.size.width else { return }

@@ -8,18 +8,18 @@
 import Foundation
 
 class IssueCellViewModel {
-    let issueID: Int
+    let issueID: Int?
     let title: String
-    let comments: [Comment]
+    let comments: [Comment]?
     let milestone: Milestone?
-    let labelBadges: [LabelBadge]
+    let labelBadges: [LabelBadge]?
     
     init(issue: Issue) {
         issueID = issue.issueID
         title = issue.title
         comments = issue.comments
         milestone = issue.milestoneTitle
-        labelBadges = issue.issueLabels.map {
+        labelBadges = issue.issueLabels?.map {
             LabelBadge(text: $0.label.labelName, colorCode: $0.label.color)
         }
     }
