@@ -63,7 +63,7 @@ class IssueTrackerNetworkManager: NetworkManager {
         guard let cookie = HTTPCookie(properties: cookieProps) else { completion(.failure(NetworkError.cookeyError)); return }
         
         AF.session.configuration.httpCookieStorage?.setCookie(cookie)
-        AF.request(url, method: .post, parameters: issue, encoder: JSONParameterEncoder.default).responseData { (responseObject) -> Void in
+        AF.request(url, method: .post, parameters: IssueParameter(issue: issue), encoder: JSONParameterEncoder.default).responseData { (responseObject) -> Void in
             
             guard let responseCode = responseObject.response?.statusCode, responseCode == 200 else {
                 dump(responseObject)

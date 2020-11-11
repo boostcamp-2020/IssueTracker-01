@@ -45,7 +45,7 @@ struct Issue: Codable, Hashable {
     }
 }
 
-struct IssueParameter {
+struct IssueParameter: Codable {
     let title: String
     let assignees: String?
     let milestoneId: Int?

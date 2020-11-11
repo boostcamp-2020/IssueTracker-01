@@ -25,10 +25,6 @@ class IssueAddViewController: UIViewController {
     }
     
     @IBAction func addIssue(_ sender: Any) {
-        
-        //서버에서 받는 변수이름 : label
-        //구조체 변수이름 : issueLabels (레이블 변수가 필수로 구현되어있음)
-        
         guard let title = newIssueTitle?.text else { return }
         let newIssue = Issue(title: title)
         IssueTrackerNetworkManager.shared.createIssue(token: IssueTrackerGithubLoginManager.shared.token!, issue: newIssue) { result in
