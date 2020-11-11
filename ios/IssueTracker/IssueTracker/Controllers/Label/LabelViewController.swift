@@ -35,7 +35,11 @@ class LabelViewController: UIViewController {
     }
 
     @IBAction func addLabel(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        let contentVC = self.storyboard?.instantiateViewController(withIdentifier: "labelContentViewController")
+        alert.setValue(contentVC, forKeyPath: "contentViewController")
         
+        self.present(alert, animated: true)
     }
 }
 
