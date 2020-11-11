@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   mode: "development",
   entry: {
-    main: "./src/index.js",
+    main: ['babel-polyfill', "./src/index.js"],
   },
   resolve: {
     extensions: [".js", ".jsx"],
@@ -24,6 +24,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [{ loader: "style-loader" }, { loader: "css-loader" }],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },
