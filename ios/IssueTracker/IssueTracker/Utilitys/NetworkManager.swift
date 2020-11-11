@@ -32,11 +32,7 @@ class IssueTrackerNetworkManager: NetworkManager {
 extension IssueTrackerNetworkManager {
     struct Info {
         static let baseURL = "http://api.hoyoung.me/api"
-        static var token: String? {
-            didSet {
-                print(token)
-            }
-        }
+        static var token: String?
     }
 }
 
