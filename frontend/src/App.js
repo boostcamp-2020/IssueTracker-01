@@ -3,12 +3,14 @@ import { Route } from 'react-router-dom';
 import { UserProvider } from './contexts/user';
 import Login from './pages/Login';
 import Main from './pages/Main';
+import DetailIssue from './pages/DetailIssue';
 
 const App = () => {
   return (
     <UserProvider>
       <Route path="/" component={Login} exact />
       <Route path="/main" component={Main} />
+      <Route path="/detailIssue/:issueId" component={DetailIssue} />
     </UserProvider>
   );
 };
