@@ -58,6 +58,7 @@ class IssueViewController: UIViewController {
 // MARK: - View identifier
 extension IssueViewController {
     private struct ViewID {
+        static let header = "IssueViewMainHeader"
         static let cell = String(describing: IssueCell.self)
         static let detail = String(describing: IssueDetailViewController.self)
         static let filter = String(describing: IssueFilterViewController.self)
@@ -130,13 +131,15 @@ extension IssueViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
+        let dataSource = DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
             guard let issueViewModel = self?.viewModel?.issueCellViewModels[indexPath.row] else { return listCell }
             listCell.configureCell(viewModel: issueViewModel)
             return listCell
         })
+        
+        return dataSource
     }
     
     func applySnapshot(animatingDifferences: Bool = true) {
