@@ -13,7 +13,6 @@ class CommentViewModel {
     }
     
     var itemSetHandler: (() -> Void)?
-    var networkManager: NetworkManager?
     
     init(comments: [Comment]) {
         commentCellViewModels = comments.map { CommentCellViewModel(comment: $0) }
