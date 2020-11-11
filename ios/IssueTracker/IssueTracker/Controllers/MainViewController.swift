@@ -23,8 +23,8 @@ class MainViewController: UITabBarController {
     }
     
     private func checkAccessToken() {
-        guard let networkManager = networkManager, networkManager.hasToken else { return }
-        present(loginViewController, animated: true, completion: nil)
+        guard let networkManager = networkManager, !networkManager.hasToken else { return }
+        present(loginViewController, animated: false, completion: nil)
     }
 }
 
