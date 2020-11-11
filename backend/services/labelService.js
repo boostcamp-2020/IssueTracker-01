@@ -12,11 +12,8 @@ exports.getLabels = async (req, res) => {
 
 exports.createLabel = async (req, res) => {
   try {
-    // const isExist = await Label.findOne({ where: { labelName: req.body.name } });
-
-    // if (!isExist) {
     const newLabel = {
-      labelName: req.body.name,
+      labelName: req.body.labelName,
       color: req.body.color,
       description: req.body.desc,
     };
@@ -24,9 +21,6 @@ exports.createLabel = async (req, res) => {
     const result = await Label.create(newLabel);
 
     return res.status(200).json({ data: result, message: 'success' });
-    // }
-
-    // return res.status(409).json({ message: 'This name already exists.' });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
@@ -34,9 +28,6 @@ exports.createLabel = async (req, res) => {
 
 exports.updateLabel = async (req, res) => {
   try {
-    // const isExist = await Label.findOne({ where: { labelName: req.body.newName } });
-
-    // if (!isExist) {
     await Label.update(
       {
         labelName: req.body.newName,
@@ -44,14 +35,11 @@ exports.updateLabel = async (req, res) => {
         description: req.body.desc,
       },
       {
-        where: { labelName: req.body.curName },
+        where: { labelName: req.body.labelName },
       },
     );
 
     return res.status(200).json({ message: 'success.' });
-    // }
-
-    // return res.status(409).json({ message: 'This name already exists.' });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
@@ -60,7 +48,7 @@ exports.updateLabel = async (req, res) => {
 exports.deleteLabel = async (req, res) => {
   try {
     await Label.destroy({
-      where: { labelName: req.body.name },
+      where: { labelName: req.body.labelName },
     });
 
     return res.status(200).json({ message: 'success.' });
