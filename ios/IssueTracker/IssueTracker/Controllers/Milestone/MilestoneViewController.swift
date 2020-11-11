@@ -31,7 +31,10 @@ class MilestoneViewController: UIViewController {
     }
 
     @IBAction func addMilestone(_ sender: Any) {
-        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        let contentVC = self.storyboard?.instantiateViewController(withIdentifier: "milestoneContentViewController")
+        alert.setValue(contentVC, forKeyPath: "contentViewController")
+        present(alert, animated: true, completion: nil)
     }
 }
 

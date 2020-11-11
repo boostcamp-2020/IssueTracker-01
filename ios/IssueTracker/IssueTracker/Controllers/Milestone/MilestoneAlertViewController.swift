@@ -1,5 +1,5 @@
 //
-//  LabelAlertViewController.swift
+//  MilestoneAlertViewController.swift
 //  IssueTracker
 //
 //  Created by 최광현 on 2020/11/12.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelAlertViewController: UIViewController {
+class MilestoneAlertViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,5 +23,5 @@ class LabelAlertViewController: UIViewController {
     }
     @IBAction func initialize(_ sender: Any) {
     }
-    
+
 }

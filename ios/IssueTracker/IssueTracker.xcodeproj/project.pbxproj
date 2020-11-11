@@ -56,6 +56,7 @@
 		DED4F81F255AD4D800D62CA5 /* LabelCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED4F81E255AD4D800D62CA5 /* LabelCellViewModel.swift */; };
 		DED4F824255AD4E300D62CA5 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED4F823255AD4E300D62CA5 /* LabelViewModel.swift */; };
 		DEEFC23B255C4E9A00FB33D5 /* LabelAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEFC23A255C4E9A00FB33D5 /* LabelAlertViewController.swift */; };
+		DEEFC246255C5E8400FB33D5 /* MilestoneAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEFC245255C5E8400FB33D5 /* MilestoneAlertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		DED4F81E255AD4D800D62CA5 /* LabelCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCellViewModel.swift; sourceTree = "<group>"; };
 		DED4F823255AD4E300D62CA5 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
 		DEEFC23A255C4E9A00FB33D5 /* LabelAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAlertViewController.swift; sourceTree = "<group>"; };
+		DEEFC245255C5E8400FB33D5 /* MilestoneAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAlertViewController.swift; sourceTree = "<group>"; };
 		E3A338802E0FAC5F54ABF501 /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		E874F56191945209810F25EC /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F223843C7962E1826CC6ACA2 /* Pods-IssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				DE61E167255AFF75005038E6 /* MilestoneViewController.swift */,
+				DEEFC245255C5E8400FB33D5 /* MilestoneAlertViewController.swift */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,
 				DE8C6E4325514FA200CAEC4E /* NetworkManager.swift in Sources */,
 				0D6FB3A62559250C0043BFD2 /* Milestone.swift in Sources */,
+				DEEFC246255C5E8400FB33D5 /* MilestoneAlertViewController.swift in Sources */,
 				DECEB65C254FE8F00004960A /* LabelBadge.swift in Sources */,
 				0D7D23502547F34E0012C943 /* MainViewController.swift in Sources */,
 				0D13E93125590EC0000CA6BC /* IssueBottomSheetViewController.swift in Sources */,
