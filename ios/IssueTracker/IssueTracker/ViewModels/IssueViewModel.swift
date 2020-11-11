@@ -12,6 +12,14 @@ class IssueViewModel {
         didSet { issueChangeHandler?() }
     }
     
+    lazy var addViewModel: IssueAddViewModel = {
+        let addViewModel = IssueAddViewModel(networkManager: self.networkManager)
+        addViewModel.addIssueCompletion = {
+            self.downloadData()
+        }
+        return addViewModel
+    }()
+    
     var issueChangeHandler: (() -> Void)?
     var token: String?
     var networkManager: NetworkManager?

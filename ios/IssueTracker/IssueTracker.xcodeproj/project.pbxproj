@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D08DA82255BDD0000E5B21C /* IssueAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D08DA81255BDD0000E5B21C /* IssueAddViewModel.swift */; };
+		0D08DA87255C0DE800E5B21C /* ServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D08DA86255C0DE800E5B21C /* ServerResponse.swift */; };
 		0D13E93125590EC0000CA6BC /* IssueBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13E93025590EC0000CA6BC /* IssueBottomSheetViewController.swift */; };
 		0D356E032547E790008F2704 /* UIView+IBInspectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D356E022547E790008F2704 /* UIView+IBInspectable.swift */; };
 		0D6FB39C255924C80043BFD2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6FB39B255924C80043BFD2 /* Comment.swift */; };
@@ -69,6 +71,8 @@
 
 /* Begin PBXFileReference section */
 		0791FA08BDA5505523FB53D6 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
+		0D08DA81255BDD0000E5B21C /* IssueAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddViewModel.swift; sourceTree = "<group>"; };
+		0D08DA86255C0DE800E5B21C /* ServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponse.swift; sourceTree = "<group>"; };
 		0D13E93025590EC0000CA6BC /* IssueBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBottomSheetViewController.swift; sourceTree = "<group>"; };
 		0D356E022547E790008F2704 /* UIView+IBInspectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+IBInspectable.swift"; sourceTree = "<group>"; };
 		0D6FB39B255924C80043BFD2 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 				0D6FB3A52559250C0043BFD2 /* Milestone.swift */,
 				0D6FB3AE255926030043BFD2 /* Label.swift */,
 				0D6FB3B325593B310043BFD2 /* IssueLabel.swift */,
+				0D08DA86255C0DE800E5B21C /* ServerResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 				0D6FB3C42559947F0043BFD2 /* IssueCellViewModel.swift */,
 				CFE493BC2557C4CB00BE8F3E /* CommentViewModel.swift */,
 				CFE493C12557C4D900BE8F3E /* CommentCellViewModel.swift */,
+				0D08DA81255BDD0000E5B21C /* IssueAddViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -577,10 +583,12 @@
 				0DB5B8CD254FF78C00C2118E /* UIViewController+Keyboard.swift in Sources */,
 				0D8643BE255130C3007747E5 /* IssueDetailViewController.swift in Sources */,
 				DE9B06B9255BCA8F005E0B4B /* AssigneeCell.swift in Sources */,
+				DE9B06B4255BB81F005E0B4B /* IssueEditViewController.swift in Sources */,
+				0D08DA82255BDD0000E5B21C /* IssueAddViewModel.swift in Sources */,
 				0DA6EDE02547D67C009EA88F /* SceneDelegate.swift in Sources */,
 				0D735DDE25526EF80040AAC4 /* IssueFilterViewController.swift in Sources */,
 				CFE493B22557BA4100BE8F3E /* IssueCommentCell.swift in Sources */,
-				DE9B06B4255BB81F005E0B4B /* IssueEditViewController.swift in Sources */,
+				0D08DA87255C0DE800E5B21C /* ServerResponse.swift in Sources */,
 				DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */,
 				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,
 				DE8C6E4325514FA200CAEC4E /* NetworkManager.swift in Sources */,
