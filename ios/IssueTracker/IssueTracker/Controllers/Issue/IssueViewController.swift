@@ -49,9 +49,9 @@ class IssueViewController: UIViewController {
         guard let add = addViewController as? IssueAddViewController else { return }
         guard let viewModel = viewModel else { return }
         add.viewModel = viewModel.addViewModel
-        let nav = UINavigationController(rootViewController: add)
-        nav.navigationBar.prefersLargeTitles = true
-        navigationController?.present(nav, animated: true)
+        let navigationViewController = UINavigationController(rootViewController: add)
+        navigationViewController.navigationBar.prefersLargeTitles = true
+        navigationController?.present(navigationViewController, animated: true)
     }
 }
 
@@ -94,7 +94,6 @@ extension IssueViewController: UICollectionViewDelegate {
     
     private func configureFlowLayout() {
         guard let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize.width = view.frame.width
     }
     
