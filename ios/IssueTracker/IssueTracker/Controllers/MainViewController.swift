@@ -15,7 +15,6 @@ class MainViewController: UITabBarController {
         return login
     }()
     
-    var githubLoginManager: GithubLoginManager?
     var networkManager: NetworkManager?
     
     override func viewDidAppear(_ animated: Bool) {
@@ -24,8 +23,8 @@ class MainViewController: UITabBarController {
     }
     
     private func checkAccessToken() {
-        guard githubLoginManager?.token == nil else { return }
-        present(loginViewController, animated: true, completion: nil)
+        guard let networkManager = networkManager, !networkManager.hasToken else { return }
+        present(loginViewController, animated: false, completion: nil)
     }
 }
 
@@ -39,12 +38,12 @@ extension MainViewController {
 // MARK: - LoginViewControllerDelegate
 extension MainViewController: LoginViewControllerDelegate {
     func requestCode(loginViewController: LoginViewController) {
-        githubLoginManager?.requestGithubLogin { [weak self] in
+        networkManager?.requestGithubLogin { [weak self] in
             loginViewController.dismiss(animated: true, completion: nil)
             guard let navigation = self?.viewControllers?.first as? UINavigationController else { return }
             guard let issue = navigation.viewControllers.first as? IssueViewController else { return }
             
-            let issueViewModel = IssueViewModel(token: self?.githubLoginManager?.token, networkManager: self?.networkManager)
+            let issueViewModel = IssueViewModel(networkManager: self?.networkManager)
             issueViewModel.issueChangeHandler = { issue.applySnapshot() }
             issue.viewModel = issueViewModel
         }

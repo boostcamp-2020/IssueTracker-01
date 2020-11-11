@@ -31,7 +31,6 @@
 		0DA6EE002547D67D009EA88F /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA6EDFF2547D67D009EA88F /* IssueTrackerUITests.swift */; };
 		0DB5B8BF254FDA4900C2118E /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */; };
 		0DB5B8CD254FF78C00C2118E /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB5B8CC254FF78C00C2118E /* UIViewController+Keyboard.swift */; };
-		0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB84C932549308C000B6651 /* GithubLoginManager.swift */; };
 		0DD6D43F2553BF6B0083D352 /* IssueAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD6D43E2553BF6B0083D352 /* IssueAddViewController.swift */; };
 		0DD6D4622553CDBA0083D352 /* IssueFilterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD6D4602553CDBA0083D352 /* IssueFilterHeader.swift */; };
 		2B3D022A903AE303F996D7BC /* libPods-IssueTrackerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A852DE7971E87431BDB3D9A /* libPods-IssueTrackerTests.a */; };
@@ -100,7 +99,6 @@
 		0DA6EE012547D67D009EA88F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DB5B8BE254FDA4900C2118E /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		0DB5B8CC254FF78C00C2118E /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
-		0DB84C932549308C000B6651 /* GithubLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManager.swift; sourceTree = "<group>"; };
 		0DD6D43E2553BF6B0083D352 /* IssueAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAddViewController.swift; sourceTree = "<group>"; };
 		0DD6D4602553CDBA0083D352 /* IssueFilterHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterHeader.swift; sourceTree = "<group>"; };
 		33CDC2B04FC8A9344D260530 /* libPods-IssueTracker-IssueTrackerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTracker-IssueTrackerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,7 +164,6 @@
 		0D6FB3AA255925240043BFD2 /* Utilitys */ = {
 			isa = PBXGroup;
 			children = (
-				0DB84C932549308C000B6651 /* GithubLoginManager.swift */,
 				DE8C6E4225514FA200CAEC4E /* NetworkManager.swift */,
 			);
 			path = Utilitys;
@@ -585,7 +582,6 @@
 				CFE493B22557BA4100BE8F3E /* IssueCommentCell.swift in Sources */,
 				DE9B06B4255BB81F005E0B4B /* IssueEditViewController.swift in Sources */,
 				DECEB67B254FF7C70004960A /* IssueCell.swift in Sources */,
-				0DB84C942549308C000B6651 /* GithubLoginManager.swift in Sources */,
 				DE67A395254FFDB7006A4C2A /* UIColor+hexColor.swift in Sources */,
 				DE8C6E4325514FA200CAEC4E /* NetworkManager.swift in Sources */,
 				0D6FB3A62559250C0043BFD2 /* Milestone.swift in Sources */,

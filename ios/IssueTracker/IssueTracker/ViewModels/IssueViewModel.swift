@@ -16,14 +16,12 @@ class IssueViewModel {
     var token: String?
     var networkManager: NetworkManager?
     
-    init(token: String?, networkManager: NetworkManager?) {
-        self.token = token
+    init(networkManager: NetworkManager?) {
         self.networkManager = networkManager
     }
     
     func downloadData() {
-        guard let token = token else { return }
-        networkManager?.downloadIssues(token: token) { [weak self] result in
+        networkManager?.downloadIssues { [weak self] result in
             switch result {
             case let .success(result):
                 self?.issueCellViewModels = result.map { IssueCellViewModel(issue: $0) }
