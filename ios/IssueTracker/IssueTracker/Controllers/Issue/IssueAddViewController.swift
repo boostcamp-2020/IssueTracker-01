@@ -27,7 +27,7 @@ class IssueAddViewController: UIViewController {
     @IBAction func addIssue(_ sender: Any) {
         guard let title = newIssueTitle?.text else { return }
         let newIssue = Issue(title: title)
-        IssueTrackerNetworkManager.shared.createIssue(token: IssueTrackerGithubLoginManager.shared.token!, issue: newIssue) { result in
+        IssueTrackerNetworkManager.shared.addIssue(issue: newIssue) { result in
             switch result {
             case let .success(result):
                 print("success")

@@ -57,13 +57,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     func configureLoginManager() {
         guard let mainViewController =  window?.rootViewController as? MainViewController else { return }
-        IssueTrackerGithubLoginManager.shared.delegate = self
-        mainViewController.githubLoginManager = IssueTrackerGithubLoginManager.shared
+        IssueTrackerNetworkManager.shared.delegate = self
         mainViewController.networkManager = IssueTrackerNetworkManager.shared
     }
 }
 
-extension SceneDelegate: GithubLoginManagerDelegate {
+extension SceneDelegate: GithubLoginDelegate {
     func canOpenURL(_ url: URL) -> Bool {
         UIApplication.shared.canOpenURL(url)
     }
@@ -75,10 +74,6 @@ extension SceneDelegate: GithubLoginManagerDelegate {
 
 extension SceneDelegate {
     func checkGithubResponse(openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let url = URLContexts.first?.url else { return }
-        guard url.absoluteString.starts(with: "issuetracker://") else { return }
-        guard let token = url.absoluteString.split(separator: "/").last.map({ String($0) }) else { return }
-        IssueTrackerGithubLoginManager.shared.token = token
-        IssueTrackerGithubLoginManager.shared.githubLoginCompletionHandler?()
+        IssueTrackerNetworkManager.shared.checkGithubResponse(openURLContexts: URLContexts)
     }
 }

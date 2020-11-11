@@ -9,27 +9,75 @@ import Foundation
 import Alamofire
 
 protocol NetworkManager {
-    func downloadIssues(token: String, completion: @escaping (Result<[Issue], Error>) -> Void)
+    var hasToken: Bool { get }
+    func requestGithubLogin(requestHandler: (() -> Void)?)
+    func downloadIssues(completion: @escaping (Result<[Issue], Error>) -> Void)
+}
+
+protocol GithubLoginDelegate: class {
+    func canOpenURL(_ url: URL) -> Bool
+    func open(_ url: URL)
 }
 
 class IssueTrackerNetworkManager: NetworkManager {
     static let shared = IssueTrackerNetworkManager()
-    let baseURL = "http://api.hoyoung.me/api"
+    weak var delegate: GithubLoginDelegate?
+    var githubLoginCompletionHandler: (() -> Void)?
     
     private init() { }
+}
+
+// MARK: Information to communicate with server
+extension IssueTrackerNetworkManager {
+    struct Info {
+        static let baseURL = "http://api.hoyoung.me/api"
+        static var token: String?
+    }
+}
+
+// MARK: Github Login
+extension IssueTrackerNetworkManager {
+    var hasToken: Bool { Info.token != nil ? true:false }
+    
+    enum GithubLoginManagerError: Error {
+        case haveNoAccessToken
+    }
+    
+    func requestGithubLogin(requestHandler: (() -> Void)?) {
+        let urlString = "http://api.hoyoung.me/oauth/github"
+        guard let url = URL(string: urlString)  else { return }
+        guard let canOpenURL = delegate?.canOpenURL(url) else { return }
+        guard canOpenURL else { return }
+        self.githubLoginCompletionHandler = requestHandler
+        delegate?.open(url)
+    }
+    
+    func checkGithubResponse(openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url else { return }
+        guard url.absoluteString.starts(with: "issuetracker://") else { return }
+        guard let token = url.absoluteString.split(separator: "/").last.map({ String($0) }) else { return }
+        Info.token = token
+        githubLoginCompletionHandler?()
+    }
+}
+
+// MARK: User data
+extension IssueTrackerNetworkManager {
+    private var cookie: HTTPCookie? {
+        HTTPCookie(properties: [
+            HTTPCookiePropertyKey.domain: "api.hoyoung.me",
+            HTTPCookiePropertyKey.path: "/",
+            HTTPCookiePropertyKey.name: "jwt",
+            HTTPCookiePropertyKey.value: Info.token ?? ""
+        ])
+    }
     
     enum NetworkError: Error {
         case cookeyError, dataError, requestError
     }
     
-    private func configureCookie(token: String) -> Bool {
-        guard let cookie = HTTPCookie(properties: [
-            HTTPCookiePropertyKey.domain: "api.hoyoung.me",
-            HTTPCookiePropertyKey.path: "/",
-            HTTPCookiePropertyKey.name: "jwt",
-            HTTPCookiePropertyKey.value: token
-        ]) else { return false }
-        
+    private func configureCookie() -> Bool {
+        guard let cookie = cookie else { return false }
         AF.session.configuration.httpCookieStorage?.setCookie(cookie)
         return true
     }
@@ -62,46 +110,46 @@ class IssueTrackerNetworkManager: NetworkManager {
         }
     }
     
-    func downloadIssues(token: String, completion: @escaping (Result<[Issue], Error>) -> Void) {
-        let url = baseURL + "/issue"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func downloadIssues(completion: @escaping (Result<[Issue], Error>) -> Void) {
+        let url = Info.baseURL + "/issue"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
     }
     
-    func addIssue(token: String, issue: Issue, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/issue"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func addIssue(issue: Issue, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/issue"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: IssueParameter(issue: issue), completion: completion)
     }
     
-    func changeIssueTitle(token: String, title: String, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/issue/\(issueID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func changeIssueTitle(title: String, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/issue/\(issueID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, parameters: title, completion: completion)
     }
     
-    func changeIssueUser(token: String, user: User, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/issue/\(issueID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func changeIssueUser(user: User, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/issue/\(issueID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, parameters: user, completion: completion)
     }
     
-    func changeIssueMilestone(token: String, milestone: Milestone, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/issue/\(issueID)/milestone"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func changeIssueMilestone(milestone: Milestone, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/issue/\(issueID)/milestone"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, parameters: milestone, completion: completion)
     }
     
-    func addIssueLabel(token: String, label: Label, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/issue/issueLabel/\(issueID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func addIssueLabel(label: Label, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/issue/issueLabel/\(issueID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, parameters: label, completion: completion)
     }
     
     // FIXME: addIssueLable()과 기능이 같음
-    func deleteIssueLabel(token: String, label: Label, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/issue/issueLabel/\(issueID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func deleteIssueLabel(label: Label, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/issue/issueLabel/\(issueID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, parameters: label, completion: completion)
     }
     
@@ -110,41 +158,41 @@ class IssueTrackerNetworkManager: NetworkManager {
         
     }
     
-    func changeIssueStatus(token: String, status: Int, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/issue/status/\(status)/\(issueID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func changeIssueStatus(status: Int, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/issue/status/\(status)/\(issueID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, completion: completion)
     }
     
     // TODO: IssueLabel인지 Label인지?
-    func downloadLabels(token: String, completion: @escaping (Result<[Label], Error>) -> Void) {
-        let url = baseURL + "/label"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func downloadLabels(completion: @escaping (Result<[Label], Error>) -> Void) {
+        let url = Info.baseURL + "/label"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
     }
     
-    func createLabel(token: String, label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/label"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func createLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/label"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: label, completion: completion)
     }
     
     // FIXME: 파라미터 수정필요
-    func editLabel(token: String, label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/label"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func editLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/label"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: label, completion: completion)
     }
     
-    func deleteLabel(token: String, label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/label"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func deleteLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/label"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .delete, parameters: label, completion: completion)
     }
     
-    func downloadMilestones(token: String, completion: @escaping (Result<[Milestone], Error>) -> Void) {
-        let url = baseURL + "/milestone"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func downloadMilestones(completion: @escaping (Result<[Milestone], Error>) -> Void) {
+        let url = Info.baseURL + "/milestone"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
     }
     
@@ -153,45 +201,45 @@ class IssueTrackerNetworkManager: NetworkManager {
         
     }
     
-    func addMilestone(token: String, milestone: Milestone, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/milestone"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func addMilestone(milestone: Milestone, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/milestone"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: milestone, completion: completion)
     }
     
-    func editMilestone(token: String, milestone: Milestone, milestoneID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/milestone" + "/\(milestoneID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func editMilestone(milestone: Milestone, milestoneID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/milestone" + "/\(milestoneID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: milestone, completion: completion)
     }
     
-    func deleteMilestone(token: String, milestone: Milestone, milestoneID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/milestone" + "/\(milestoneID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func deleteMilestone(milestone: Milestone, milestoneID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/milestone" + "/\(milestoneID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .delete, completion: completion)
     }
     
-    func downloadComments(token: String, issueID: Int, completion: @escaping (Result<[Comment], Error>) -> Void) {
-        let url = baseURL + "/comment" + "/\(issueID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func downloadComments(issueID: Int, completion: @escaping (Result<[Comment], Error>) -> Void) {
+        let url = Info.baseURL + "/comment" + "/\(issueID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
     }
     
-    func addComment(token: String, comment: Comment, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/comment" + "/\(issueID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func addComment(comment: Comment, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/comment" + "/\(issueID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: comment, completion: completion)
     }
     
-    func editComment(token: String, comment: Comment, commentID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/comment" + "/\(commentID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func editComment(comment: Comment, commentID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/comment" + "/\(commentID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, parameters: comment, completion: completion)
     }
     
-    func deleteComment(token: String, commentID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = baseURL + "/comment" + "/\(commentID)"
-        guard configureCookie(token: token) else { completion(.failure(NetworkError.cookeyError)); return }
+    func deleteComment(commentID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/comment" + "/\(commentID)"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .delete, completion: completion)
     }
 }
