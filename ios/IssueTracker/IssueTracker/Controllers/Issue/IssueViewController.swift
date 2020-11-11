@@ -10,6 +10,7 @@ import UIKit
 class IssueViewController: UIViewController {
     private lazy var detailViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.detail)
     private lazy var filterViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.filter)
+    private lazy var addViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.add)
     private lazy var dataSource = makeDataSource()
     
     var viewModel: IssueViewModel? {
@@ -43,6 +44,15 @@ class IssueViewController: UIViewController {
     @IBAction func clickCancelButton(_ sender: Any) {
         setEditing(false, animated: true)
     }
+    
+    @IBAction func clickAddButton(_ sender: Any) {
+        guard let add = addViewController as? IssueAddViewController else { return }
+        guard let viewModel = viewModel else { return }
+        add.viewModel = viewModel.addViewModel
+        let nav = UINavigationController(rootViewController: add)
+        nav.navigationBar.prefersLargeTitles = true
+        navigationController?.present(nav, animated: true)
+    }
 }
 
 // MARK: - View identifier
@@ -51,6 +61,7 @@ extension IssueViewController {
         static let cell = String(describing: IssueCell.self)
         static let detail = String(describing: IssueDetailViewController.self)
         static let filter = String(describing: IssueFilterViewController.self)
+        static let add = String(describing: IssueAddViewController.self)
     }
 }
 

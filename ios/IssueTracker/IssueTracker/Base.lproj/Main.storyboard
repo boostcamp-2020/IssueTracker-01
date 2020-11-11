@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O98-sC-zUl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -175,7 +175,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="97k-JX-4kz" kind="presentation" id="VaE-dY-Arq"/>
+                                    <action selector="clickAddButton:" destination="U5U-OD-pjL" eventType="touchUpInside" id="zKk-YG-JHd"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔍 Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="39F-uz-qDJ">
@@ -646,44 +646,28 @@
             </objects>
             <point key="canvasLocation" x="3232.8000000000002" y="-1155.472263868066"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nKL-2K-7of">
-            <objects>
-                <navigationController id="97k-JX-4kz" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="shd-ke-jfr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="fOJ-ao-Iq0" kind="relationship" relationship="rootViewController" id="hNf-Ko-v9l"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ldN-gf-CJY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3001" y="-497"/>
-        </scene>
         <!--새 이슈-->
         <scene sceneID="g5L-w5-JE7">
             <objects>
-                <viewController id="fOJ-ao-Iq0" customClass="IssueAddViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueAddViewController" hidesBottomBarWhenPushed="YES" id="fOJ-ao-Iq0" customClass="IssueAddViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aNw-eR-IOx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제목" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Erv-y9-yes">
-                                <rect key="frame" x="14" y="108" width="347" height="25.5"/>
+                                <rect key="frame" x="14" y="0.0" width="347" height="25.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EfC-q8-dsU">
-                                <rect key="frame" x="14" y="143.5" width="347" height="32"/>
+                                <rect key="frame" x="14" y="35.5" width="347" height="32"/>
                                 <segments>
                                     <segment title="마크다운"/>
                                     <segment title="미리보기"/>
                                 </segments>
                             </segmentedControl>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hIW-si-rH8">
-                                <rect key="frame" x="14" y="182" width="347" height="451.5"/>
+                                <rect key="frame" x="14" y="73.5" width="347" height="535.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -705,7 +689,7 @@
                             <constraint firstItem="EfC-q8-dsU" firstAttribute="top" secondItem="Erv-y9-yes" secondAttribute="bottom" constant="10" id="wfw-qh-IkI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="새 이슈" id="dGU-A5-d4c">
+                    <navigationItem key="navigationItem" title="새 이슈" largeTitleDisplayMode="always" id="dGU-A5-d4c">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="iyo-C7-Il5">
                             <connections>
                                 <action selector="clickExit:" destination="fOJ-ao-Iq0" id="ITZ-dn-r2x"/>
@@ -717,6 +701,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="newIssueContent" destination="hIW-si-rH8" id="1yb-dl-oQE"/>
                         <outlet property="newIssueTitle" destination="Erv-y9-yes" id="s8g-5w-7Al"/>
@@ -724,7 +709,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnC-aV-8eB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3660" y="-497.00149925037488"/>
+            <point key="canvasLocation" x="3218" y="-497"/>
         </scene>
         <!--Label-->
         <scene sceneID="J51-7o-y1D">
