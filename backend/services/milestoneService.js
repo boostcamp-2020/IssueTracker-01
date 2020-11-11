@@ -1,9 +1,18 @@
+import Issue from '@models/issueModel';
 import Milestone from '@models/milestoneModel';
 import Sequelize from 'sequelize';
 
 const getMilestoneList = async (req, res, next) => {
   try {
-    const milestones = await Milestone.findAll({ attributes: ['title', 'dueDate'] });
+    const milestones = await Milestone.findAll({
+      attributes: ['milestoneId', 'title', 'dueDate', 'description', 'updatedAt'],
+      include: [
+        {
+          model: Issue,
+          attributes: ['issueId', 'isOpen'],
+        }
+      ]
+    });
     res.json(milestones);
   } catch (err) {
     console.log(err);
@@ -63,14 +72,23 @@ const updateMilestone = async (req, res, next) => {
   try {
     const { milestoneId } = req.params;
     const { title, dueDate, description } = req.body;
-    await Milestone.update(
-      {
-        title,
-        dueDate,
-        description,
-      },
-      { where: { milestoneId: milestoneId } },
-    );
+
+    if (dueDate.length === 0) {
+      await Milestone.update(
+        {
+          title, description
+        },
+        { where: { milestoneId: milestoneId } },
+      );
+    } else {
+      await Milestone.update(
+        {
+          title, dueDate, description
+        },
+        { where: { milestoneId: milestoneId } },
+      );
+    }
+
     res.json({ message: 'Success' });
   } catch (err) {
     console.log(err);
