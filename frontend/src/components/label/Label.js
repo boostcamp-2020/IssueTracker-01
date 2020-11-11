@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LabelEdit from './LabelEdit';
+import { useLabelDispatch, deleteLabel } from '@contexts/label';
 
 const LabelDiv = styled.div`
   padding: 16px;
@@ -81,6 +82,7 @@ const generateRandomColor = () => {
 const Label = ({ id, item }) => {
   const [hide, setHide] = useState(true);
   const [label, setLabel] = useState({ ...item, fontContrast: contrastColor(hexToRgb(item.color)) });
+  const dispatch = useLabelDispatch();
 
   let debounce = undefined;
 
@@ -116,6 +118,11 @@ const Label = ({ id, item }) => {
     }, 500);
   };
 
+  const deleteThisLabel = (e) => {
+    e.preventDefault();
+    deleteLabel(dispatch, label.labelName);
+  };
+
   return (
     <LabelDiv>
       <LabelInfo>
@@ -129,7 +136,7 @@ const Label = ({ id, item }) => {
         </WidthDiv>
         <ButtonDiv>
           <Button onClick={toggleHide}>Edit</Button>
-          <Button>Delete</Button>
+          <Button onClick={(e) => deleteThisLabel(e)}>Delete</Button>
         </ButtonDiv>
       </LabelInfo>
       <LabelEdit

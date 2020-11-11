@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SVG from './SVG';
+import SVG from '../public/SVG';
 
 const FlextDiv = styled.div`
   display: flex;

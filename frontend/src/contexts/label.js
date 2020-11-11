@@ -43,6 +43,17 @@ export const updateLabel = async (dispatch, label) => {
   }
 };
 
+export const deleteLabel = async (dispatch, labelName) => {
+  try {
+    const response = await axios.delete(`http://localhost:3000/api/label/${labelName}`, {
+      withCredentials: true,
+    });
+    await loadLabels(dispatch);
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
 const LabelStateContext = createContext();
 const LabelDispatchContext = createContext();
 

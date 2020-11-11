@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import GreenButton from './GreenButton';
-import WhiteButton from './WhiteButton';
-import SVG from './SVG';
+import GreenButton from '../public/GreenButton';
+import WhiteButton from '../public/WhiteButton';
+import SVG from '../public/SVG';
 import { updateLabel, useLabelDispatch } from '@contexts/label';
 
 const EditForm = styled.form`

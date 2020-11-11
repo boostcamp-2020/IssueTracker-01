@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Label from '@components/Label';
+import Label from '@components/label/Label';
 
 const ListItem = styled.div``;
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TabButton from '@components/TabButton';
-import GreenButton from '@components/GreenButton';
-import LabelCreate from '@components/LabelCreate';
+import TabButton from '@components/label/TabButton';
+import GreenButton from '@components/public/GreenButton';
+import LabelCreate from '@components/label/LabelCreate';
 
 const FlexDiv = styled.div`
   display: flex;
