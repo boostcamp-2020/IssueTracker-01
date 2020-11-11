@@ -48,7 +48,7 @@ class IssueViewController: UIViewController {
     @IBAction func clickAddButton(_ sender: Any) {
         guard let add = addViewController as? IssueAddViewController else { return }
         guard let viewModel = viewModel else { return }
-        add.viewModel = viewModel.addViewModel
+        add.viewModel = viewModel.issueAddViewModel
         let navigationViewController = UINavigationController(rootViewController: add)
         navigationViewController.navigationBar.prefersLargeTitles = true
         navigationController?.present(navigationViewController, animated: true)
@@ -78,7 +78,11 @@ extension IssueViewController: UICollectionViewDelegate {
         guard !isEditing else { return }
         guard let detail = detailViewController as? IssueDetailViewController else { return }
         guard let viewModel = viewModel else { return }
-        detail.viewModel = CommentViewModel(comments: viewModel.issueCellViewModels[indexPath.row].comments ?? [])
+        do {
+            detail.viewModel = try viewModel.issueDetailViewModel(index: indexPath.row)
+        } catch {
+            print(error.localizedDescription)
+        }
         navigationController?.pushViewController(detail, animated: true)
     }
     
@@ -138,7 +142,12 @@ extension IssueViewController {
             listCell.configureCell(viewModel: issueViewModel)
             return listCell
         })
-        
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
+            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ViewID.header, for: indexPath)
+            header.isHidden = true
+            return header
+        }
         return dataSource
     }
     

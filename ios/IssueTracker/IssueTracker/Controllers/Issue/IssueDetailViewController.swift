@@ -16,7 +16,15 @@ class IssueDetailViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView?
     
-    var viewModel: CommentViewModel?
+    var viewModel: IssueDetailViewModel? {
+        didSet {
+            let bottomViewModel = viewModel?.issueBottomSheetViewModel
+            bottomViewModel?.closeIssueCompletion = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            bottomSheetViewController.viewModel = viewModel?.issueBottomSheetViewModel
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
