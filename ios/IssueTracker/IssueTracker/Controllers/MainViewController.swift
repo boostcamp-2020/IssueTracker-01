@@ -25,7 +25,7 @@ class MainViewController: UITabBarController {
     
     private func checkAccessToken() {
         guard githubLoginManager?.token == nil else { return }
-        present(loginViewController, animated: true, completion: nil)
+//        present(loginViewController, animated: true, completion: nil)
     }
 }
 
