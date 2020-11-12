@@ -145,34 +145,15 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Eqi-op-mx1">
-                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
+                                <rect key="frame" x="0.0" y="96" width="375" height="522"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="MQI-ES-dwC">
                                     <size key="itemSize" width="375" height="94"/>
-                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="IssueViewMainHeader" id="EyE-bo-2b1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔍 Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="39F-uz-qDJ">
-                                            <rect key="frame" x="16" y="8" width="343" height="34"/>
-                                            <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                        </textField>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstItem="39F-uz-qDJ" firstAttribute="bottom" secondItem="EyE-bo-2b1" secondAttribute="bottomMargin" id="Fp7-V1-mJc"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="39F-uz-qDJ" secondAttribute="trailing" constant="8" id="YR1-rL-Ttq"/>
-                                        <constraint firstItem="39F-uz-qDJ" firstAttribute="top" secondItem="EyE-bo-2b1" secondAttribute="topMargin" id="bvq-70-cZq"/>
-                                        <constraint firstItem="39F-uz-qDJ" firstAttribute="leading" secondItem="EyE-bo-2b1" secondAttribute="leadingMargin" constant="8" id="nPy-Yf-qb0"/>
-                                    </constraints>
-                                </collectionReusableView>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTW-4I-fqq">
                                 <rect key="frame" x="309" y="536" width="50" height="50"/>
@@ -197,6 +178,12 @@
                                     <action selector="clickAddButton:" destination="U5U-OD-pjL" eventType="touchUpInside" id="zKk-YG-JHd"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UAA-e1-BDQ">
+                                <rect key="frame" x="0.0" y="569" width="375" height="49"/>
+                                <items>
+                                    <barButtonItem title="선택 이슈 닫기" id="oGW-9y-a1T"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NbL-Ed-jtI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -204,6 +191,9 @@
                             <constraint firstItem="Eqi-op-mx1" firstAttribute="top" secondItem="NbL-Ed-jtI" secondAttribute="top" id="2y4-C5-ah7"/>
                             <constraint firstItem="Eqi-op-mx1" firstAttribute="bottom" secondItem="NbL-Ed-jtI" secondAttribute="bottom" id="3oA-A1-D0Y"/>
                             <constraint firstItem="NbL-Ed-jtI" firstAttribute="trailing" secondItem="zTW-4I-fqq" secondAttribute="trailing" constant="16" id="5M3-kZ-SUe"/>
+                            <constraint firstItem="UAA-e1-BDQ" firstAttribute="leading" secondItem="NbL-Ed-jtI" secondAttribute="leading" id="G6Q-nA-2Dh"/>
+                            <constraint firstItem="UAA-e1-BDQ" firstAttribute="trailing" secondItem="NbL-Ed-jtI" secondAttribute="trailing" id="INU-sf-QDz"/>
+                            <constraint firstItem="UAA-e1-BDQ" firstAttribute="bottom" secondItem="NbL-Ed-jtI" secondAttribute="bottom" id="JiA-wG-obt"/>
                             <constraint firstItem="Eqi-op-mx1" firstAttribute="leading" secondItem="NbL-Ed-jtI" secondAttribute="leading" id="RsT-Gb-kmu"/>
                             <constraint firstItem="Eqi-op-mx1" firstAttribute="trailing" secondItem="NbL-Ed-jtI" secondAttribute="trailing" id="aMs-Oc-r1C"/>
                             <constraint firstItem="NbL-Ed-jtI" firstAttribute="bottom" secondItem="zTW-4I-fqq" secondAttribute="bottom" constant="32" id="ojL-y3-6s5"/>
@@ -1105,9 +1095,6 @@
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondarySystemFillColor">
-            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

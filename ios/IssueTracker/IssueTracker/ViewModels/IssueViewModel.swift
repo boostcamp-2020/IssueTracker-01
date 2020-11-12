@@ -26,11 +26,17 @@ class IssueViewModel {
         self?.downloadData()
     }
     
-    var issueCellViewModels = [IssueCellViewModel]() {
+    private var issueCellViewModels = [IssueCellViewModel]() {
         didSet { issueChangeHandler?() }
     }
     
+    var filteredIssueCellViewModels: [IssueCellViewModel] {
+        guard let filterText = filterText, !filterText.isEmpty else { return issueCellViewModels }
+        return issueCellViewModels.filter { $0.title.contains(filterText) }
+    }
+    
     var issueChangeHandler: (() -> Void)?
+    var filterText: String?
     
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager

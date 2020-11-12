@@ -11,6 +11,14 @@ class IssueViewController: UIViewController {
     private lazy var detailViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.detail)
     private lazy var filterViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.filter)
     private lazy var addViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.add)
+    private lazy var searchController: UISearchController = {
+        let search = UISearchController()
+        search.searchBar.placeholder = "Search"
+        search.searchResultsUpdater = self
+        search.obscuresBackgroundDuringPresentation = false
+        return search
+    }()
+    
     private lazy var dataSource = makeDataSource()
     
     var viewModel: IssueViewModel? {
@@ -99,6 +107,7 @@ extension IssueViewController: UICollectionViewDelegate {
         collectionView?.delegate = self
         collectionView?.dataSource = dataSource
         collectionView?.allowsMultipleSelectionDuringEditing = true
+        navigationItem.searchController = searchController
     }
     
     private func registerCell() {
@@ -144,27 +153,27 @@ extension IssueViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        let dataSource = DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
-            guard let issueViewModel = self?.viewModel?.issueCellViewModels[indexPath.row] else { return listCell }
+            guard let issueViewModel = self?.viewModel?.filteredIssueCellViewModels[indexPath.row] else { return listCell }
             listCell.configureCell(viewModel: issueViewModel)
             return listCell
         })
-        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
-            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ViewID.header, for: indexPath)
-            header.isHidden = true
-            return header
-        }
-        return dataSource
     }
     
     func applySnapshot(animatingDifferences: Bool = true) {
         guard let viewModel = viewModel else { return }
         var snapshot = Snapshot()
         snapshot.appendSections([0])
-        snapshot.appendItems(viewModel.issueCellViewModels, toSection: 0)
+        snapshot.appendItems(viewModel.filteredIssueCellViewModels, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+}
+
+extension IssueViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        viewModel?.filterText = searchController.searchBar.text
+        applySnapshot()
     }
 }
