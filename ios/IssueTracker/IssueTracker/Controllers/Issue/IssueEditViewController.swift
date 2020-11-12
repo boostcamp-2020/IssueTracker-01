@@ -101,7 +101,7 @@ extension IssueEditViewController: UICollectionViewDataSource {
         let dummyIssueVM = IssueCellViewModel(issue: dummyIssue)
        
         //TODO: 이슈에서 마일스톤 연결해서 진행상황 가져오기
-        milestoneCell.configureCell()
+        // milestoneCell.configureCell(viewModel: dummyIssueVM)
         
         return milestoneCell
     }

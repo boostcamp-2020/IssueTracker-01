@@ -14,6 +14,8 @@ protocol NetworkManager {
     func downloadIssues(isOpen: Bool, completion: @escaping (Result<[Issue], Error>) -> Void)
     func addIssue(issue: Issue, completion: @escaping (Result<ServerResponse, Error>) -> Void)
     func closeIssue(issueID: Int, completion: @escaping (Result<ServerResponse, Error>) -> Void)
+    func downloadLabels(completion: @escaping (Result<LabelList, Error>) -> Void)
+    func downloadMilestones(completion: @escaping (Result<[Milestone], Error>) -> Void)
 }
 
 protocol GithubLoginDelegate: class {
@@ -21,7 +23,7 @@ protocol GithubLoginDelegate: class {
     func open(_ url: URL)
 }
 
-class IssueTrackerNetworkManager: NetworkManager {
+class IssueTrackerNetworkManager: NetworkManager {    
     static let shared = IssueTrackerNetworkManager()
     weak var delegate: GithubLoginDelegate?
     var githubLoginCompletionHandler: (() -> Void)?
@@ -86,6 +88,7 @@ extension IssueTrackerNetworkManager {
     
     private func response<T: Decodable>(responseObject: AFDataResponse<Data>, completion: @escaping (Result<T, Error>) -> Void) {
         guard let responseCode = responseObject.response?.statusCode, responseCode == 200 else {
+            dump(responseObject)
             let error = NetworkError.requestError.asAFError(orFailWith: "Response failed, code: " + "\(String(describing: responseObject.response?.statusCode))")
             completion(.failure(error))
             return
@@ -171,21 +174,13 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .patch, completion: completion)
     }
     
-    // TODO: IssueLabel인지 Label인지?
-    func downloadLabels(completion: @escaping (Result<[Label], Error>) -> Void) {
+    func downloadLabels(completion: @escaping (Result<LabelList, Error>) -> Void) {
         let url = Info.baseURL + "/label"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
     }
     
     func createLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = Info.baseURL + "/label"
-        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
-        request(url: url, method: .post, parameters: label, completion: completion)
-    }
-    
-    // FIXME: 파라미터 수정필요
-    func editLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = Info.baseURL + "/label"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: label, completion: completion)
@@ -201,11 +196,6 @@ extension IssueTrackerNetworkManager {
         let url = Info.baseURL + "/milestone"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
-    }
-    
-    // TODO : miletone 상세 조회
-    func detailMilestone() {
-        
     }
     
     func addMilestone(milestone: Milestone, completion: @escaping (Result<Bool, Error>) -> Void) {
@@ -248,5 +238,11 @@ extension IssueTrackerNetworkManager {
         let url = Info.baseURL + "/comment" + "/\(commentID)"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .delete, completion: completion)
+    }
+    
+    func addLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/comment" + "/label"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
+        request(url: url, method: .post, parameters: label, completion: completion)
     }
 }
