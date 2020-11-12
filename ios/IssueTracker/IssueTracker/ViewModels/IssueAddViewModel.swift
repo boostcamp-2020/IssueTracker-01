@@ -15,14 +15,14 @@ class IssueAddViewModel {
         self.networkManager = networkManager
     }
     
-    func addIssue(title: String, completion viewControllerCompletoin: (() -> Void)?) {
+    func addIssue(title: String, completion viewControllerCompletion: (() -> Void)?) {
         let newIssue = Issue(title: title)
         networkManager?.addIssue(issue: newIssue) { [weak self] result in
             switch result {
             case let .success(result):
                 guard result.message == "Success" else { print("error: ", result.message ?? ""); return }
                 self?.addIssueCompletion?()
-                viewControllerCompletoin?()
+                viewControllerCompletion?()
             case let .failure(result):
                 print(result.localizedDescription)
             }

@@ -1475,6 +1475,11 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="400"/>
+                    <connections>
+                        <outlet property="dueDate" destination="Kur-Or-iui" id="I8q-DH-3YU"/>
+                        <outlet property="milestoneDescription" destination="0lb-Il-OAG" id="hga-un-j7k"/>
+                        <outlet property="milestoneTitle" destination="Ft5-8I-EsP" id="8Nf-U4-UVx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDf-0H-GAV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

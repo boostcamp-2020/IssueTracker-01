@@ -15,24 +15,24 @@ class MilestoneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let networkManager = IssueTrackerNetworkManager.shared.self
-        let dummyVM = MilestoneViewModel(networkManager: networkManager)
-        dummyVM.milestoneCellViewModels = [
-            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤1", dueDate: "20201111", description: "마일스톤설명1" )),
-            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤2", dueDate: "20201112", description: "마일스톤설명2")),
-            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤3", dueDate: "20201113", description: "마일스톤설명3")),
-            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤4", dueDate: "20201114", description: "마일스톤설명4" )),
-            MilestoneCellViewModel(milestone: Milestone(title: "마일스톤5", dueDate: "20201115", description: "마일스톤설명5")),
-            ]
-        
-        self.viewModel = dummyVM
+
         configureFlowLayout()
         applySnapshot()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel = MilestoneViewModel(networkManager: IssueTrackerNetworkManager.shared.self)
+        self.viewModel?.delegate = self
+        self.viewModel?.downloadData()
+        
     }
 
     @IBAction func addMilestone(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let contentVC = self.storyboard?.instantiateViewController(withIdentifier: "milestoneContentViewController")
+        
+        guard let contentVC = self.storyboard?.instantiateViewController(withIdentifier: "milestoneContentViewController") as? MilestoneAlertViewController else { return }
+        contentVC.delegate = self
         alert.setValue(contentVC, forKeyPath: "contentViewController")
         present(alert, animated: true, completion: nil)
     }
@@ -57,7 +57,7 @@ extension MilestoneViewController {
     }
 }
 
-extension MilestoneViewController {
+extension MilestoneViewController: SnapshotDelegate {
     typealias DataSource = UICollectionViewDiffableDataSource<Int, MilestoneCellViewModel>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, MilestoneCellViewModel>
     
