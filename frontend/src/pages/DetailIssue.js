@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/util/Header';
 import Title from '../components/DetailIssue/Title';
+import CommentList from '../components/DetailIssue/CommentList';
 import axios from 'axios';
 
 const Box = styled.div`
@@ -30,6 +31,7 @@ const DetailIssue = ({ match }) => {
       <Header />
       <Box>
         <Title detailIssue={detailIssue} />
+        <CommentList comments={detailIssue.Comments} />
       </Box>
     </>
   );

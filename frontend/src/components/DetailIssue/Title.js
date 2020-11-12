@@ -54,11 +54,11 @@ const ClosedBox = styled.div`
   background: #cb2431;
 `;
 const Author = styled.p`
-  color: #697079;
+  color: #555b64;
   font-weight: 600;
 `;
 const InfoText = styled.p`
-  color: #90959b;
+  color: #555b64;
 `;
 const Title = ({ detailIssue }) => {
   const { issueId, title, isOpen, userId, createdAt, Comments } = detailIssue;
