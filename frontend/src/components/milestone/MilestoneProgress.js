@@ -1,43 +1,13 @@
 import React, { useContext, useRef } from "react";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import { MilestoneDispatchContext } from '../../contexts/milestone';
-
+import MilestoneGraph, { getStats } from './MilestoneGraph';
 
 const ProgressLayout = styled.div`
     flex: 0.45;
     display: flex;
     flex-direction: column;
-`;
-
-const GraphArea = styled.span`
-    height: 10px;
-    flex: 1;
-    padding-right: 20px;
-`;
-
-const GraphDiv = styled.div`
-    width: 100%;
-    height: 10px;
-    margin: 0;
-    margin-top: 10px;
-    background-color: #e1e4e8;
-    border-radius: 10px;
-`;
-
-const Graph = styled.div`
-    width: 0%;
-    height: 10px;
-    margin: 0;
-    margin-top: 10px;
-    background-color: #28a745;
-    border-radius: 10px;
-
-    ${(props) =>
-        props.per &&
-        css`
-          width: ${props.per}%;
-        `}
 `;
 
 const Stats = styled.div`
@@ -84,25 +54,6 @@ const DeleteBtn = styled.button`
       }
 `;
 
-const getStats = (issues) => {
-    if (!issues.length) return { per: 0, open: 0, close: 0 }
-
-    let open = 0;
-    let close = 0;
-
-    issues.forEach((issue) => {
-        if(issue.isOpen) {
-            open++;
-        } else {
-            close++;
-        }
-    })
-
-    const per = close / (open + close) * 100;
-
-    return { per: per, open: open, close: close }
-}
-
 const MilestoneProgress = (props) => {
     const issues = props.issues;
     const milestoneId = props.id;
@@ -127,7 +78,7 @@ const MilestoneProgress = (props) => {
     }
 
     return <ProgressLayout ref={milestoneRef}>
-        <GraphArea><GraphDiv><Graph per={stats.per} /></GraphDiv></GraphArea>
+        <MilestoneGraph issues={issues}/>
         <Stats> {stats.per}% complete {stats.open} open {stats.close} closed</Stats>
         <Btns>
             <EditBtn onClick={EditCilcked}>Edit</EditBtn>
