@@ -12,6 +12,8 @@ class LabelViewModel {
         didSet { labelChangeHandler?() }
     }
     
+    weak var delegate: LabelViewController?
+    
     var labelChangeHandler: (() -> Void)?
     var networkManager: NetworkManager?
     
@@ -20,10 +22,12 @@ class LabelViewModel {
     }
     
     func downloadData() {
-        networkManager?.downloadLabels() { [weak self] result in
+        networkManager?.downloadLabels { [weak self] result in
             switch result {
             case let .success(result):
-                self?.labelCellViewModels = result.map { LabelCellViewModel(label: $0) }
+                let labelList = result.labels
+                self?.labelCellViewModels = labelList?.map { LabelCellViewModel(label: $0) } ?? []
+                self?.delegate?.applySnapshot()
             case let .failure(error):
                 print(error.localizedDescription)
             }

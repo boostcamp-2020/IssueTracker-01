@@ -18,3 +18,11 @@ struct Label: Codable, Hashable {
         self.description = description
     }
 }
+
+struct LabelList: Codable {
+    let labels: [Label]?
+    
+    enum CodingKeys: String, CodingKey {        
+        case labels = "data"
+    }
+}

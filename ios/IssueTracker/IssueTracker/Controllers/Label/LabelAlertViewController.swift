@@ -11,6 +11,7 @@ class LabelAlertViewController: UIViewController {
     @IBOutlet weak var labelTitle: UITextField!
     @IBOutlet weak var labelDescription: UITextField!
     @IBOutlet weak var labelColor: UITextField!
+    weak var delegate: LabelViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,7 @@ class LabelAlertViewController: UIViewController {
     }
     
     @IBAction func exit(_ sender: Any) {
+        delegate?.applySnapshot()
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func save(_ sender: Any) {

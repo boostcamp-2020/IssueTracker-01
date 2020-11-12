@@ -15,28 +15,22 @@ class LabelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let networkManager = IssueTrackerNetworkManager.shared.self
-        let dummyVM = LabelViewModel(networkManager: networkManager)
-        dummyVM.labelCellViewModels = [
-            LabelCellViewModel(label: Label(labelName: "fix", color: "#DDDDDD")),
-            LabelCellViewModel(label: Label(labelName: "bug", color: "#AADDDD")),
-            LabelCellViewModel(label: Label(labelName: "feat", color: "#DAFD12")),
-            LabelCellViewModel(label: Label(labelName: "dsa", color: "#DDDDDD")),
-            LabelCellViewModel(label: Label(labelName: "qwewqe", color: "#121212")),
-            LabelCellViewModel(label: Label(labelName: "fgxvbc", color: "#999999")),
-            LabelCellViewModel(label: Label(labelName: "aaaaaa", color: "#AABBCC")),
-            LabelCellViewModel(label: Label(labelName: "dssfdxzc", color: "#DD5566")),
-            LabelCellViewModel(label: Label(labelName: "dsdasfasd", color: "#D67822")),
-            ]
-        
-        self.viewModel = dummyVM
         configureFlowLayout()
         applySnapshot()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let networkManager = IssueTrackerNetworkManager.shared.self
+        self.viewModel = LabelViewModel(networkManager: networkManager)
+        self.viewModel?.delegate = self
+        self.viewModel?.downloadData()
     }
 
     @IBAction func addLabel(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let contentVC = self.storyboard?.instantiateViewController(withIdentifier: "labelContentViewController")
+        guard let contentVC = self.storyboard?.instantiateViewController(withIdentifier: "labelContentViewController") as? LabelAlertViewController else { return }
+        contentVC.delegate = self
         alert.setValue(contentVC, forKeyPath: "contentViewController")
         
         self.present(alert, animated: true)

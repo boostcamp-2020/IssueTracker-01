@@ -14,7 +14,7 @@ protocol NetworkManager {
     func downloadIssues(completion: @escaping (Result<[Issue], Error>) -> Void)
     func addIssue(issue: Issue, completion: @escaping (Result<ServerResponse, Error>) -> Void)
     func closeIssue(issueID: Int, completion: @escaping (Result<ServerResponse, Error>) -> Void)
-    func downloadLabels(completion: @escaping (Result<[Label], Error>) -> Void)
+    func downloadLabels(completion: @escaping (Result<LabelList, Error>) -> Void)
     func downloadMilestones(completion: @escaping (Result<[Milestone], Error>) -> Void)
 }
 
@@ -169,7 +169,7 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .patch, completion: completion)
     }
     
-    func downloadLabels(completion: @escaping (Result<[Label], Error>) -> Void) {
+    func downloadLabels(completion: @escaping (Result<LabelList, Error>) -> Void) {
         let url = Info.baseURL + "/label"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
