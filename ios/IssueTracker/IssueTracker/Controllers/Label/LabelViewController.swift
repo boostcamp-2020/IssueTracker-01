@@ -16,7 +16,7 @@ class LabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let networkManager = IssueTrackerNetworkManager.shared.self
-        let dummyVM = LabelViewModel(token: IssueTrackerGithubLoginManager.shared.token ?? "", networkManager: networkManager)
+        let dummyVM = LabelViewModel(networkManager: networkManager)
         dummyVM.labelCellViewModels = [
             LabelCellViewModel(label: Label(labelName: "fix", color: "#DDDDDD")),
             LabelCellViewModel(label: Label(labelName: "bug", color: "#AADDDD")),

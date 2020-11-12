@@ -11,13 +11,11 @@ import Alamofire
 protocol NetworkManager {
     var hasToken: Bool { get }
     func requestGithubLogin(requestHandler: (() -> Void)?)
-    
-    func downloadIssues(token: String, completion: @escaping (Result<[Issue], Error>) -> Void)
-    func downloadLabels(token: String, completion: @escaping (Result<[Label], Error>) -> Void)
-    func downloadMilestones(token: String, completion: @escaping (Result<[Milestone], Error>) -> Void)
     func downloadIssues(completion: @escaping (Result<[Issue], Error>) -> Void)
     func addIssue(issue: Issue, completion: @escaping (Result<ServerResponse, Error>) -> Void)
     func closeIssue(issueID: Int, completion: @escaping (Result<ServerResponse, Error>) -> Void)
+    func downloadLabels(completion: @escaping (Result<[Label], Error>) -> Void)
+    func downloadMilestones(completion: @escaping (Result<[Milestone], Error>) -> Void)
 }
 
 protocol GithubLoginDelegate: class {
@@ -25,7 +23,7 @@ protocol GithubLoginDelegate: class {
     func open(_ url: URL)
 }
 
-class IssueTrackerNetworkManager: NetworkManager {
+class IssueTrackerNetworkManager: NetworkManager {    
     static let shared = IssueTrackerNetworkManager()
     weak var delegate: GithubLoginDelegate?
     var githubLoginCompletionHandler: (() -> Void)?
@@ -164,18 +162,12 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .delete, parameters: label, completion: completion)
     }
     
-    // TODO: 모든 레이블을 삭제하는 동작 필요
-    func deleteAllIssueLabel() {
-        
-    }
-    
     func changeIssueStatus(status: Int, issueID: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = Info.baseURL + "/issue/status/\(status)/\(issueID)"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, completion: completion)
     }
     
-    // TODO: IssueLabel인지 Label인지?
     func downloadLabels(completion: @escaping (Result<[Label], Error>) -> Void) {
         let url = Info.baseURL + "/label"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
@@ -183,13 +175,6 @@ extension IssueTrackerNetworkManager {
     }
     
     func createLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = Info.baseURL + "/label"
-        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
-        request(url: url, method: .post, parameters: label, completion: completion)
-    }
-    
-    // FIXME: 파라미터 수정필요
-    func editLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = Info.baseURL + "/label"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: label, completion: completion)
@@ -205,11 +190,6 @@ extension IssueTrackerNetworkManager {
         let url = Info.baseURL + "/milestone"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
-    }
-    
-    // TODO : miletone 상세 조회
-    func detailMilestone() {
-        
     }
     
     func addMilestone(milestone: Milestone, completion: @escaping (Result<Bool, Error>) -> Void) {

@@ -16,7 +16,7 @@ class MilestoneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let networkManager = IssueTrackerNetworkManager.shared.self
-        let dummyVM = MilestoneViewModel(token: IssueTrackerGithubLoginManager.shared.token ?? "", networkManager: networkManager)
+        let dummyVM = MilestoneViewModel(networkManager: networkManager)
         dummyVM.milestoneCellViewModels = [
             MilestoneCellViewModel(milestone: Milestone(title: "마일스톤1", dueDate: "20201111", description: "마일스톤설명1" )),
             MilestoneCellViewModel(milestone: Milestone(title: "마일스톤2", dueDate: "20201112", description: "마일스톤설명2")),

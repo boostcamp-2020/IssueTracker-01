@@ -13,17 +13,14 @@ class LabelViewModel {
     }
     
     var labelChangeHandler: (() -> Void)?
-    var token: String?
     var networkManager: NetworkManager?
     
-    init(token: String?, networkManager: NetworkManager?) {
-        self.token = token
+    init(networkManager: NetworkManager?) {
         self.networkManager = networkManager
     }
     
     func downloadData() {
-        guard let token = token else { return }
-        networkManager?.downloadLabels(token: token) { [weak self] result in
+        networkManager?.downloadLabels() { [weak self] result in
             switch result {
             case let .success(result):
                 self?.labelCellViewModels = result.map { LabelCellViewModel(label: $0) }
