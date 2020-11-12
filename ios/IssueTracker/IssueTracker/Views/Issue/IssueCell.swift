@@ -25,6 +25,11 @@ class IssueCell: UICollectionViewListCell {
         selectedBackgroundView = bgView
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        badgeStackView?.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
     private func configureMultiselect() {
         let selector = UICellAccessory.multiselect(displayed: .whenEditing, options: .init())
         accessories.append(selector)
@@ -33,7 +38,24 @@ class IssueCell: UICollectionViewListCell {
         separatorLayoutGuide.trailingAnchor.constraint(equalTo: issueDescription.leadingAnchor).isActive = true
     }
     
-    override func prepareForReuse() {
-        self.badgeStackView = nil
+    private func configureLabelStackView(labelBadges: [LabelBadge]?) {
+        guard let stackView = badgeStackView else { return }
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 3
+        
+        var sumOfLabelWidth = CGFloat.zero
+        labelBadges?.forEach { badge in
+            sumOfLabelWidth += badge.frame.size.width
+            stackView.addArrangedSubview(badge)
+            guard sumOfLabelWidth > stackView.frame.size.width else { return }
+            badge.backgroundColor = .clear
+            badge.text = "..."
+        }
+    }
+    
+    func configureCell(viewModel: IssueCellViewModel) {
+        issueTitle?.text = viewModel.title
+        milestoneTitle?.text = viewModel.milestone?.title
+        configureLabelStackView(labelBadges: viewModel.labelBadges)
     }
 }

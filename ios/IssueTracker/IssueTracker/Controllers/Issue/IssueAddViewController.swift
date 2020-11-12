@@ -8,17 +8,19 @@
 import UIKit
 
 class IssueAddViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    @IBOutlet weak var newIssueTitle: UITextField?
+    @IBOutlet weak var newIssueContent: UITextView?
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
+    var viewModel: IssueAddViewModel?
     
     @IBAction func clickExit(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func addIssue(_ sender: Any) {
+        guard let title = newIssueTitle?.text else { return }
+        viewModel?.addIssue(title: title) { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
     }
 }

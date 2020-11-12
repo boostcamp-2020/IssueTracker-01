@@ -21,6 +21,11 @@ class LabelBadge: UILabel {
         configure(origin: origin, text: text, colorCode: colorCode)
     }
     
+    convenience init(label: Label) {
+        self.init(frame: CGRect(origin: CGPoint.zero, size: CGSize.zero))
+        configure(origin: CGPoint.zero, text: label.labelName, colorCode: label.color)
+    }
+    
     func configure(origin: CGPoint, text: String, colorCode: String) {
         self.text = text
         self.backgroundColor = UIColor.hexColor(code: colorCode)

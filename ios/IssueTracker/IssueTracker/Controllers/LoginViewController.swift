@@ -14,18 +14,6 @@ protocol LoginViewControllerDelegate: class {
 class LoginViewController: UIViewController {
     weak var delegate: LoginViewControllerDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    private func configureMainTabBarController() -> UIViewController {
-        return storyboard?.instantiateViewController(withIdentifier: "MainTabBarController") ?? UIViewController()
-    }
-    
-    private func gitHubOAuth() -> Any? {
-        return "user"
-    }
-    
     @IBAction func loginGitHub(_ sender: UIButton) {
         delegate?.requestCode(loginViewController: self)
     }

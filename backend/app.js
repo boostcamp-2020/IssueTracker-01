@@ -9,6 +9,7 @@ import 'module-alias/register';
 import indexRouter from './routes/index';
 import passport from 'passport';
 import passportConfig from './passport/passport';
+import cors from 'cors';
 
 const app = express();
 
@@ -22,6 +23,13 @@ sequelize
   });
 
 passportConfig();
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+);
 
 app.use(logger('dev'));
 app.use(express.json());

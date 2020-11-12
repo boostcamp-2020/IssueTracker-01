@@ -8,50 +8,77 @@
 import UIKit
 
 class IssueViewModel {
-    var issueID: Int
-    var title: String
-    var milestoneTitle: MileStone?
-    var issueLabels: [IssueLabel]
-    var labelBadges = [LabelBadge?]()
-    
-    init(issue: Issue) {
-        self.issueID = issue.issueID
-        self.title = issue.title
-        self.milestoneTitle = issue.milestoneTitle
-        self.issueLabels = issue.issueLabels
+    enum IssueViewModelError: Error {
+        case noIssueID
     }
     
-    func configureLabel() {
-        for label in issueLabels {
-            labelBadges.append(LabelBadge(text: label.label.labelName, colorCode: label.label.color))
+    let networkManager: NetworkManager
+    
+    lazy var issueAddViewModel: IssueAddViewModel = {
+        let addViewModel = IssueAddViewModel(networkManager: self.networkManager)
+        addViewModel.addIssueCompletion = { [weak self] in
+            self?.downloadData()
+        }
+        return addViewModel
+    }()
+    
+    lazy var issueFilterViewModel = IssueFilterViewModel(filtered: .open) { [weak self] in
+        self?.downloadData()
+    }
+    
+    private var issueCellViewModels = [IssueCellViewModel]() {
+        didSet { issueChangeHandler?() }
+    }
+    
+    var filteredIssueCellViewModels: [IssueCellViewModel] {
+        guard let filterText = filterText, !filterText.isEmpty else { return issueCellViewModels }
+        return issueCellViewModels.filter { $0.title.contains(filterText) }
+    }
+    
+    var issueChangeHandler: (() -> Void)?
+    var filterText: String?
+    
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
+    
+    func issueDetailViewModel(index: Int) throws -> IssueDetailViewModel {
+        let issue = issueCellViewModels[index]
+        guard let issueID = issue.issueID else { throw IssueViewModelError.noIssueID }
+        return IssueDetailViewModel(comments: issue.comments ?? [], issueBottomSheetViewModel: IssueBottomSheetViewModel(issueID: issueID, networkManager: networkManager))
+    }
+    
+    func downloadData() {
+        switch issueFilterViewModel.filtered {
+        case .open:
+            self.downloadData(isOpen: true)
+        case.close:
+            self.downloadData(isOpen: false)
         }
     }
     
-    func configureLabelStackView(stackView: UIStackView) {
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 3
-        var sumOfLabelWidth = CGFloat.zero
-        for badge in labelBadges {
-            guard let badge = badge else { break }
-            sumOfLabelWidth += badge.frame.size.width
-            guard sumOfLabelWidth < stackView.frame.size.width else {
-                badge.text = "..."
-                stackView.addArrangedSubview(badge)
-                badge.translatesAutoresizingMaskIntoConstraints = false
-                badge.setContentHuggingPriority(.defaultLow, for: .horizontal)
-                break
+    func closeIssues(items: [Int]) {
+        items.forEach {
+            guard let issueID = issueCellViewModels[$0].issueID else { return }
+            networkManager.closeIssue(issueID: issueID) { [weak self] result in
+                switch result {
+                case let .failure(result):
+                    print(result.localizedDescription)
+                default:
+                    self?.issueChangeHandler?()
+                }
             }
-            stackView.addArrangedSubview(badge)
         }
     }
-}
-
-extension IssueViewModel: Hashable {
-    static func == (lhs: IssueViewModel, rhs: IssueViewModel) -> Bool {
-        lhs.issueID == rhs.issueID
-    }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(issueID)
+    private func downloadData(isOpen: Bool) {
+        networkManager.downloadIssues(isOpen: isOpen) { [weak self] result in
+            switch result {
+            case let .success(result):
+                self?.issueCellViewModels = result.map { IssueCellViewModel(issue: $0) }
+            case let .failure(result):
+                print(result.localizedDescription)
+            }
+        }
     }
 }

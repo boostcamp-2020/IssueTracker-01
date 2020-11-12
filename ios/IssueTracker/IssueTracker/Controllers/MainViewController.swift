@@ -8,38 +8,44 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-    var githubLogin: GithubLogin?
+    lazy var loginViewController: LoginViewController = {
+        let login = storyboard?.instantiateViewController(withIdentifier: ViewID.login) as? LoginViewController ?? LoginViewController()
+        login.delegate = self
+        login.modalPresentationStyle = .fullScreen
+        return login
+    }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    var networkManager: NetworkManager?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkAccessToken()
     }
     
-    private func configureLoginViewController() -> LoginViewController {
-        let login = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController ?? LoginViewController()
-        login.delegate = self
-        return login
-    }
-    
     private func checkAccessToken() {
-        guard githubLogin?.token == nil else { return }
-        let login = configureLoginViewController()
-        login.delegate = self
-        login.modalPresentationStyle = .fullScreen
-        present(login, animated: true, completion: nil)
+        guard let networkManager = networkManager, !networkManager.hasToken else { return }
+        present(loginViewController, animated: false, completion: nil)
     }
 }
 
+// MARK: - View identifier
+extension MainViewController {
+    private struct ViewID {
+        static let login = String(describing: LoginViewController.self)
+    }
+}
+
+// MARK: - LoginViewControllerDelegate
 extension MainViewController: LoginViewControllerDelegate {
     func requestCode(loginViewController: LoginViewController) {
-        githubLogin?.requestCode {
-            guard let issueViewController = self.viewControllers?.first as? IssueViewController else { return }
-            issueViewController.downloadViewModel()
+        guard let networkManager = networkManager else { return }
+        networkManager.requestGithubLogin { [weak self] in
             loginViewController.dismiss(animated: true, completion: nil)
+            guard let navigation = self?.viewControllers?.first as? UINavigationController else { return }
+            guard let issue = navigation.viewControllers.first as? IssueViewController else { return }
+            let issueViewModel = IssueViewModel(networkManager: networkManager)
+            issueViewModel.issueChangeHandler = { issue.applySnapshot() }
+            issue.viewModel = issueViewModel
         }
     }
 }
