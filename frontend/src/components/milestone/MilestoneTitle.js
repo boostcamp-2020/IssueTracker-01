@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import clockIcon from '../../../public/icon/clock.png' 
+import clockIcon from '../../../public/icon/clock.png'
+import MilestoneDueDate from './MilestoneDueDate';
 
 const TitleCell = styled.div`
     flex: 0.55;
@@ -13,13 +14,10 @@ const MilestoneMeta = styled.div`
     flex-direction: row;
 `;
 
-const MilestoneMetaDueDate = styled.span`
-    font-size: 0.95em;
-    color: gray;
-    font-weight: lighter;
-`;
-
 const MilestoneMetaUpdateDate = styled.span`
+    display: flex;
+    flex-direction: row;
+
     font-size: 0.95em;
     color: gray;
     font-weight: lighter;
@@ -39,13 +37,6 @@ const TitleLink = styled.a`
     }
 `;
 
-const titleStyle = {
-    fontSize: "1.6em",
-    width: "fit-content",
-    marginBottom: "10px",
-    textDecoration: "none"
-}
-
 const Desc = styled.p`
     margin-top: 10px;
 `;
@@ -54,15 +45,15 @@ const ClockImg = styled.img`
     width: 16px;
     height: 16px;
     margin-right: 5px;
+    padding-top: 3px;
 `;
 
-const month = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+const UpdateDateText = styled.p`
+    margin: 0 auto;
 
-const getDateFrom = (date) => {
-    return month[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-}
+color: gray;
+font-weight: lighter;
+`;
 
 const getElapsedTime = (date) => {
     const time = new Date(date).getTime();
@@ -77,30 +68,21 @@ const getElapsedTime = (date) => {
     } else {
         result = parseInt(result / 1000 / 60 / 60) + " day";
     }
-
     
     return result;
 }
 
 const MilestoneTitle = (props) => {
     const data = props.data;
-    let dueDate = new Date(data.dueDate);
-    
-    if (data.dueDate) {
-        dueDate = "Due by " + getDateFrom(dueDate);
-    } else {
-        dueDate = "No due date"
-    }
-
     const updateDate = getElapsedTime(data.updatedAt);
 
     return <TitleCell>
         <TitleLink href="http://localhost:8080/milestone-add">{data.title}</TitleLink>
         <MilestoneMeta>
-            <MilestoneMetaDueDate>{dueDate}</MilestoneMetaDueDate>
+            <MilestoneDueDate dueDate={data.dueDate}/>
             <MilestoneMetaUpdateDate>
                 <ClockImg src={clockIcon}/>
-                Last updated about {updateDate} ago
+                <UpdateDateText>Last updated about {updateDate} ago</UpdateDateText>
             </MilestoneMetaUpdateDate>
         </MilestoneMeta>
         <Desc>{data.description}</Desc>
