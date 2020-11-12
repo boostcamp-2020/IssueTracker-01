@@ -51,8 +51,8 @@ const ClockImg = styled.img`
 const UpdateDateText = styled.p`
     margin: 0 auto;
 
-color: gray;
-font-weight: lighter;
+    color: gray;
+    font-weight: lighter;
 `;
 
 const getElapsedTime = (date) => {
