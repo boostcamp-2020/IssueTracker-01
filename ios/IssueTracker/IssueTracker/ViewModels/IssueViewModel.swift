@@ -16,18 +16,21 @@ class IssueViewModel {
     
     lazy var issueAddViewModel: IssueAddViewModel = {
         let addViewModel = IssueAddViewModel(networkManager: self.networkManager)
-        addViewModel.addIssueCompletion = {
-            self.downloadData()
+        addViewModel.addIssueCompletion = { [weak self] in
+            self?.downloadData()
         }
         return addViewModel
     }()
+    
+    lazy var issueFilterViewModel = IssueFilterViewModel(filtered: .open) { [weak self] in
+        self?.downloadData()
+    }
     
     var issueCellViewModels = [IssueCellViewModel]() {
         didSet { issueChangeHandler?() }
     }
     
     var issueChangeHandler: (() -> Void)?
-    var token: String?
     
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
@@ -40,7 +43,16 @@ class IssueViewModel {
     }
     
     func downloadData() {
-        networkManager.downloadIssues { [weak self] result in
+        switch issueFilterViewModel.filtered {
+        case .open:
+            self.downloadData(isOpen: true)
+        case.close:
+            self.downloadData(isOpen: false)
+        }
+    }
+    
+    private func downloadData(isOpen: Bool) {
+        networkManager.downloadIssues(isOpen: isOpen) { [weak self] result in
             switch result {
             case let .success(result):
                 self?.issueCellViewModels = result.map { IssueCellViewModel(issue: $0) }

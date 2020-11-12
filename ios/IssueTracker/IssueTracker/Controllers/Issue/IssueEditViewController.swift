@@ -13,7 +13,6 @@ class IssueEditViewController: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var assigneeCollectionView: UICollectionView!
     @IBOutlet weak var milestoneCollectionView: UICollectionView!
     
-    
     private let labels = [
         Label(labelName: "feature", color: "AA66DD"),
         Label(labelName: "develop", color: "88FF88"),

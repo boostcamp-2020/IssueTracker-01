@@ -218,7 +218,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Filter"/>
                                     <connections>
-                                        <segue destination="g3c-Y3-Z8d" kind="presentation" id="3I7-tJ-uoJ"/>
+                                        <action selector="clickFilterButton:" destination="U5U-OD-pjL" eventType="touchUpInside" id="DAR-Ab-1RC"/>
                                     </connections>
                                 </button>
                             </barButtonItem>
@@ -269,32 +269,16 @@
             </objects>
             <point key="canvasLocation" x="2336.8000000000002" y="-497.00149925037488"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="em1-83-uCq">
-            <objects>
-                <navigationController id="g3c-Y3-Z8d" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Yqq-Ql-0t6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="oCi-36-Ezd" kind="relationship" relationship="rootViewController" id="fdF-c1-G1j"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XoD-HM-Sdy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="948" y="-1155"/>
-        </scene>
         <!--필터 선택-->
         <scene sceneID="yfj-gd-HRF">
             <objects>
                 <viewController storyboardIdentifier="IssueFilterViewController" id="oCi-36-Ezd" customClass="IssueFilterViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6SD-L5-co3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tXq-DV-lma">
-                                <rect key="frame" x="0.0" y="56" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="3xG-ir-UBR">
                                     <size key="itemSize" width="375" height="57"/>
@@ -338,10 +322,14 @@
                     <navigationItem key="navigationItem" title="필터 선택" largeTitleDisplayMode="always" id="isE-8H-fpJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MId-KL-uuo">
                             <connections>
-                                <action selector="clickExit:" destination="oCi-36-Ezd" id="a9z-CI-R7c"/>
+                                <action selector="clickCancelButton:" destination="oCi-36-Ezd" id="a9z-CI-R7c"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="4Kn-6L-Hpr"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="4Kn-6L-Hpr">
+                            <connections>
+                                <action selector="clickDoneButton:" destination="oCi-36-Ezd" id="kHX-me-F7T"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -471,8 +459,10 @@
                                                 <constraint firstItem="iFg-br-y6d" firstAttribute="leading" secondItem="g0F-UH-TZj" secondAttribute="trailing" constant="11" id="KPl-89-tGU"/>
                                                 <constraint firstItem="g0F-UH-TZj" firstAttribute="leading" secondItem="QSN-0J-o2x" secondAttribute="leading" constant="8" id="KSa-Mj-gjx"/>
                                                 <constraint firstItem="5Uz-ee-Q7t" firstAttribute="top" secondItem="iFg-br-y6d" secondAttribute="bottom" constant="8" symbolic="YES" id="LtG-XT-utQ"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iFg-br-y6d" secondAttribute="trailing" constant="10" id="M6P-BE-faU"/>
                                                 <constraint firstItem="5Uz-ee-Q7t" firstAttribute="leading" secondItem="iFg-br-y6d" secondAttribute="leading" id="VTP-bj-8iZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="iBB-b8-VYk" secondAttribute="trailing" constant="8" id="Z0D-li-ZGx"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5Uz-ee-Q7t" secondAttribute="trailing" constant="10" id="hDY-vt-SJh"/>
                                                 <constraint firstItem="iBB-b8-VYk" firstAttribute="top" secondItem="g0F-UH-TZj" secondAttribute="bottom" constant="8" symbolic="YES" id="o38-Iy-lNJ"/>
                                                 <constraint firstItem="iBB-b8-VYk" firstAttribute="leading" secondItem="g0F-UH-TZj" secondAttribute="leading" id="uJp-Bs-ZA5"/>
                                             </constraints>
@@ -709,7 +699,7 @@
                                 <action selector="clickExit:" destination="fOJ-ao-Iq0" id="ITZ-dn-r2x"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.up" catalog="system" style="plain" id="8Nk-60-O2i">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.up" catalog="system" id="8Nk-60-O2i">
                             <connections>
                                 <action selector="addIssue:" destination="fOJ-ao-Iq0" id="54z-0q-wkD"/>
                             </connections>
@@ -1020,6 +1010,7 @@
                                                 <constraint firstItem="aea-s6-xWJ" firstAttribute="leading" secondItem="ZVq-q7-NAQ" secondAttribute="leading" id="NTg-DW-E61"/>
                                                 <constraint firstAttribute="trailing" secondItem="aea-s6-xWJ" secondAttribute="trailing" constant="14" id="QsQ-lS-jve"/>
                                                 <constraint firstItem="YsX-Bd-fIq" firstAttribute="leading" secondItem="aea-s6-xWJ" secondAttribute="leading" id="ami-vz-7ih"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZVq-q7-NAQ" secondAttribute="trailing" constant="10" id="oeL-5B-eL6"/>
                                                 <constraint firstItem="YsX-Bd-fIq" firstAttribute="top" secondItem="aea-s6-xWJ" secondAttribute="top" id="w3i-2a-Eda"/>
                                             </constraints>
                                         </collectionViewCellContentView>

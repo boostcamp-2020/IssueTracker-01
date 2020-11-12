@@ -45,6 +45,15 @@ class IssueViewController: UIViewController {
         setEditing(false, animated: true)
     }
     
+    @IBAction func clickFilterButton(_ sender: Any) {
+        guard let filter = filterViewController as? IssueFilterViewController else { return }
+        guard let viewModel = viewModel else { return }
+        filter.viewModel = viewModel.issueFilterViewModel
+        let navigationViewController = UINavigationController(rootViewController: filter)
+        navigationViewController.navigationBar.prefersLargeTitles = true
+        navigationController?.present(navigationViewController, animated: true)
+    }
+    
     @IBAction func clickAddButton(_ sender: Any) {
         guard let add = addViewController as? IssueAddViewController else { return }
         guard let viewModel = viewModel else { return }
