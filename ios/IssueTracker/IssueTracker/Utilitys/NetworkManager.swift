@@ -88,6 +88,7 @@ extension IssueTrackerNetworkManager {
     
     private func response<T: Decodable>(responseObject: AFDataResponse<Data>, completion: @escaping (Result<T, Error>) -> Void) {
         guard let responseCode = responseObject.response?.statusCode, responseCode == 200 else {
+            dump(responseObject)
             let error = NetworkError.requestError.asAFError(orFailWith: "Response failed, code: " + "\(String(describing: responseObject.response?.statusCode))")
             completion(.failure(error))
             return
@@ -232,5 +233,11 @@ extension IssueTrackerNetworkManager {
         let url = Info.baseURL + "/comment" + "/\(commentID)"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .delete, completion: completion)
+    }
+    
+    func addLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let url = Info.baseURL + "/comment" + "/label"
+        guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
+        request(url: url, method: .post, parameters: label, completion: completion)
     }
 }
