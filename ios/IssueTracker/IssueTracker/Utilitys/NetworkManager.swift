@@ -198,7 +198,7 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .get, completion: completion)
     }
     
-    func addMilestone(milestone: Milestone, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func addMilestone(milestone: Milestone, completion: @escaping (Result<[String: String], Error>) -> Void) {
         let url = Info.baseURL + "/milestone"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: milestone, completion: completion)
@@ -240,7 +240,7 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .delete, completion: completion)
     }
     
-    func addLabel(label: Label, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func addLabel(label: Label, completion: @escaping (Result<LabelResult, Error>) -> Void) {
         let url = Info.baseURL + "/comment" + "/label"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: label, completion: completion)

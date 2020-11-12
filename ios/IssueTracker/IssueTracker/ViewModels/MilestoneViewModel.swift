@@ -15,15 +15,18 @@ class MilestoneViewModel {
     var milestoneChangeHandler: (() -> Void)?
     var networkManager: NetworkManager?
     
+    weak var delegate: SnapshotDelegate?
+    
     init(networkManager: NetworkManager?) {
         self.networkManager = networkManager
     }
     
     func downloadData() {
-        networkManager?.downloadMilestones() { [weak self] result in
+        networkManager?.downloadMilestones { [weak self] result in
             switch result {
             case let .success(result):
                 self?.milestoneCellViewModels = result.map { MilestoneCellViewModel(milestone: $0) }
+                self?.delegate?.applySnapshot(animatingDiffernces: true)
             case let .failure(error):
                 print(error.localizedDescription)
             }
