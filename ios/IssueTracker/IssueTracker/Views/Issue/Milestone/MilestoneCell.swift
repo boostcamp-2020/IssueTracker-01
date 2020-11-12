@@ -18,7 +18,7 @@ class MilestoneCell: UICollectionViewListCell {
     func configureCell(viewModel: MilestoneCellViewModel) {
         self.milestoneTitle.text = viewModel.title
         self.milestoneDescription.text = viewModel.description
-        self.dueDate.text = viewModel.dueDate
+        self.dueDate.text = viewModel.formatDueDate()
         self.percentage.text = "\(viewModel.calcPercentage())%"
         self.openedIssue.text = "\(viewModel.openIssues ?? 0) opened"
         self.closedIssue.text = "\(viewModel.closeIssues ?? 0) closed"
