@@ -20,8 +20,8 @@ router.get('/', (req, res) => {
   return res.send('ok');
 });
 
-router.get('/validate/jwt', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.sendStatus(200);
+router.get('/isLogin', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.status(200).json({ userId: req.user.dataValues.userId });
 });
 
 export default router;

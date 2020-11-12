@@ -10,7 +10,7 @@ const githubOAuthLogin = (req, res) => {
       return res.redirect(`issuetracker://${token}`);
     }
     res.cookie('jwt', token, { httpOnly: true });
-    return res.redirect('/');
+    return res.redirect('http://127.0.0.1:8080/');
   })(req, res);
 };
 
