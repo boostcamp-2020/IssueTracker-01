@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from '../components/util/Header';
 import Title from '../components/DetailIssue/Title';
 import CommentList from '../components/DetailIssue/CommentList';
+import AddComment from '../components/DetailIssue/AddComment';
 import axios from 'axios';
 
 const Box = styled.div`
@@ -32,6 +33,7 @@ const DetailIssue = ({ match }) => {
       <Box>
         <Title detailIssue={detailIssue} />
         <CommentList comments={detailIssue.Comments} />
+        <AddComment issueId={detailIssue.issueId} isOpen={detailIssue.isOpen} />
       </Box>
     </>
   );
