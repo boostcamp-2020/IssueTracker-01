@@ -19,7 +19,7 @@ const Issue = ({ item }) => {
         </span>
       </SVGDiv>
       <IssueTitleColumn>
-        <IssueTitle href={`/deatilissue/${item.issueId}`}>{item.title}</IssueTitle>
+        <IssueTitle href={`/deatilIssue/${item.issueId}`}>{item.title}</IssueTitle>
         <span>
           {item.IssueLabels.map((issueLabel) => {
             return (

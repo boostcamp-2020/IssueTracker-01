@@ -10,7 +10,7 @@ const IssueButtons = () => {
       <IssueFilter />
       <Buttons>
         <TabButton />
-        <GreenButton text="New Issue" />
+        <GreenButton text="New Issue" onClick={() => (location.href = '/issue-add')} />
       </Buttons>
     </FlexDiv>
   );
