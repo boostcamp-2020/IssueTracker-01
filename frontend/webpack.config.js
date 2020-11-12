@@ -9,15 +9,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-<<<<<<< HEAD
     alias: {
       '@components': path.resolve(__dirname, 'src/components'),
       '@contexts': path.resolve(__dirname, 'src/contexts'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@templates': path.resolve(__dirname, 'src/templates'),
     },
-=======
->>>>>>> feature/detailIssuePage
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -33,7 +30,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-<<<<<<< HEAD
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -42,8 +38,6 @@ module.exports = {
             loader: 'file-loader',
           },
         ],
-=======
->>>>>>> feature/detailIssuePage
       },
     ],
   },

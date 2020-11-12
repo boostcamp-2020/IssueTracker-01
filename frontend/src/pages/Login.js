@@ -27,7 +27,7 @@ const Login = ({ history }) => {
           userId: response.data.userId,
           profileUrl: response.data.profileUrl,
         });
-        history.push('/detailIssue/1');
+        history.push('/main');
       } catch (error) {
         console.log(error);
       }
