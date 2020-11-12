@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SVG from '../public/SVG';
+import SVG from '../utils/SVG';
 
 const FlextDiv = styled.div`
   display: flex;
@@ -13,6 +13,11 @@ const Button = styled.a`
   padding: 0 10px;
   border: 1px solid #e1e4e8;
   padding: 5px 16px;
+
+  &:link {
+    text-decoration: none;
+    color: #24292e;
+  }
   &:first-child {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
@@ -24,15 +29,15 @@ const Button = styled.a`
   }
 `;
 
-const TabButton = ({ active }) => {
+const TabButton = () => {
   return (
     <FlextDiv>
       <TabBorder>
-        <Button>
+        <Button href="/label">
           <SVG name="labelImage" size="16" />
           Labels
         </Button>
-        <Button>
+        <Button href="/milestone">
           <SVG name="milestoneImage" size="16" />
           Milestones
         </Button>

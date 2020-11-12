@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ListHead from '@components/label/ListHead';
 import LabelCount from '@components/label/LabelCount';
-import List from '@components/public/List';
+import List from '@components/utils/List';
 import { useLabelState } from '@contexts/label';
 
 const SummaryDiv = styled.div`
