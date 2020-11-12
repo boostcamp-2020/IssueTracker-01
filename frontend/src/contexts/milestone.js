@@ -29,7 +29,7 @@ const MilestoneProvider = ({ children }) => {
             try {
                 setLoading(true);
 
-                const result = await axios.get('http://localhost:3000/api/milestone');
+                const result = await axios.get('http://127.0.0.1:3000/api/milestone', { withCredentials: true });
 
                 dispatch({type: 'set', list: result.data});
             } catch (error) {
