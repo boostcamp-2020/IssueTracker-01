@@ -9,6 +9,7 @@ import UIKit
 
 protocol SnapshotDelegate: class {
     func applySnapshot(animatingDiffernces: Bool)
+    func updateList()
 }
 
 class LabelViewController: UIViewController {
@@ -39,6 +40,8 @@ class LabelViewController: UIViewController {
         
         self.present(alert, animated: true)
     }
+    
+    
 }
 
 // MARK: - View identifier
@@ -61,6 +64,8 @@ extension LabelViewController {
 }
 
 extension LabelViewController: SnapshotDelegate {
+    
+    
     typealias DataSource = UICollectionViewDiffableDataSource<Int, LabelCellViewModel>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, LabelCellViewModel>
     
@@ -82,6 +87,10 @@ extension LabelViewController: SnapshotDelegate {
         snapshot.appendItems(viewModel.labelCellViewModels)
         dataSource.apply(snapshot, animatingDifferences: animatingDiffernces)
         
+    }
+    
+    func updateList() {
+        self.viewModel?.downloadData()
     }
     
 }

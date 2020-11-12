@@ -36,8 +36,11 @@ class MilestoneAlertViewController: UIViewController {
         IssueTrackerNetworkManager.shared.addMilestone(milestone: newMilestone) { result in
             switch result {
             case let .success(result):
+                self.delegate?.updateList()
                 self.dismiss(animated: true, completion: nil)
             case let .failure(result):
+                dump(result.localizedDescription)
+                dump(result)
                 self.present(alertManager.showAlert(message: "오류가 발생했습니다."), animated: true)
             }
         }

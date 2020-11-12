@@ -36,6 +36,11 @@ class MilestoneViewController: UIViewController {
         alert.setValue(contentVC, forKeyPath: "contentViewController")
         present(alert, animated: true, completion: nil)
     }
+    
+    func update() {
+        self.viewModel?.downloadData()
+        self.applySnapshot()
+    }
 }
 
 // MARK: - View identifier
@@ -81,4 +86,7 @@ extension MilestoneViewController: SnapshotDelegate {
         
     }
     
+    func updateList() {
+        self.viewModel?.downloadData()
+    }
 }

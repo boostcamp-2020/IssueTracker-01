@@ -26,3 +26,8 @@ struct LabelList: Codable {
         case labels = "data"
     }
 }
+
+struct LabelResult: Codable {
+    let data: Label
+    let message: String
+}

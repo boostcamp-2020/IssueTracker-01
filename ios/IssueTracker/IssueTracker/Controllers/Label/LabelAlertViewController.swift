@@ -39,6 +39,7 @@ class LabelAlertViewController: UIViewController {
         IssueTrackerNetworkManager.shared.addLabel(label: newLabel) { result in
             switch result {
             case let .success(result):
+                self.delegate?.updateList()
                 self.dismiss(animated: true, completion: nil)
             case let .failure(result):
                 self.present(alertManager.showAlert(message: "오류가 발생했습니다."), animated: true)
