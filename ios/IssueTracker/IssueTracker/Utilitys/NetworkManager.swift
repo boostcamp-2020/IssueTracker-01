@@ -11,7 +11,7 @@ import Alamofire
 protocol NetworkManager {
     var hasToken: Bool { get }
     func requestGithubLogin(requestHandler: (() -> Void)?)
-    func downloadIssues(completion: @escaping (Result<[Issue], Error>) -> Void)
+    func downloadIssues(isOpen: Bool, completion: @escaping (Result<[Issue], Error>) -> Void)
     func addIssue(issue: Issue, completion: @escaping (Result<ServerResponse, Error>) -> Void)
     func closeIssue(issueID: Int, completion: @escaping (Result<ServerResponse, Error>) -> Void)
     func downloadLabels(completion: @escaping (Result<LabelList, Error>) -> Void)
@@ -115,8 +115,13 @@ extension IssueTrackerNetworkManager {
         }
     }
     
-    func downloadIssues(completion: @escaping (Result<[Issue], Error>) -> Void) {
-        let url = Info.baseURL + "/issue"
+    func downloadIssues(isOpen: Bool, completion: @escaping (Result<[Issue], Error>) -> Void) {
+        var url = Info.baseURL + "/issue"
+        if isOpen {
+            url += "?q=is:open"
+        } else {
+            url += "?q=is:close"
+        }
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .get, completion: completion)
     }
@@ -128,7 +133,7 @@ extension IssueTrackerNetworkManager {
     }
     
     func closeIssue(issueID: Int, completion: @escaping (Result<ServerResponse, Error>) -> Void) {
-        let url = Info.baseURL + "/issue/status/2/\(issueID)"
+        let url = Info.baseURL + "/issue/status/0/\(issueID)"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .patch, completion: completion)
     }

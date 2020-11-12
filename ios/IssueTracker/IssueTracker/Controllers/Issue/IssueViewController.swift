@@ -11,6 +11,14 @@ class IssueViewController: UIViewController {
     private lazy var detailViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.detail)
     private lazy var filterViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.filter)
     private lazy var addViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.add)
+    private lazy var searchController: UISearchController = {
+        let search = UISearchController()
+        search.searchBar.placeholder = "Search"
+        search.searchResultsUpdater = self
+        search.obscuresBackgroundDuringPresentation = false
+        return search
+    }()
+    
     private lazy var dataSource = makeDataSource()
     
     var viewModel: IssueViewModel? {
@@ -20,6 +28,7 @@ class IssueViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView?
+    @IBOutlet weak var editingTabBar: UIToolbar?
     @IBOutlet weak var filterButton: UIButton?
     @IBOutlet weak var editButton: UIButton?
     @IBOutlet weak var selectAllButton: UIButton?
@@ -45,6 +54,15 @@ class IssueViewController: UIViewController {
         setEditing(false, animated: true)
     }
     
+    @IBAction func clickFilterButton(_ sender: Any) {
+        guard let filter = filterViewController as? IssueFilterViewController else { return }
+        guard let viewModel = viewModel else { return }
+        filter.viewModel = viewModel.issueFilterViewModel
+        let navigationViewController = UINavigationController(rootViewController: filter)
+        navigationViewController.navigationBar.prefersLargeTitles = true
+        navigationController?.present(navigationViewController, animated: true)
+    }
+    
     @IBAction func clickAddButton(_ sender: Any) {
         guard let add = addViewController as? IssueAddViewController else { return }
         guard let viewModel = viewModel else { return }
@@ -52,6 +70,13 @@ class IssueViewController: UIViewController {
         let navigationViewController = UINavigationController(rootViewController: add)
         navigationViewController.navigationBar.prefersLargeTitles = true
         navigationController?.present(navigationViewController, animated: true)
+    }
+    
+    @IBAction func clickCloseIssueButton(_ sender: Any) {
+        guard let selectedItems = collectionView?.indexPathsForSelectedItems else { return }
+        viewModel?.closeIssues(items: selectedItems.map { $0.row })
+        viewModel?.downloadData()
+        setEditing(false, animated: true)
     }
 }
 
@@ -90,6 +115,7 @@ extension IssueViewController: UICollectionViewDelegate {
         collectionView?.delegate = self
         collectionView?.dataSource = dataSource
         collectionView?.allowsMultipleSelectionDuringEditing = true
+        navigationItem.searchController = searchController
     }
     
     private func registerCell() {
@@ -103,21 +129,13 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     private func setButtonModes(isEditing: Bool) {
-        if isEditing {
-            filterButton?.isHidden = true
-            editButton?.isHidden = true
-            selectAllButton?.isHidden = false
-            cancelButton?.isHidden = false
-            addButton?.isHidden = true
-        } else {
-            filterButton?.isHidden = false
-            editButton?.isHidden = false
-            selectAllButton?.isHidden = true
-            cancelButton?.isHidden = true
-            addButton?.isHidden = false
-        }
-        
-        self.applySnapshot()
+        filterButton?.isHidden = isEditing
+        editButton?.isHidden = isEditing
+        selectAllButton?.isHidden = !isEditing
+        cancelButton?.isHidden = !isEditing
+        addButton?.isHidden = isEditing
+        editingTabBar?.isHidden = !isEditing
+        tabBarController?.tabBar.isHidden = isEditing
     }
     
     private func selectAllCell() {
@@ -135,27 +153,27 @@ extension IssueViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        let dataSource = DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
+        return DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
-            guard let issueViewModel = self?.viewModel?.issueCellViewModels[indexPath.row] else { return listCell }
+            guard let issueViewModel = self?.viewModel?.filteredIssueCellViewModels[indexPath.row] else { return listCell }
             listCell.configureCell(viewModel: issueViewModel)
             return listCell
         })
-        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
-            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ViewID.header, for: indexPath)
-            header.isHidden = true
-            return header
-        }
-        return dataSource
     }
     
     func applySnapshot(animatingDifferences: Bool = true) {
         guard let viewModel = viewModel else { return }
         var snapshot = Snapshot()
         snapshot.appendSections([0])
-        snapshot.appendItems(viewModel.issueCellViewModels, toSection: 0)
+        snapshot.appendItems(viewModel.filteredIssueCellViewModels, toSection: 0)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+}
+
+extension IssueViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        viewModel?.filterText = searchController.searchBar.text
+        applySnapshot()
     }
 }
