@@ -181,6 +181,7 @@
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UAA-e1-BDQ">
                                 <rect key="frame" x="0.0" y="569" width="375" height="49"/>
                                 <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="861-Le-T7e"/>
                                     <barButtonItem title="선택 이슈 닫기" id="oGW-9y-a1T">
                                         <connections>
                                             <action selector="clickCloseIssueButton:" destination="U5U-OD-pjL" id="1T2-9g-XeB"/>
