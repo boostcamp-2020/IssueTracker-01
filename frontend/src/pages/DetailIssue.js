@@ -41,7 +41,7 @@ const DetailIssue = ({ match }) => {
             <Title detailIssue={detailIssue} />
             <CommentList comments={detailIssue.Comments} setEdit={setEdit} setComment={setComment} />
             {!edit ? (
-              <AddComment issueId={detailIssue.issueId} isOpen={detailIssue.isOpen} />
+              <AddComment issueId={detailIssue.issueId} isOpen={detailIssue.isOpen} fetchData={fetchData} />
             ) : (
               <EditComment setEdit={setEdit} comment={comment} fetchData={fetchData} />
             )}

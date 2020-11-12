@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import UserContext from '../../contexts/user';
 import { GoIssueClosed } from 'react-icons/go';
+import axios from 'axios';
 
 const Img = styled.img`
   width: auto;
@@ -56,7 +57,7 @@ const ButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-const CloseButton = styled.button`
+const IssueButton = styled.button`
   width: 120px;
   height: 30px;
   background: #f5f7f9;
@@ -80,8 +81,42 @@ const AddButton = styled.button`
     background: #a2d1a6;
   }
 `;
-const AddComment = ({ issueId, isOpen }) => {
+const AddComment = ({ issueId, isOpen, fetchData }) => {
   const { user } = useContext(UserContext);
+  const [comment, setComment] = useState('');
+  const onChange = useCallback((e) => {
+    setComment(e.target.value);
+  });
+  const onSubmit = useCallback(async () => {
+    try {
+      await axios.post(
+        `http://127.0.0.1:3000/api/comment/${issueId}`,
+        { content: comment },
+        {
+          withCredentials: true,
+        },
+      );
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+    setComment('');
+  });
+  const onClick = useCallback(async () => {
+    try {
+      const status = isOpen ? 0 : 1;
+      await axios.patch(
+        `http://127.0.0.1:3000/api/issue/status/${status}/${issueId}`,
+        {},
+        {
+          withCredentials: true,
+        },
+      );
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  });
   return (
     <Box>
       <Img src={user.profileUrl} />
@@ -90,16 +125,20 @@ const AddComment = ({ issueId, isOpen }) => {
           <p>Write</p>
         </Title>
         <Content>
-          <TextArea placeholder={'Leave a comment'} />
+          <TextArea placeholder={'Leave a comment'} value={comment} onChange={onChange} />
         </Content>
         <ButtonBox>
-          {isOpen === 1 && (
-            <CloseButton>
+          {isOpen ? (
+            <IssueButton onClick={onClick}>
               <GoIssueClosed style={{ color: 'red' }} />
               &nbsp;Close issue
-            </CloseButton>
+            </IssueButton>
+          ) : (
+            <IssueButton onClick={onClick}>Reopen issue</IssueButton>
           )}
-          <AddButton>Comment</AddButton>
+          <AddButton disabled={!comment.length} onClick={onSubmit}>
+            Comment
+          </AddButton>
         </ButtonBox>
       </AddBox>
     </Box>

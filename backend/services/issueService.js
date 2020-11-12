@@ -69,6 +69,7 @@ const removeAllLabel = async (req, res) => {
 };
 
 const updateIssueStatus = async (req, res, next) => {
+  console.log('test');
   try {
     const { status, issueId } = req.params;
 
