@@ -11,7 +11,7 @@ class LabelAlertViewController: UIViewController {
     @IBOutlet weak var labelTitle: UITextField!
     @IBOutlet weak var labelDescription: UITextField!
     @IBOutlet weak var labelColor: UITextField!
-    weak var delegate: LabelViewController?
+    weak var delegate: SnapshotDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,6 @@ class LabelAlertViewController: UIViewController {
     }
     
     @IBAction func exit(_ sender: Any) {
-        delegate?.applySnapshot()
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func save(_ sender: Any) {
@@ -39,9 +38,9 @@ class LabelAlertViewController: UIViewController {
         let newLabel = Label(labelName: title, color: color, description: description)
         IssueTrackerNetworkManager.shared.addLabel(label: newLabel) { result in
             switch result {
-            case .success(_):
+            case let .success(result):
                 self.dismiss(animated: true, completion: nil)
-            case .failure(_):
+            case let .failure(result):
                 self.present(alertManager.showAlert(message: "오류가 발생했습니다."), animated: true)
             }
         }

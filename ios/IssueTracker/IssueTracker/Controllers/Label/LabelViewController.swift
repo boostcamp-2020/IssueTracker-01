@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SnapshotDelegate: class {
+    func applySnapshot(animatingDiffernces: Bool)
+}
+
 class LabelViewController: UIViewController {
     private lazy var dataSource = makeDatasource()
     var viewModel: LabelViewModel?
@@ -56,7 +60,7 @@ extension LabelViewController {
     }
 }
 
-extension LabelViewController {
+extension LabelViewController: SnapshotDelegate {
     typealias DataSource = UICollectionViewDiffableDataSource<Int, LabelCellViewModel>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, LabelCellViewModel>
     

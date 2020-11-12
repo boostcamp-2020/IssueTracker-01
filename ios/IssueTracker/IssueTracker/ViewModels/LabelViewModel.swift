@@ -12,7 +12,7 @@ class LabelViewModel {
         didSet { labelChangeHandler?() }
     }
     
-    weak var delegate: LabelViewController?
+    weak var delegate: SnapshotDelegate?
     
     var labelChangeHandler: (() -> Void)?
     var networkManager: NetworkManager?
@@ -27,7 +27,7 @@ class LabelViewModel {
             case let .success(result):
                 let labelList = result.labels
                 self?.labelCellViewModels = labelList?.map { LabelCellViewModel(label: $0) } ?? []
-                self?.delegate?.applySnapshot()
+                self?.delegate?.applySnapshot(animatingDiffernces: true)
             case let .failure(error):
                 print(error.localizedDescription)
             }
