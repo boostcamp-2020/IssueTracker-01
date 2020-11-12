@@ -57,6 +57,20 @@ class IssueViewModel {
         }
     }
     
+    func closeIssues(items: [Int]) {
+        items.forEach {
+            guard let issueID = issueCellViewModels[$0].issueID else { return }
+            networkManager.closeIssue(issueID: issueID) { [weak self] result in
+                switch result {
+                case let .failure(result):
+                    print(result.localizedDescription)
+                default:
+                    self?.issueChangeHandler?()
+                }
+            }
+        }
+    }
+    
     private func downloadData(isOpen: Bool) {
         networkManager.downloadIssues(isOpen: isOpen) { [weak self] result in
             switch result {

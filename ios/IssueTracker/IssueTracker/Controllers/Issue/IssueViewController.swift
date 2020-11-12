@@ -28,6 +28,7 @@ class IssueViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView?
+    @IBOutlet weak var editingTabBar: UIToolbar?
     @IBOutlet weak var filterButton: UIButton?
     @IBOutlet weak var editButton: UIButton?
     @IBOutlet weak var selectAllButton: UIButton?
@@ -69,6 +70,13 @@ class IssueViewController: UIViewController {
         let navigationViewController = UINavigationController(rootViewController: add)
         navigationViewController.navigationBar.prefersLargeTitles = true
         navigationController?.present(navigationViewController, animated: true)
+    }
+    
+    @IBAction func clickCloseIssueButton(_ sender: Any) {
+        guard let selectedItems = collectionView?.indexPathsForSelectedItems else { return }
+        viewModel?.closeIssues(items: selectedItems.map { $0.row })
+        viewModel?.downloadData()
+        setEditing(false, animated: true)
     }
 }
 
@@ -121,21 +129,13 @@ extension IssueViewController: UICollectionViewDelegate {
     }
     
     private func setButtonModes(isEditing: Bool) {
-        if isEditing {
-            filterButton?.isHidden = true
-            editButton?.isHidden = true
-            selectAllButton?.isHidden = false
-            cancelButton?.isHidden = false
-            addButton?.isHidden = true
-        } else {
-            filterButton?.isHidden = false
-            editButton?.isHidden = false
-            selectAllButton?.isHidden = true
-            cancelButton?.isHidden = true
-            addButton?.isHidden = false
-        }
-        
-        self.applySnapshot()
+        filterButton?.isHidden = isEditing
+        editButton?.isHidden = isEditing
+        selectAllButton?.isHidden = !isEditing
+        cancelButton?.isHidden = !isEditing
+        addButton?.isHidden = isEditing
+        editingTabBar?.isHidden = !isEditing
+        tabBarController?.tabBar.isHidden = isEditing
     }
     
     private func selectAllCell() {
