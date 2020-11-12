@@ -10,9 +10,11 @@ import Foundation
 class LabelCellViewModel {
     let labelName: String
     let color: String
+    let labelDescription: String?
     init(label: Label) {
         self.labelName = label.labelName
         self.color = label.color
+        self.labelDescription = label.description
     }
 }
 

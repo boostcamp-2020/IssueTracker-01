@@ -14,11 +14,11 @@ class LabelCell: UICollectionViewListCell {
     func configureCell(viewModel: LabelCellViewModel) {
         let badge = LabelBadge(text: viewModel.labelName, colorCode: viewModel.color)
         self.wrapperView.addSubview(badge)
-        //FIXME: 라벨 설명을 받아오는 방법
-        self.labelDescription.text = "라벨 설명"
+        self.labelDescription.text = viewModel.labelDescription
     }
     
     override func prepareForReuse() {
-        wrapperView.subviews.forEach{ $0.removeFromSuperview() }
+        super.prepareForReuse()
+        wrapperView.subviews.forEach { $0.removeFromSuperview() }
     }
 }
