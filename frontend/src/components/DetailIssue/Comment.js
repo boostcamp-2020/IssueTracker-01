@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import UserContext from '../../contexts/user';
 import calcTime from '../../util/calcTime';
@@ -59,10 +59,17 @@ const InfoBox = styled.div`
 const CommentConent = styled.div`
   padding: 0 1rem 0 1rem;
 `;
-const Comment = ({ comment }) => {
-  const { content, createdAt, User } = comment;
+const Comment = ({ comment, setEdit, setComment }) => {
+  const { commentId, content, createdAt, User } = comment;
   const { userId, profile_url } = User;
   const { user } = useContext(UserContext);
+  const onEdit = useCallback(() => {
+    setEdit(1);
+    setComment({
+      commentId,
+      content,
+    });
+  });
   return (
     <Box>
       <Img src={profile_url} />
@@ -77,7 +84,9 @@ const Comment = ({ comment }) => {
               <OwnerBox>
                 <p>Owner</p>
               </OwnerBox>
-              <p style={{ cursor: 'pointer' }}>Edit</p>
+              <p style={{ cursor: 'pointer' }} onClick={onEdit}>
+                Edit
+              </p>
             </EditBox>
           </CommentInfo>
           <CommentConent>

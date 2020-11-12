@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import UserContext from '../../contexts/user';
-import { GoIssueClosed } from 'react-icons/go';
+import axios from 'axios';
 
 const Img = styled.img`
   width: auto;
@@ -56,8 +56,8 @@ const ButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-const CloseButton = styled.button`
-  width: 120px;
+const CancelButton = styled.button`
+  width: 110px;
   height: 30px;
   background: #f5f7f9;
   border-radius: 4px;
@@ -66,22 +66,48 @@ const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: red;
+  cursor: pointer;
 `;
-const AddButton = styled.button`
+const UpdateButton = styled.button`
   margin-left: 5px;
-  width: 90px;
+  width: 200px;
   height: 30px;
   background: #2cbe4e;
   border-radius: 4px;
   border: 1px solid #7ea682;
   color: white;
   font-weight: 600;
+  cursor: pointer;
   :disabled {
     background: #a2d1a6;
+    cursor: default;
   }
 `;
-const AddComment = ({ issueId, isOpen }) => {
+const EditComment = ({ setEdit, comment, fetchData }) => {
   const { user } = useContext(UserContext);
+  const [text, setText] = useState(comment.content);
+  const onChange = useCallback((e) => {
+    setText(e.target.value);
+  });
+  const onCancel = useCallback(() => {
+    setEdit(0);
+  });
+  const onUpdate = useCallback(async () => {
+    try {
+      await axios.patch(
+        `http://127.0.0.1:3000/api/comment/${comment.commentId}`,
+        { content: text },
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    setEdit(0);
+    fetchData();
+  });
   return (
     <Box>
       <Img src={user.profileUrl} />
@@ -90,20 +116,17 @@ const AddComment = ({ issueId, isOpen }) => {
           <p>Write</p>
         </Title>
         <Content>
-          <TextArea placeholder={'Leave a comment'} />
+          <TextArea placeholder={'Leave a comment'} value={text} onChange={onChange} />
         </Content>
         <ButtonBox>
-          {isOpen === 1 && (
-            <CloseButton>
-              <GoIssueClosed style={{ color: 'red' }} />
-              &nbsp;Close issue
-            </CloseButton>
-          )}
-          <AddButton>Comment</AddButton>
+          <CancelButton onClick={onCancel}>Cancel</CancelButton>
+          <UpdateButton onClick={onUpdate} disabled={!text.length}>
+            Update comment
+          </UpdateButton>
         </ButtonBox>
       </AddBox>
     </Box>
   );
 };
 
-export default AddComment;
+export default EditComment;

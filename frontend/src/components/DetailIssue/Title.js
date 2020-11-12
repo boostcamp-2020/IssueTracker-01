@@ -28,6 +28,9 @@ const EditButton = styled.button`
   font-weight: 600;
   outline: none;
   cursor: pointer;
+  :disabled {
+    cursor: default;
+  }
 `;
 
 const boxStyle = css`
