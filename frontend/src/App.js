@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Main from './pages/Main';
+<<<<<<< HEAD
 import Label from '@pages/Label';
 import IssueAdding from './pages/IssueAdding';
 import Milestone from './pages/Milestone';
@@ -14,10 +15,14 @@ import { LabelProvider } from '@contexts/label';
 import UserListProvider from './contexts/userList';
 import SelectionProvider from './contexts/selection';
 import MilestoneProvider from './contexts/milestone';
+=======
+import DetailIssue from './pages/DetailIssue';
+>>>>>>> feature/detailIssuePage
 
 const App = () => {
   return (
     <UserProvider>
+<<<<<<< HEAD
       <LabelProvider>
         <Route path="/" component={Login} exact />
         <Route path="/label" component={Label} />
@@ -33,6 +38,11 @@ const App = () => {
           </UserListProvider>
         </MilestoneProvider>
       </LabelProvider>
+=======
+      <Route path="/" component={Login} exact />
+      <Route path="/main" component={Main} />
+      <Route path="/detailIssue/:issueId" component={DetailIssue} />
+>>>>>>> feature/detailIssuePage
     </UserProvider>
   );
 };

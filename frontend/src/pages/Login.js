@@ -18,13 +18,16 @@ const H1 = styled.h1`
   box-sizing: border-box;
 `;
 const Login = ({ history }) => {
-  const { setUserId } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   useEffect(() => {
     const checkLogin = async () => {
       try {
         const response = await axios.get('http://127.0.0.1:3000/isLogin', { withCredentials: true });
-        setUserId(response.data.userId);
-        history.push('/main');
+        setUser({
+          userId: response.data.userId,
+          profileUrl: response.data.profileUrl,
+        });
+        history.push('/detailIssue/1');
       } catch (error) {
         console.log(error);
       }

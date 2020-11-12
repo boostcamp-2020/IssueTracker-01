@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/isLogin', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.status(200).json({ userId: req.user.dataValues.userId });
+  res.status(200).json({ userId: req.user.dataValues.userId, profileUrl: req.user.dataValues.profile_url });
 });
 
 export default router;

@@ -16,6 +16,7 @@ const GitHubLoginButton = styled.button`
   box-sizing: border-box;
   font-size: 1rem;
   font-weight: 600;
+  outline: 0;
   cursor: pointer;
   p {
     margin: 0;
