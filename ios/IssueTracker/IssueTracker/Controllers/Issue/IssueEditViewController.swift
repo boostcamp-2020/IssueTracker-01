@@ -95,7 +95,7 @@ extension IssueEditViewController: UICollectionViewDataSource {
     }
     
     func configureMilestoneCollectionViewCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
-        guard let milestoneCell = collectionView.dequeueReusableCell(withReuseIdentifier: "milestone", for: indexPath) as? MilestoneCell else { return MilestoneCell() }
+        guard let milestoneCell = collectionView.dequeueReusableCell(withReuseIdentifier: "milestone", for: indexPath) as? BottomSheetMilestoneCell else { return BottomSheetMilestoneCell() }
         
         let dummyIssue = Issue(title: "", label: [], milestoneTitle: nil)
         let dummyIssueVM = IssueCellViewModel(issue: dummyIssue)
