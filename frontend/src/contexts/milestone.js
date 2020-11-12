@@ -42,7 +42,7 @@ const MilestoneProvider = ({ children }) => {
         getMilestones(); 
     }, []);
 
-    if (loading) return <div>로딩 중...</div>
+    if (loading) return null
 
     return <MilestoneStateContext.Provider value={state}>
         <MilestoneDispatchContext.Provider value={dispatch}>
