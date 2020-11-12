@@ -1,15 +1,20 @@
 import React from 'react';
-import Label from '@pages/Label';
 import { Route } from 'react-router-dom';
+import { UserProvider } from './contexts/user';
+import Login from './pages/Login';
+import Main from './pages/Main';
+import Label from '@pages/Label';
+import { LabelProvider } from '@contexts/label';
 
 const App = () => {
   return (
-    <div>
-      <Route path="/" exact={true}>
-        <div>hello World</div>
-      </Route>
-      <Route path="/label" component={Label} />
-    </div>
+    <UserProvider>
+      <LabelProvider>
+        <Route path="/" component={Login} exact />
+        <Route path="/main" component={Main} />
+        <Route path="/label" component={Label}
+      </LabelProvider>
+    </UserProvider>
   );
 };
 
