@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { GoIssueOpened, GoIssueClosed } from 'react-icons/go';
 import calcTime from '../../util/calcTime';
+import axios from 'axios';
 
 const TextBox = styled.div`
   display: flex;
@@ -25,6 +26,8 @@ const EditButton = styled.button`
   border-radius: 4px;
   border: 1px solid #d0d5d7;
   font-weight: 600;
+  outline: none;
+  cursor: pointer;
 `;
 
 const boxStyle = css`
@@ -60,19 +63,65 @@ const Author = styled.p`
 const InfoText = styled.p`
   color: #555b64;
 `;
+const InputTitle = styled.input`
+  width: 90%;
+  padding: 0.5rem;
+  outline-color: #9cc1f5;
+`;
+const CancelP = styled.p`
+  color: #2768cf;
+  cursor: pointer;
+`;
+
 const Title = ({ detailIssue }) => {
   const { issueId, title, isOpen, userId, createdAt, Comments } = detailIssue;
-  const commentLength = Comments ? Comments.length : 0;
   const time = calcTime(createdAt);
+  const [edit, setEdit] = useState(0);
+  const [titleText, setTitleText] = useState(title);
+  const onChangeText = useCallback((e) => {
+    setTitleText(e.target.value);
+  }, []);
+  const onChangeTitle = useCallback(async () => {
+    try {
+      await axios.patch(
+        `http://127.0.0.1:3000/api/issue/${issueId}`,
+        { title: titleText },
+        {
+          withCredentials: true,
+        },
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    setEdit(0);
+  });
+  const onEditChange = useCallback(() => {
+    if (edit) {
+      setTitleText(title);
+      setEdit(0);
+      return;
+    }
+    setEdit(1);
+  });
   return (
     <>
-      <TitleBox>
-        <TextBox>
-          <h1>{title}&nbsp;</h1>
-          <IssueId>#{issueId}</IssueId>
-        </TextBox>
-        <EditButton>Edit</EditButton>
-      </TitleBox>
+      {!edit ? (
+        <TitleBox>
+          <TextBox>
+            <h1>{titleText}&nbsp;</h1>
+            <IssueId>#{issueId}</IssueId>
+          </TextBox>
+          <EditButton onClick={onEditChange}>Edit</EditButton>
+        </TitleBox>
+      ) : (
+        <TitleBox>
+          <InputTitle value={titleText} onChange={onChangeText} />
+          <EditButton disabled={!titleText.length} onClick={onChangeTitle}>
+            Save
+          </EditButton>
+          <CancelP onClick={onEditChange}>Cancel</CancelP>
+        </TitleBox>
+      )}
       <InfoBox>
         {isOpen === 1 ? (
           <OpenBox>
@@ -87,7 +136,7 @@ const Title = ({ detailIssue }) => {
         )}
         <Author>&nbsp;{userId}&nbsp;</Author>
         <InfoText>
-          opened this issue {time} · {commentLength} comment
+          opened this issue {time} · {Comments.length} comment
         </InfoText>
       </InfoBox>
       <hr />

@@ -13,7 +13,7 @@ const Box = styled.div`
 `;
 const DetailIssue = ({ match }) => {
   const { issueId } = match.params;
-  const [detailIssue, setDetailIssue] = useState({});
+  const [detailIssue, setDetailIssue] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,12 +29,18 @@ const DetailIssue = ({ match }) => {
   }, [issueId]);
   return (
     <>
-      <Header />
-      <Box>
-        <Title detailIssue={detailIssue} />
-        <CommentList comments={detailIssue.Comments} />
-        <AddComment issueId={detailIssue.issueId} isOpen={detailIssue.isOpen} />
-      </Box>
+      {!detailIssue ? (
+        <div />
+      ) : (
+        <>
+          <Header />
+          <Box>
+            <Title detailIssue={detailIssue} />
+            <CommentList comments={detailIssue.Comments} />
+            <AddComment issueId={detailIssue.issueId} isOpen={detailIssue.isOpen} />
+          </Box>
+        </>
+      )}
     </>
   );
 };
