@@ -10,6 +10,7 @@ import UIKit
 class IssueViewController: UIViewController {
     private lazy var detailViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.detail)
     private lazy var filterViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.filter)
+    private lazy var addViewController = storyboard?.instantiateViewController(withIdentifier: ViewID.add)
     private lazy var dataSource = makeDataSource()
     
     var viewModel: IssueViewModel? {
@@ -43,14 +44,25 @@ class IssueViewController: UIViewController {
     @IBAction func clickCancelButton(_ sender: Any) {
         setEditing(false, animated: true)
     }
+    
+    @IBAction func clickAddButton(_ sender: Any) {
+        guard let add = addViewController as? IssueAddViewController else { return }
+        guard let viewModel = viewModel else { return }
+        add.viewModel = viewModel.issueAddViewModel
+        let navigationViewController = UINavigationController(rootViewController: add)
+        navigationViewController.navigationBar.prefersLargeTitles = true
+        navigationController?.present(navigationViewController, animated: true)
+    }
 }
 
 // MARK: - View identifier
 extension IssueViewController {
     private struct ViewID {
+        static let header = "IssueViewMainHeader"
         static let cell = String(describing: IssueCell.self)
         static let detail = String(describing: IssueDetailViewController.self)
         static let filter = String(describing: IssueFilterViewController.self)
+        static let add = String(describing: IssueAddViewController.self)
     }
 }
 
@@ -66,7 +78,11 @@ extension IssueViewController: UICollectionViewDelegate {
         guard !isEditing else { return }
         guard let detail = detailViewController as? IssueDetailViewController else { return }
         guard let viewModel = viewModel else { return }
-        detail.viewModel = CommentViewModel(comments: viewModel.issueCellViewModels[indexPath.row].comments ?? [])
+        do {
+            detail.viewModel = try viewModel.issueDetailViewModel(index: indexPath.row)
+        } catch {
+            print(error.localizedDescription)
+        }
         navigationController?.pushViewController(detail, animated: true)
     }
     
@@ -83,7 +99,6 @@ extension IssueViewController: UICollectionViewDelegate {
     
     private func configureFlowLayout() {
         guard let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize.width = view.frame.width
     }
     
@@ -120,13 +135,20 @@ extension IssueViewController {
     
     private func makeDataSource() -> DataSource {
         guard let collectionView = collectionView else { return DataSource() }
-        return DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
+        let dataSource = DataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, viewModel) -> IssueCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCell else { return IssueCell() }
             guard let issueViewModel = self?.viewModel?.issueCellViewModels[indexPath.row] else { return listCell }
             listCell.configureCell(viewModel: issueViewModel)
             return listCell
         })
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
+            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ViewID.header, for: indexPath)
+            header.isHidden = true
+            return header
+        }
+        return dataSource
     }
     
     func applySnapshot(animatingDifferences: Bool = true) {

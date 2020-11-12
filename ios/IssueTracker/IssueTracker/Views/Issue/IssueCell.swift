@@ -19,14 +19,15 @@ class IssueCell: UICollectionViewListCell {
         configureMultiselect()
     }
     
-    override func prepareForReuse() {
-        badgeStackView = nil
-    }
-    
     private func configureSelectedBackgroundView() {
         let bgView = UIView(frame: bounds)
         bgView.backgroundColor = .systemBackground
         selectedBackgroundView = bgView
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        badgeStackView?.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     private func configureMultiselect() {
@@ -45,11 +46,10 @@ class IssueCell: UICollectionViewListCell {
         var sumOfLabelWidth = CGFloat.zero
         labelBadges?.forEach { badge in
             sumOfLabelWidth += badge.frame.size.width
-            guard sumOfLabelWidth > stackView.frame.size.width else { return }
-            badge.text = "..."
-            badge.translatesAutoresizingMaskIntoConstraints = false
-            badge.setContentHuggingPriority(.defaultLow, for: .horizontal)
             stackView.addArrangedSubview(badge)
+            guard sumOfLabelWidth > stackView.frame.size.width else { return }
+            badge.backgroundColor = .clear
+            badge.text = "..."
         }
     }
     
