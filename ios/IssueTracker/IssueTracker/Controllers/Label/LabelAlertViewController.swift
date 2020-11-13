@@ -36,7 +36,9 @@ class LabelAlertViewController: UIViewController {
         }
         
         let newLabel = Label(labelName: title, color: color, description: description)
-        IssueTrackerNetworkManager.shared.addLabel(label: newLabel) { result in
+        let labelParameter = LabelParameter(label: newLabel)
+        
+        IssueTrackerNetworkManager.shared.addLabel(label: labelParameter) { result in
             switch result {
             case let .success(result):
                 self.delegate?.updateList()

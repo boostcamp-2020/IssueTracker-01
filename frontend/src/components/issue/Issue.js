@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import SVG from '@components/utils/SVG';
 import { formatDistance, subHours } from 'date-fns';
 
-const Issue = ({ item }) => {
+const Issue = ({ item, history }) => {
+  const onClick = useCallback(() => {
+    history.push(`/detailIssue/${item.issueId}`);
+  });
   return (
     <FlexDiv>
       <StyledCheckboxLabel>
@@ -19,7 +22,7 @@ const Issue = ({ item }) => {
         </span>
       </SVGDiv>
       <IssueTitleColumn>
-        <IssueTitle href={`/deatilIssue/${item.issueId}`}>{item.title}</IssueTitle>
+        <IssueTitle onClick={onClick}>{item.title}</IssueTitle>
         <span>
           {item.IssueLabels.map((issueLabel) => {
             return (
@@ -69,7 +72,7 @@ const IssueTitleColumn = styled.div`
   line-height: 1.5;
 `;
 
-const IssueTitle = styled.a`
+const IssueTitle = styled.p`
   font-weight: 600;
   font-size: 16px;
   vertical-align: middle;
