@@ -27,28 +27,32 @@ const IssueInputButtons = () => {
 
   const submitIssue = async () => {
     if (selections.title.length > 0) {
-        let data = {
-            title: selections.title
-        }
-        if (selections.milestoneId.length == 0 && selections.assignees.length == 0) {
-            data = {
-                title: selections.title
-            }
-        } else if (selections.assignees.length == 0) {
-            data = {
-                title: selections.title,
-                milestoneId: selections.milestoneId,
-            }
-        } else if (selections.milestoneId.length == 0) {
-            data = {
-                title: selections.title,
-                assignees: selections.assignees,
-            }
-        }
-      
-        const result = await axios.post('http://api.hoyoung.me/api/issue', {
-        data
-        }, { withCredentials: true });
+      let data = {
+        title: selections.title,
+      };
+      if (selections.milestoneId.length == 0 && selections.assignees.length == 0) {
+        data = {
+          title: selections.title,
+        };
+      } else if (selections.assignees.length == 0) {
+        data = {
+          title: selections.title,
+          milestoneId: selections.milestoneId,
+        };
+      } else if (selections.milestoneId.length == 0) {
+        data = {
+          title: selections.title,
+          assignees: selections.assignees,
+        };
+      }
+
+      const result = await axios.post(
+        'http://api.hoyoung.me/api/issue',
+        {
+          ...data,
+        },
+        { withCredentials: true },
+      );
 
       if (result.status === 200) {
         window.location.href = '/issue';
