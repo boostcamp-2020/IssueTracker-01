@@ -260,8 +260,8 @@ extension IssueTrackerNetworkManager {
         request(url: url, method: .delete, completion: completion)
     }
     
-    func addLabel(label: Label, completion: @escaping (Result<LabelResult, Error>) -> Void) {
-        let url = Info.baseURL + "/comment" + "/label"
+    func addLabel(label: LabelParameter, completion: @escaping (Result<LabelResult, Error>) -> Void) {
+        let url = Info.baseURL + "/label"
         guard configureCookie() else { completion(.failure(NetworkError.cookeyError)); return }
         request(url: url, method: .post, parameters: label, completion: completion)
     }
