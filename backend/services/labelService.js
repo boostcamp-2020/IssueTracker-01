@@ -48,7 +48,7 @@ exports.updateLabel = async (req, res) => {
 exports.deleteLabel = async (req, res) => {
   try {
     await Label.destroy({
-      where: { labelName: req.body.labelName },
+      where: { labelName: req.params.labelName },
     });
 
     return res.status(200).json({ message: 'success.' });
