@@ -5,12 +5,14 @@ import IssueInputTitle from '../../components/Issue/IssueInputTitle';
 import IssueInputButtons from '../../components/Issue/IssueInputButtons';
 
 const MainLayout = styled.div`
+    flex: 0.7;
+
     width: 60%;
     
     margin: 0 auto;
-    margin-right: 30px;
-    margin-left: 7%;
-
+    margin-left: 3%;
+    margin-right: 3%;
+    
     border: 1px solid #e1e4e8;
     border-radius: 6px;
 `;

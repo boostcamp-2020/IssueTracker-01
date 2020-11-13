@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import MilestoneDueDate from '../../components/milestone/MilestoneDueDate';
 import MilestoneGraph, { getStats } from '../../components/milestone/MilestoneGraph';
@@ -7,11 +7,11 @@ import MilestoneGraph, { getStats } from '../../components/milestone/MilestoneGr
 import { SelectionsStateContext, SelectionsSetContext } from '../../contexts/selection';
 import { UserListContext } from '../../contexts/userList';
 import { MilestoneStateContext } from '../../contexts/milestone';
+import { useLabelState } from '@contexts/label';
 
 const SideBarLayout = styled.div`
+    flex: 0.2;
     padding: 10px;
-
-    float: right;
 `;
 
 const AssigneesItem = styled.li`
@@ -74,11 +74,59 @@ const SolidLine = styled.hr`
 
 const ListLayout = styled.ul`
     padding: 0;
+    margin-top: 5px;
 `;
 
 const SelectedItem = styled.p`
     margin-bottom: 0;
+    margin-top:0;
 `;
+
+const LabelListItemLayout = styled.div`
+    height: fit-content;
+
+    display: flex;
+    flex-direction: row;
+`;
+
+const LabelSpan = styled.span`
+    width: fit-content;
+
+    margin-top: 10px;
+    padding: 5px 10px;
+
+    display: flex;
+    flex-direction: row;
+
+    border-radius: 15px;
+
+    font-size: 0.9em;
+    background-color: red;
+
+    ${(props) =>
+        props &&
+        css`
+          background-color: ${props.color};
+          padding: ${props.padding};
+        `}
+`;
+
+const Circle = styled.div`
+    background-color: red;
+    width:16px;
+    height:16px;
+    border-radius: 50px;
+    
+    margin-right: 5px;
+    margin-top: 3.5px;
+
+    ${(props) =>
+    props.color &&
+    css`
+      background-color: ${props.color};
+    `}
+`;
+
 
 const AssigneesListItem = (props) => {
     if (props.user.userId === 'No one—') {
@@ -95,10 +143,19 @@ const AssigneesListItem = (props) => {
     
     const user = props.user;
 
-    return <AssigneesItem value={user.profile_url}>
+    return <AssigneesItem>
        <ProfileImg src={user.profile_url}/>
        {user.userId}
     </AssigneesItem>
+}
+
+const LabelListItem = (props) => {
+    const label = props.label;
+
+    return <LabelListItemLayout className={label.color}>
+        <Circle color={label.color}/>
+        <SelectedItem>{label.labelName}</SelectedItem>
+    </LabelListItemLayout>
 }
 
 const MilestoneListItem = (props) => {
@@ -106,7 +163,7 @@ const MilestoneListItem = (props) => {
     const data = getStats(milestone.Issues);
 
     return <MilestoneItem value={data.per} className={milestone.title}>
-       <p>{milestone.title}</p>
+       <SelectedItem>{milestone.title}</SelectedItem>
        <MilestoneDueDate dueDate={milestone.dueDate}/>
     </MilestoneItem>
 }
@@ -114,11 +171,17 @@ const MilestoneListItem = (props) => {
 const IssueAddingSideBar = () => {
     const users = useContext(UserListContext);
     const milestones = useContext(MilestoneStateContext);
+
     const selections = useContext(SelectionsStateContext);
     const setSelection = useContext(SelectionsSetContext);
 
+    const labels = useLabelState();
+
     const [per, setPer] = useState(0);
     const [selectedTitle, setTitle] = useState('No milestone');
+
+    const [color, setColor] = useState('white');
+    const [selectedLabel, setLabel] = useState({text:'None yet', padding: "0"});
 
     const [userId, setUserId] = useState('No one—');
     const [profileUrl, setProfileUrl] = useState('none');
@@ -132,13 +195,28 @@ const IssueAddingSideBar = () => {
             const userId = assigneesItem.innerText.split('\n')[0];
      
             setUserId(userId);
-            setProfileUrl(assigneesItem.value);
+            setProfileUrl(assigneesItem.firstChild.src);
             setSelection({
                 ...selections,
                 ['assignees']: userId
             });
 
-            console.log(selections);
+            const detailsTest = e.target.closest('details');
+            detailsTest.open = false;
+        }
+    }
+
+    const LabelSelected = (e) => {
+        const labelUl = e.target.closest('ul');
+        const className = labelUl.className.split(' ')[2];
+
+        if (className === 'label_list') {
+            const labelItem = e.target.closest('div');
+            const labelTitle = labelItem.innerText.split('\n')[0];
+            const circleColor = labelItem.className.split(' ')[2];
+     
+            setColor(circleColor);
+            setLabel({text: labelTitle, padding: "5px 10px"});
 
             const detailsTest = e.target.closest('details');
             detailsTest.open = false;
@@ -185,11 +263,17 @@ const IssueAddingSideBar = () => {
         <SolidLine/>
         <details>
             <SideSummary className="Labels">Labels</SideSummary>
-            <div>
-
+            <div onClick={LabelSelected}>
+                <ListLayout className="label_list">
+                        {labels.map(label =>
+                            <LabelListItem setPer={setPer} label={label} key={label.labelName}/>
+                        )}
+                </ListLayout>
             </div>
         </details>
-        <MessageSpan>None yet</MessageSpan>
+        <LabelSpan color={color} padding={selectedLabel.padding}>
+            <SelectedItem>{selectedLabel.text}</SelectedItem>
+        </LabelSpan>
         <SolidLine/>
         <details>
             <SideSummary className="Milestone">Milestone</SideSummary>
