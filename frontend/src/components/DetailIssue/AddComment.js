@@ -90,7 +90,7 @@ const AddComment = ({ issueId, isOpen, fetchData }) => {
   const onSubmit = useCallback(async () => {
     try {
       await axios.post(
-        `http://127.0.0.1:3000/api/comment/${issueId}`,
+        `http://api.hoyoung.me/api/comment/${issueId}`,
         { content: comment },
         {
           withCredentials: true,
@@ -106,7 +106,7 @@ const AddComment = ({ issueId, isOpen, fetchData }) => {
     try {
       const status = isOpen ? 0 : 1;
       await axios.patch(
-        `http://127.0.0.1:3000/api/issue/status/${status}/${issueId}`,
+        `http://api.hoyoung.me/api/issue/status/${status}/${issueId}`,
         {},
         {
           withCredentials: true,

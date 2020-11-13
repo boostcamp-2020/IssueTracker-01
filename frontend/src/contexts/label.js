@@ -12,7 +12,7 @@ const labelReducer = (state, action) => {
 
 export const loadLabels = async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:3000/api/label', {
+    const response = await axios.get('http://api.hoyoung.me/api/label', {
       withCredentials: true,
     });
     dispatch({ type: 'LOAD', data: response.data.data });
@@ -23,7 +23,7 @@ export const loadLabels = async (dispatch) => {
 
 export const createLabel = async (dispatch, label) => {
   try {
-    const response = await axios.post('http://localhost:3000/api/label', label, {
+    const response = await axios.post('http://api.hoyoung.me/api/label', label, {
       withCredentials: true,
     });
     await loadLabels(dispatch);
@@ -34,7 +34,7 @@ export const createLabel = async (dispatch, label) => {
 
 export const updateLabel = async (dispatch, label) => {
   try {
-    const response = await axios.patch('http://localhost:3000/api/label', label, {
+    const response = await axios.patch('http://api.hoyoung.me/api/label', label, {
       withCredentials: true,
     });
     await loadLabels(dispatch);
@@ -45,7 +45,7 @@ export const updateLabel = async (dispatch, label) => {
 
 export const deleteLabel = async (dispatch, labelName) => {
   try {
-    const response = await axios.delete(`http://localhost:3000/api/label/${labelName}`, {
+    const response = await axios.delete(`http://api.hoyoung.me/api/label/${labelName}`, {
       withCredentials: true,
     });
     await loadLabels(dispatch);

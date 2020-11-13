@@ -87,7 +87,7 @@ const Title = ({ detailIssue }) => {
   const onChangeTitle = useCallback(async () => {
     try {
       await axios.patch(
-        `http://127.0.0.1:3000/api/issue/${issueId}`,
+        `http://api.hoyoung.me/api/issue/${issueId}`,
         { title: titleText },
         {
           withCredentials: true,

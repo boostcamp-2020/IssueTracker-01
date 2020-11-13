@@ -27,7 +27,7 @@ const IssueInputButtons = () => {
 
   const submitIssue = async () => {
     if (selections.title.length > 0) {
-      const result = await axios.post('http://localhost:3000/api/issue', {
+      const result = await axios.post('http://api.hoyoung.me/api/issue', {
         title: selections.title,
         assignees: selections.assignees,
         milestoneId: selections.milestoneId,

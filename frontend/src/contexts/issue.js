@@ -12,7 +12,7 @@ const issueReducer = (state, action) => {
 
 export const loadIssues = async (dispatch, query = '') => {
   try {
-    const response = await axios.get(`http://localhost:3000/api/issue?${query}`, {
+    const response = await axios.get(`http://api.hoyoung.me/api/issue?${query}`, {
       withCredentials: true,
     });
     console.log(response.data);

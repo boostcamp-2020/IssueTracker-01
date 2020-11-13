@@ -19,7 +19,7 @@ const DetailIssue = ({ match }) => {
   const [comment, setComment] = useState({});
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:3000/api/issue/detailIssue/${issueId}`, {
+      const response = await axios.get(`http://api.hoyoung.me/api/issue/detailIssue/${issueId}`, {
         withCredentials: true,
       });
       setDetailIssue(response.data);
