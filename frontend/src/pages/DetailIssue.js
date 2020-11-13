@@ -52,7 +52,6 @@ const DetailIssue = ({ match }) => {
               )}
             </Box>
           </div>
-          <IssueAddingSideBar />
         </div>
       )}
     </>

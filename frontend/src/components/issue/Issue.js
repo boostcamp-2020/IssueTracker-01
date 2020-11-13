@@ -72,7 +72,7 @@ const IssueTitleColumn = styled.div`
   line-height: 1.5;
 `;
 
-const IssueTitle = styled.p`
+const IssueTitle = styled.a`
   font-weight: 600;
   font-size: 16px;
   vertical-align: middle;
