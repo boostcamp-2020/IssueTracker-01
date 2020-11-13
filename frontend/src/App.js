@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Login from './pages/Login';
-import Main from './pages/Main';
+import IssueMain from '@pages/IssueMain';
 import Label from '@pages/Label';
 import IssueAdding from './pages/IssueAdding';
 import Milestone from './pages/Milestone';
@@ -30,7 +30,7 @@ const App = () => {
             <SelectionProvider>
               <Route path="/issue-add" component={IssueAdding} />
             </SelectionProvider>
-            <Route path="/main" component={Main} />
+            <Route path="/main" component={IssueMain} />
           </UserListProvider>
         </MilestoneProvider>
       </LabelProvider>
