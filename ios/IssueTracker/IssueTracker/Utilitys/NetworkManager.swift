@@ -11,6 +11,7 @@ import Alamofire
 protocol NetworkManager {
     var hasToken: Bool { get }
     func requestGithubLogin(requestHandler: (() -> Void)?)
+    func urlDataDownload(_ url: URL, completionHandler: ((Result<String, Error>)->())?)
     func downloadIssues(isOpen: Bool, completion: @escaping (Result<[Issue], Error>) -> Void)
     func addIssue(issue: Issue, completion: @escaping (Result<ServerResponse, Error>) -> Void)
     func closeIssue(issueID: Int, completion: @escaping (Result<ServerResponse, Error>) -> Void)
@@ -77,7 +78,26 @@ extension IssueTrackerNetworkManager {
     }
     
     enum NetworkError: Error {
-        case cookeyError, dataError, requestError
+        case urlError, cookeyError, dataError, requestError
+    }
+    
+    func urlDataDownload(_ url: URL, completionHandler: ((Result<String, Error>)->())?) {
+        guard let documentsURL = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
+            URLSession.shared.downloadTask(with: url) { urlOrNil, responseOrNil, errorOrNil in
+                guard let fileURL = urlOrNil else { completionHandler?(.failure(NetworkError.urlError)); return }
+                do {
+                    let documentsURL = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                    let savedURL = documentsURL.appendingPathComponent(url.lastPathComponent)
+                    try FileManager.default.moveItem(at: fileURL, to: savedURL)
+                    completionHandler?(.success(documentsURL.appendingPathComponent(url.lastPathComponent).path))
+                } catch {
+                    print ("file error: \(error)")
+                    completionHandler?(.failure(NetworkError.urlError))
+                }
+            }.resume()
+            return
+        }
+        completionHandler?(.success(documentsURL.appendingPathComponent(url.lastPathComponent).path))
     }
     
     private func configureCookie() -> Bool {

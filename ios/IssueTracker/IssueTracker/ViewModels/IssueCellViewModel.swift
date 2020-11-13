@@ -10,6 +10,8 @@ import Foundation
 class IssueCellViewModel {
     let issueID: Int?
     let title: String
+    let user: User?
+    let userAuthor: User?
     let comments: [Comment]?
     let milestone: Milestone?
     let labelBadges: [LabelBadge]?
@@ -18,6 +20,8 @@ class IssueCellViewModel {
     init(issue: Issue) {
         issueID = issue.issueID
         title = issue.title
+        user = issue.user
+        userAuthor = issue.userAuthor
         comments = issue.comments
         milestone = issue.milestone
         labelBadges = issue.issueLabels?.map {

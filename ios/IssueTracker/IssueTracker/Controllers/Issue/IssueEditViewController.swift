@@ -17,7 +17,6 @@ class IssueEditViewController: UIViewController, UICollectionViewDelegate {
         Label(labelName: "feature", color: "AA66DD"),
         Label(labelName: "develop", color: "88FF88"),
         Label(labelName: "hotfix", color: "BB8888")
-    
     ]
     
     override func viewDidLoad() {

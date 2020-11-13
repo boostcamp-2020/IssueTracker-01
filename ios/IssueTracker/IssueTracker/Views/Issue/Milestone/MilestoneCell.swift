@@ -22,6 +22,5 @@ class MilestoneCell: UICollectionViewListCell {
         self.percentage.text = "\(viewModel.calcPercentage())%"
         self.openedIssue.text = "\(viewModel.openIssues ?? 0) opened"
         self.closedIssue.text = "\(viewModel.closeIssues ?? 0) closed"
-
     }
 }
