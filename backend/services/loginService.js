@@ -9,8 +9,8 @@ const githubOAuthLogin = (req, res) => {
     if (req.headers['user-agent'].includes('iPhone')) {
       return res.redirect(`issuetracker://${token}`);
     }
-    res.cookie('jwt', token, { httpOnly: true });
-    return res.redirect('http://127.0.0.1:8080/');
+    res.cookie('jwt', token, { domain: 'hoyoung.me', httpOnly: true });
+    return res.redirect('http://hoyoung.me/');
   })(req, res);
 };
 
