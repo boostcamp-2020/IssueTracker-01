@@ -16,7 +16,7 @@ import { IssueProvider } from '@contexts/issue';
 import UserListProvider from './contexts/userList';
 import SelectionProvider from './contexts/selection';
 import MilestoneProvider from './contexts/milestone';
-import { GlobalStyle } from 'GlobalStyle';
+import { GlobalStyle } from './GlobalStyle';
 
 const App = () => {
   return (
