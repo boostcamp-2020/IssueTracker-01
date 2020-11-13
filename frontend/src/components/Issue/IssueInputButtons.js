@@ -31,7 +31,7 @@ const IssueInputButtons = () => {
         title: selections.title,
         assignees: selections.assignees,
         milestoneId: selections.milestoneId,
-      });
+      }, { withCredentials: true });
 
       if (result.status === 200) {
         window.location.href = '/issue';
