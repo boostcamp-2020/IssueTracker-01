@@ -31,3 +31,15 @@ struct LabelResult: Codable {
     let data: Label
     let message: String
 }
+
+struct LabelParameter: Codable {
+    let labelName: String
+    let color: String
+    let desc: String?
+    
+    init(label: Label) {
+        self.labelName = label.labelName
+        self.color = label.color
+        self.desc = label.description
+    }
+}
