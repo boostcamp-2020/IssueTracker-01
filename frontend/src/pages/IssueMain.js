@@ -2,11 +2,11 @@ import React from 'react';
 import IssueList from '@templates/IssueList';
 import IssueButtons from '@templates/IssueButtons';
 
-const IssueMain = () => {
+const IssueMain = ({ history }) => {
   return (
     <div>
       <IssueButtons />
-      <IssueList />
+      <IssueList history={history} />
     </div>
   );
 };

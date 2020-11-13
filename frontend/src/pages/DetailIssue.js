@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import styled from 'styled-components';
 import Header from '../components/util/Header';
 import Title from '../components/DetailIssue/Title';
@@ -24,23 +24,21 @@ const DetailIssue = ({ match }) => {
   const [comment, setComment] = useState({});
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:3000/api/issue/detailIssue/${issueId}`, {
+      const response = await axios.get(`http://api.hoyoung.me/api/issue/detailIssue/${issueId}`, {
         withCredentials: true,
       });
       setDetailIssue(response.data);
       setSelection({
         ...selections,
         ['assignees']: response.data.assignees,
-        ['milestoneId']: response.data.MileStone.title
-    });
+        ['milestoneId']: response.data.MileStone.title,
+      });
     } catch (error) {
       console.log(error);
     }
   });
   useEffect(() => {
     fetchData();
-
-
   }, [issueId]);
   return (
     <>
@@ -60,7 +58,7 @@ const DetailIssue = ({ match }) => {
               )}
             </Box>
           </div>
-          <IssueAddingSideBar/>
+          <IssueAddingSideBar />
         </div>
       )}
     </>

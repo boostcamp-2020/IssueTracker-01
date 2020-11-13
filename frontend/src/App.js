@@ -20,8 +20,8 @@ import MilestoneProvider from './contexts/milestone';
 const App = () => {
   return (
     <UserProvider>
-      <IssueProvider>
-        <LabelProvider>
+      <LabelProvider>
+        <IssueProvider>
           <Route path="/" component={Login} exact />
           <Route path="/label" component={Label} />
           <MilestoneProvider>
@@ -35,9 +35,9 @@ const App = () => {
               <Route path="/main" component={IssueMain} />
             </UserListProvider>
           </MilestoneProvider>
-        </LabelProvider>
-        <Route path="/detailIssue/:issueId" component={DetailIssue} />
-      </IssueProvider>
+          <Route path="/detailIssue/:issueId" component={DetailIssue} />
+        </IssueProvider>
+      </LabelProvider>
     </UserProvider>
   );
 };
