@@ -59,9 +59,9 @@ const IssueInputButtons = () => {
       } else {
         alert('에러');
       }
+    } else {
+      alert('제목을 입력하세요.');
     }
-
-    alert('제목을 입력하세요.');
   };
 
   return (

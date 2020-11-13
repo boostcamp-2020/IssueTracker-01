@@ -16,7 +16,6 @@ const Box = styled.div`
 `;
 const DetailIssue = ({ match }) => {
   const selections = useContext(SelectionsStateContext);
-  const setSelection = useContext(SelectionsSetContext);
 
   const { issueId } = match.params;
   const [detailIssue, setDetailIssue] = useState(null);
@@ -28,11 +27,6 @@ const DetailIssue = ({ match }) => {
         withCredentials: true,
       });
       setDetailIssue(response.data);
-      setSelection({
-        ...selections,
-        ['assignees']: response.data.assignees,
-        ['milestoneId']: response.data.MileStone.title,
-      });
     } catch (error) {
       console.log(error);
     }
