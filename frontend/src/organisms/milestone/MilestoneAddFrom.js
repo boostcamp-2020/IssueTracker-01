@@ -70,6 +70,8 @@ const MilestoneAddFrom = () => {
       title: titleInput.current.value,
       dueDate: dueDateInput.current.value,
       description: descInput.current.value,
+    }, {
+      withCredentials: true,
     });
 
     if (result.status === 200) {
