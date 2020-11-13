@@ -43,7 +43,7 @@ class IssueViewModel {
     }
     
     func issueDetailViewModel(index: Int) throws -> IssueDetailViewModel {
-        let issue = issueCellViewModels[index]
+        let issue = filteredIssueCellViewModels[index]
         guard let issueID = issue.issueID else { throw IssueViewModelError.noIssueID }
         return IssueDetailViewModel(issueID: issue.issueID ?? -1, title: issue.title, userAuthor: issue.userAuthor, comments: issue.comments ?? [], issueBottomSheetViewModel: IssueBottomSheetViewModel(issueID: issueID, networkManager: networkManager), networkManager: networkManager)
     }
