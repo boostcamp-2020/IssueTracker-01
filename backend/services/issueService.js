@@ -139,7 +139,7 @@ const create = async (req, res) => {
     const { issueId } = await Issue.create(data);
     const label = req.body.label;
     console.log(label);
-    if (label.length) {
+    if (label && label.length) {
       label.forEach(async (name) => {
         await IssueLabel.create({ issueId, name });
       });

@@ -53,10 +53,3 @@
 ![erd](https://i.ibb.co/BfJdjGX/erd.png)
 
 ## :apple:iOS - [App 배포 주소](https://kr.object.ncloudstorage.com/issuetracker01/downapp.html)
-- [x] Login
-    - Github OAuth를 이용한 로그인  
-    <img width="50%" src="https://user-images.githubusercontent.com/45285737/97650166-754af880-1a9c-11eb-87e0-2b548163696f.gif"></img>  
-- [ ] Issue Tab
-- [ ] Label Tab
-- [ ] Milestone Tab
-- [ ] 선택/추가 구현
