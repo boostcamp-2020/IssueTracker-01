@@ -15,9 +15,22 @@ class IssueDetailViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
     
     @IBOutlet weak var collectionView: UICollectionView?
+    @IBOutlet weak var adminNameLabel: UILabel?
+    @IBOutlet weak var titleLabel: UILabel?
+    @IBOutlet weak var descriptionLabel: UILabel?
+    @IBOutlet weak var issueNumLabel: UILabel?
+    @IBOutlet weak var userImageView: UIImageView?
     
     var viewModel: IssueDetailViewModel? {
         didSet {
+            viewModel?.userImageHandler = { [weak self] path in
+                guard let image = UIImage(contentsOfFile: path) else {
+                    self?.userImageView?.image = UIImage(systemName: "person.fill")
+                    return
+                }
+                self?.userImageView?.image = image
+            }
+            
             let bottomViewModel = viewModel?.issueBottomSheetViewModel
             bottomViewModel?.closeIssueCompletion = { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
@@ -36,6 +49,7 @@ class IssueDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureIssueView()
         configureBottomSheetView()
         tabBarController?.tabBar.isHidden = true
     }
@@ -62,6 +76,13 @@ extension IssueDetailViewController: UICollectionViewDelegate {
         collectionView?.allowsMultipleSelectionDuringEditing = true
     }
     
+    private func configureIssueView() {
+        issueNumLabel?.text = String(viewModel?.issueID ?? -1)
+        adminNameLabel?.text = viewModel?.userName
+        titleLabel?.text = viewModel?.title ?? "Title"
+        descriptionLabel?.text = ""
+    }
+    
     private func registerCell() {
         let nibName = UINib(nibName: ViewID.cell, bundle: nil)
         collectionView?.register(nibName, forCellWithReuseIdentifier: ViewID.cell)
@@ -85,11 +106,6 @@ extension IssueDetailViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewID.cell, for: indexPath)
             guard let listCell = cell as? IssueCommentCell else { return IssueCommentCell() }
             listCell.configureCell(viewModel: viewModel)
-            //            let newSize = commentCell.commentLabel.sizeThatFits(CGSize(width: commentCell.commentLabel.frame.width, height: CGFloat.greatestFiniteMagnitude))
-            //
-            //            cell.heightAnchor.constraint(equalToConstant: newSize.height + 76).isActive = true
-            //            cell.widthAnchor.constraint(equalToConstant: self.view.frame.size.width).isActive = true
-            
             return listCell
         })
     }
